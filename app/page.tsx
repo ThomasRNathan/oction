@@ -11,16 +11,18 @@ import { AttractivenessCard } from "@/components/attractiveness-score";
 import { LoadingSkeleton } from "@/components/loading-skeleton";
 import { AnalysisResult } from "@/lib/types";
 
+type PageState = "idle" | "loading" | "result" | "error";
+
 export default function Home() {
-  const [loading, setLoading] = useState(false);
+  const [state, setState] = useState<PageState>("idle");
   const [result, setResult] = useState<AnalysisResult | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [errorMsg, setErrorMsg] = useState<string>("");
   const [analyzedUrl, setAnalyzedUrl] = useState<string>("");
 
   const handleAnalyze = async (url: string) => {
-    setLoading(true);
-    setError(null);
+    setState("loading");
     setResult(null);
+    setErrorMsg("");
     setAnalyzedUrl(url);
 
     try {
@@ -29,28 +31,28 @@ export default function Home() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url }),
       });
-
       const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Erreur lors de l'analyse");
-      }
-
+      if (!response.ok) throw new Error(data.error || "Erreur lors de l'analyse");
       setResult(data);
+      setState("result");
     } catch (err) {
-      setError(
-        err instanceof Error ? err.message : "Erreur lors de l'analyse"
-      );
-    } finally {
-      setLoading(false);
+      setErrorMsg(err instanceof Error ? err.message : "Erreur lors de l'analyse");
+      setState("error");
     }
   };
 
-  /** Build an avocat search URL contextualised to the property */
+  const handleReset = () => {
+    setState("idle");
+    setResult(null);
+    setErrorMsg("");
+  };
+
   const lawyerSearchUrl = (r: AnalysisResult) => {
     const city = r.property.tribunal?.replace("Tribunal Judiciaire de ", "") || "Paris";
     return `https://www.barreau-paris.fr/trouver-un-avocat/?specialite=encheres-immobilieres&ville=${encodeURIComponent(city)}`;
   };
+
+  const isCollapsed = state === "result" || state === "loading";
 
   return (
     <main className="min-h-screen bg-[#0a0f1a] overflow-x-hidden">
@@ -58,49 +60,103 @@ export default function Home() {
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-orange-500/8 blur-3xl" />
         <div className="absolute top-1/3 -right-40 w-[500px] h-[500px] rounded-full bg-purple-600/6 blur-3xl" />
-        <div className="absolute bottom-0 left-1/3 w-[400px] h-[400px] rounded-full bg-blue-600/5 blur-3xl" />
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4 py-16">
-        <Hero />
-        <UrlInput onSubmit={handleAnalyze} loading={loading} />
+      {/* ── COLLAPSED TOP BAR (results mode) ── */}
+      {isCollapsed && (
+        <div className="sticky top-0 z-50 backdrop-blur-md bg-[#0a0f1a]/80 border-b border-slate-800">
+          <div className="max-w-6xl mx-auto px-4 py-3 flex items-center gap-4">
+            {/* Logo */}
+            <span className="text-xl font-black bg-gradient-to-r from-amber-300 via-orange-500 to-red-500 bg-clip-text text-transparent flex-shrink-0">
+              OCTION
+            </span>
 
-        {error && (
+            {/* Inline search bar */}
+            <form
+              className="flex-1 flex gap-2"
+              onSubmit={(e) => {
+                e.preventDefault();
+                const input = (e.currentTarget.elements.namedItem("url") as HTMLInputElement);
+                if (input.value.trim()) handleAnalyze(input.value.trim());
+              }}
+            >
+              <input
+                name="url"
+                type="url"
+                defaultValue=""
+                placeholder="Nouvelle URL licitor.com…"
+                className="flex-1 px-4 py-2 bg-slate-800/70 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-orange-500/50 text-sm"
+                disabled={state === "loading"}
+              />
+              <button
+                type="submit"
+                disabled={state === "loading"}
+                className="px-4 py-2 bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold rounded-lg hover:from-orange-600 hover:to-red-600 disabled:opacity-50 transition-all text-sm whitespace-nowrap"
+              >
+                {state === "loading" ? "…" : "Analyser"}
+              </button>
+            </form>
+
+            {/* New search button */}
+            <button
+              onClick={handleReset}
+              className="flex-shrink-0 px-3 py-2 rounded-lg border border-slate-700 text-slate-400 hover:text-white hover:border-slate-500 transition-all text-xs"
+            >
+              ✕ Réinitialiser
+            </button>
+          </div>
+        </div>
+      )}
+
+      <div className="relative z-10 max-w-6xl mx-auto px-4 py-16">
+
+        {/* ── HERO + INPUT (idle / error) ── */}
+        {!isCollapsed && (
+          <>
+            <Hero />
+            <UrlInput onSubmit={handleAnalyze} loading={false} />
+          </>
+        )}
+
+        {/* ── ERROR ── */}
+        {state === "error" && (
           <div className="max-w-2xl mx-auto mb-8 p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-center text-sm">
-            {error}
+            {errorMsg}
           </div>
         )}
 
-        {loading && <LoadingSkeleton />}
+        {/* ── LOADING ── */}
+        {state === "loading" && <LoadingSkeleton />}
 
-        {result && (
-          <div className="space-y-6">
-            {/* Row 1: Property + Auction info */}
+        {/* ── RESULTS ── */}
+        {state === "result" && result && (
+          <div className="space-y-6 mt-6">
+
+            {/* Row 1 */}
             <div className="grid md:grid-cols-2 gap-6">
               <PropertyCard property={result.property} />
               <AuctionInfo property={result.property} />
             </div>
 
-            {/* Row 2: DVF market + Attractiveness */}
+            {/* Row 2 */}
             <div className="grid md:grid-cols-2 gap-6">
               {result.dvf ? (
                 <MarketAnalysis dvf={result.dvf} verdict={result.verdict ?? null} />
               ) : (
                 <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-2xl p-6 flex flex-col items-center justify-center gap-2">
                   <span className="text-2xl">📊</span>
-                  <p className="text-slate-400 font-medium text-center">Données DVF indisponibles</p>
+                  <p className="text-slate-400 font-medium">Données DVF indisponibles</p>
                   <p className="text-xs text-slate-600 text-center">
                     L&apos;API de données foncières n&apos;a pas retourné de résultats pour cette zone.
                   </p>
                 </div>
               )}
-
               {result.attractiveness && (
                 <AttractivenessCard attractiveness={result.attractiveness} />
               )}
             </div>
 
-            {/* Row 3: Financing (full width) */}
+            {/* Row 3: Financing */}
             {result.property.miseAPrix && (
               <FinancingSimulator
                 miseAPrix={result.property.miseAPrix}
@@ -125,9 +181,18 @@ export default function Home() {
                   </p>
                   {result.property.lawyer && (
                     <p className="text-xs text-slate-500 mt-2">
-                      Avocat poursuivant la vente : <span className="text-slate-300">{result.property.lawyer}</span>
+                      Avocat poursuivant :{" "}
+                      <span className="text-slate-300">{result.property.lawyer}</span>
                       {result.property.lawyerPhone && (
-                        <> · <a href={`tel:${result.property.lawyerPhone}`} className="text-orange-400 hover:underline">{result.property.lawyerPhone}</a></>
+                        <>
+                          {" · "}
+                          <a
+                            href={`tel:${result.property.lawyerPhone}`}
+                            className="text-orange-400 hover:underline"
+                          >
+                            {result.property.lawyerPhone}
+                          </a>
+                        </>
                       )}
                     </p>
                   )}
@@ -152,16 +217,26 @@ export default function Home() {
                 </div>
               </div>
             </div>
+
+            {/* New search shortcut at bottom */}
+            <div className="text-center pt-4">
+              <button
+                onClick={handleReset}
+                className="text-slate-500 hover:text-slate-300 text-sm underline underline-offset-4 transition-colors"
+              >
+                ← Analyser un autre lot
+              </button>
+            </div>
           </div>
         )}
 
         {/* Footer */}
-        <footer className="mt-20 text-center text-xs text-slate-700 space-y-1">
-          <p>
-            OCTION utilise les données DVF (CEREMA / data.gouv.fr) et l&apos;API Adresse du gouvernement.
-          </p>
-          <p>Données indicatives — non contractuelles.</p>
-        </footer>
+        {state === "idle" && (
+          <footer className="mt-20 text-center text-xs text-slate-700 space-y-1">
+            <p>OCTION utilise les données DVF (CEREMA / data.gouv.fr) et l&apos;API Adresse du gouvernement.</p>
+            <p>Données indicatives — non contractuelles.</p>
+          </footer>
+        )}
       </div>
     </main>
   );
