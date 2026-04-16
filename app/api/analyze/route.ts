@@ -6,6 +6,18 @@ import { computeVerdict, computeFinancing, computeAttractiveness } from "@/lib/a
 import { PARIS_ARRONDISSEMENTS } from "@/lib/constants";
 import { AnalysisResult } from "@/lib/types";
 
+export const maxDuration = 30;
+
+/** Wraps a promise so it resolves to null after `ms` milliseconds instead of blocking. */
+function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T | null> {
+  return new Promise((resolve) => {
+    const timer = setTimeout(() => resolve(null), ms);
+    promise
+      .then((v) => { clearTimeout(timer); resolve(v); })
+      .catch(() => { clearTimeout(timer); resolve(null); });
+  });
+}
+
 export async function POST(request: NextRequest) {
   try {
     const { url, rate, duration } = await request.json();
@@ -17,14 +29,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Step 1: Scrape the listing
+    // Step 1: Scrape + geocode in parallel (independent of each other)
+    const addressQuery = (prop: Awaited<ReturnType<typeof scrapeListicor>>) =>
+      prop.address || `Paris ${prop.arrondissement}e`;
+
     const property = await scrapeListicor(url);
+    const geocoding = await geocodeAddress(addressQuery(property), property.arrondissement).catch(() => null);
 
-    // Step 2: Geocode the address
-    const addressQuery = property.address || `Paris ${property.arrondissement}e`;
-    const geocoding = await geocodeAddress(addressQuery, property.arrondissement);
-
-    // Step 3: Get DVF data — prefer citycode from geocoding, fallback to arrondissement code
+    // Step 2: DVF — capped at 7s so total response stays under maxDuration
     let dvf = null;
     if (geocoding) {
       const codeInsee =
@@ -34,37 +46,28 @@ export async function POST(request: NextRequest) {
           : undefined);
 
       const propertyType =
-        property.type?.toLowerCase() === "appartement"
-          ? "Appartement"
-          : property.type?.toLowerCase() === "maison"
-            ? "Maison"
-            : undefined;
+        property.type?.toLowerCase() === "appartement" ? "Appartement"
+        : property.type?.toLowerCase() === "maison" ? "Maison"
+        : undefined;
 
-      dvf = await getDVFAnalysis(
-        geocoding.lat,
-        geocoding.lon,
-        propertyType,
-        codeInsee
+      dvf = await withTimeout(
+        getDVFAnalysis(geocoding.lat, geocoding.lon, propertyType, codeInsee),
+        7000
       );
     }
 
-    // Step 4: Compute verdict
+    // Step 3: Verdict
     let verdict = null;
     if (property.miseAPrix && property.surface && dvf) {
-      verdict = computeVerdict(
-        property.miseAPrix,
-        property.surface,
-        dvf.medianPricePerSqm
-      );
+      verdict = computeVerdict(property.miseAPrix, property.surface, dvf.medianPricePerSqm);
     }
 
-    // Step 5: Compute financing
-    const financingAmount = property.miseAPrix || 0;
-    const financing = financingAmount > 0
-      ? computeFinancing(financingAmount, rate || 3.5, duration || 20)
+    // Step 4: Financing
+    const financing = property.miseAPrix
+      ? computeFinancing(property.miseAPrix, rate || 3.5, duration || 20)
       : undefined;
 
-    // Step 6: Compute attractiveness score
+    // Step 5: Attractiveness
     const attractiveness = computeAttractiveness(property);
 
     const result: AnalysisResult = {
@@ -81,10 +84,7 @@ export async function POST(request: NextRequest) {
     console.error("Analysis error:", error);
     return NextResponse.json(
       {
-        error:
-          error instanceof Error
-            ? error.message
-            : "Erreur lors de l'analyse",
+        error: error instanceof Error ? error.message : "Erreur lors de l'analyse",
       },
       { status: 500 }
     );
