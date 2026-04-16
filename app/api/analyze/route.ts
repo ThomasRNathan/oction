@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { scrapeListicor } from "@/lib/scraper";
 import { geocodeAddress } from "@/lib/geocoder";
 import { getDVFAnalysis } from "@/lib/dvf";
-import { computeVerdict, computeFinancing } from "@/lib/analyzer";
+import { computeVerdict, computeFinancing, computeAttractiveness } from "@/lib/analyzer";
 import { PARIS_ARRONDISSEMENTS } from "@/lib/constants";
 import { AnalysisResult } from "@/lib/types";
 
@@ -24,12 +24,15 @@ export async function POST(request: NextRequest) {
     const addressQuery = property.address || `Paris ${property.arrondissement}e`;
     const geocoding = await geocodeAddress(addressQuery, property.arrondissement);
 
-    // Step 3: Get DVF data
+    // Step 3: Get DVF data — prefer citycode from geocoding, fallback to arrondissement code
     let dvf = null;
     if (geocoding) {
-      const codeCommune = property.arrondissement
-        ? PARIS_ARRONDISSEMENTS[property.arrondissement]?.code
-        : undefined;
+      const codeInsee =
+        geocoding.citycode ??
+        (property.arrondissement
+          ? PARIS_ARRONDISSEMENTS[property.arrondissement]?.code
+          : undefined);
+
       const propertyType =
         property.type?.toLowerCase() === "appartement"
           ? "Appartement"
@@ -41,7 +44,7 @@ export async function POST(request: NextRequest) {
         geocoding.lat,
         geocoding.lon,
         propertyType,
-        codeCommune
+        codeInsee
       );
     }
 
@@ -61,12 +64,16 @@ export async function POST(request: NextRequest) {
       ? computeFinancing(financingAmount, rate || 3.5, duration || 20)
       : undefined;
 
+    // Step 6: Compute attractiveness score
+    const attractiveness = computeAttractiveness(property);
+
     const result: AnalysisResult = {
       property,
       geocoding: geocoding || undefined,
       dvf: dvf || undefined,
       verdict: verdict || undefined,
       financing,
+      attractiveness,
     };
 
     return NextResponse.json(result);

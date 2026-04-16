@@ -26,6 +26,7 @@ export async function geocodeAddress(
         lon: feature.geometry.coordinates[0],
         score: feature.properties.score,
         label: feature.properties.label,
+        citycode: feature.properties.citycode as string | undefined,
       };
     }
   } catch {

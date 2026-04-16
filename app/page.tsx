@@ -7,6 +7,7 @@ import { PropertyCard } from "@/components/property-card";
 import { AuctionInfo } from "@/components/auction-info";
 import { MarketAnalysis } from "@/components/market-analysis";
 import { FinancingSimulator } from "@/components/financing-simulator";
+import { AttractivenessCard } from "@/components/attractiveness-score";
 import { LoadingSkeleton } from "@/components/loading-skeleton";
 import { AnalysisResult } from "@/lib/types";
 
@@ -86,13 +87,17 @@ export default function Home() {
                 </div>
               )}
 
-              {result.property.miseAPrix && (
-                <FinancingSimulator
-                  miseAPrix={result.property.miseAPrix}
-                  initialFinancing={result.financing}
-                />
+              {result.attractiveness && (
+                <AttractivenessCard attractiveness={result.attractiveness} />
               )}
             </div>
+
+            {result.property.miseAPrix && (
+              <FinancingSimulator
+                miseAPrix={result.property.miseAPrix}
+                initialFinancing={result.financing}
+              />
+            )}
           </div>
         )}
 

@@ -23,6 +23,20 @@ export interface GeocodingResult {
   lon: number;
   score: number;
   label: string;
+  citycode?: string; // INSEE commune code (e.g. "75116")
+}
+
+export interface AttractivenessDetail {
+  label: string;
+  value: string;
+  impact: "positive" | "negative" | "neutral";
+}
+
+export interface AttractivenessScore {
+  score: number; // 0–10
+  label: string; // "Très prisé", "Peu convoité", etc.
+  color: string;
+  details: AttractivenessDetail[];
 }
 
 export interface DVFTransaction {
@@ -68,4 +82,5 @@ export interface AnalysisResult {
   dvf?: DVFAnalysis;
   verdict?: Verdict;
   financing?: FinancingSimulation;
+  attractiveness?: AttractivenessScore;
 }

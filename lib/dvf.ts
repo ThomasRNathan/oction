@@ -1,11 +1,15 @@
 import { DVFAnalysis, DVFTransaction } from "./types";
 
-interface DVFRawResult {
-  date_mutation: string;
-  valeur_fonciere: number;
-  surface_reelle_bati: number;
-  type_local: string;
-  nature_mutation: string;
+// CEREMA DVF Open Data API — works with INSEE commune code
+const CEREMA_BASE = "https://apidf-preprod.cerema.fr/dvf_opendata/mutations/";
+
+interface CeremaResult {
+  datemut: string;
+  anneemut: number;
+  valeurfonc: string;
+  sbati: string;
+  libtypbien: string;
+  libnatmut: string;
 }
 
 function median(values: number[]): number {
@@ -25,123 +29,51 @@ function removeOutliers(values: number[]): number[] {
   return values.filter((v) => Math.abs(v - mean) <= 2 * stdDev);
 }
 
-async function fetchDVF(
-  lat: number,
-  lon: number,
-  dist: number,
-  propertyType?: string
-): Promise<DVFRawResult[]> {
-  const params = new URLSearchParams({
-    lat: lat.toString(),
-    lon: lon.toString(),
-    dist: dist.toString(),
-    nature_mutation: "Vente",
-  });
-  if (propertyType) {
-    params.set("type_local", propertyType);
-  }
-
-  const url = `https://api.cquest.org/dvf?${params}`;
-  const response = await fetch(url, {
-    signal: AbortSignal.timeout(5000),
-  });
-
-  if (!response.ok) throw new Error(`DVF API error: ${response.status}`);
-
-  const data = await response.json();
-  return data.resultats || [];
-}
-
-async function fetchDVFByCommune(
-  codeCommune: string,
-  propertyType?: string
-): Promise<DVFRawResult[]> {
-  const params = new URLSearchParams({
-    code_commune: codeCommune,
-    nature_mutation: "Vente",
-  });
-  if (propertyType) {
-    params.set("type_local", propertyType);
-  }
-
-  const url = `https://api.cquest.org/dvf?${params}`;
-  const response = await fetch(url, {
-    signal: AbortSignal.timeout(5000),
-  });
-
-  if (!response.ok) throw new Error(`DVF API error: ${response.status}`);
-
-  const data = await response.json();
-  return data.resultats || [];
-}
-
-function processTransactions(
-  results: DVFRawResult[],
+async function fetchCerema(
+  codeInsee: string,
+  propertyType: string | undefined,
   yearsBack: number
-): DVFTransaction[] {
-  const cutoff = new Date();
-  cutoff.setFullYear(cutoff.getFullYear() - yearsBack);
-  const cutoffStr = cutoff.toISOString().slice(0, 10);
+): Promise<CeremaResult[]> {
+  const yearMin = new Date().getFullYear() - yearsBack;
+  const params = new URLSearchParams({
+    code_insee: codeInsee,
+    ordering: "-datemut",
+    page_size: "200",
+    anneemut_min: yearMin.toString(),
+  });
+  if (propertyType) params.set("type_local", propertyType);
 
-  return results
-    .filter(
-      (r) =>
-        r.valeur_fonciere > 0 &&
-        r.surface_reelle_bati > 0 &&
-        r.date_mutation >= cutoffStr
-    )
-    .map((r) => ({
-      date: r.date_mutation,
-      price: r.valeur_fonciere,
-      surface: r.surface_reelle_bati,
-      pricePerSqm: r.valeur_fonciere / r.surface_reelle_bati,
-      type: r.type_local,
-    }));
+  const res = await fetch(`${CEREMA_BASE}?${params}`, {
+    signal: AbortSignal.timeout(8000),
+    next: { revalidate: 86400 }, // cache 24h on Vercel
+  });
+  if (!res.ok) throw new Error(`CEREMA DVF ${res.status}`);
+  const data = await res.json();
+  return data.results ?? [];
 }
 
-export async function getDVFAnalysis(
-  lat: number,
-  lon: number,
-  propertyType?: string,
-  codeCommune?: string
-): Promise<DVFAnalysis | null> {
-  const radii = [500, 1000, 1500];
-
-  for (const radius of radii) {
-    try {
-      const results = await fetchDVF(lat, lon, radius, propertyType);
-      let transactions = processTransactions(results, 2);
-
-      // Expand to 5 years if too few
-      if (transactions.length < 5) {
-        transactions = processTransactions(results, 5);
-      }
-
-      if (transactions.length >= 3) {
-        return buildAnalysis(transactions, radius);
-      }
-    } catch {
-      continue;
-    }
-  }
-
-  // Fallback: commune code
-  if (codeCommune) {
-    try {
-      const results = await fetchDVFByCommune(codeCommune, propertyType);
-      let transactions = processTransactions(results, 2);
-      if (transactions.length < 5) {
-        transactions = processTransactions(results, 5);
-      }
-      if (transactions.length >= 1) {
-        return buildAnalysis(transactions, 0);
-      }
-    } catch {
-      // DVF completely unavailable
-    }
-  }
-
-  return null;
+function processResults(results: CeremaResult[]): DVFTransaction[] {
+  return results
+    .filter((r) => {
+      const price = parseFloat(r.valeurfonc);
+      const surface = parseFloat(r.sbati);
+      return (
+        r.libnatmut === "Vente" &&
+        price > 0 &&
+        surface > 5 // ignore parking/cave-only lots
+      );
+    })
+    .map((r) => {
+      const price = parseFloat(r.valeurfonc);
+      const surface = parseFloat(r.sbati);
+      return {
+        date: r.datemut,
+        price,
+        surface,
+        pricePerSqm: price / surface,
+        type: r.libtypbien,
+      };
+    });
 }
 
 function buildAnalysis(
@@ -149,19 +81,15 @@ function buildAnalysis(
   radiusUsed: number
 ): DVFAnalysis {
   let prices = transactions.map((t) => t.pricePerSqm);
+  const raw = prices;
   prices = removeOutliers(prices);
-
-  if (prices.length === 0) {
-    prices = transactions.map((t) => t.pricePerSqm);
-  }
+  if (prices.length === 0) prices = raw;
 
   const dates = transactions.map((t) => new Date(t.date));
   const oldest = Math.min(...dates.map((d) => d.getTime()));
   const periodYears = Math.max(
     1,
-    Math.round(
-      (Date.now() - oldest) / (365.25 * 24 * 60 * 60 * 1000)
-    )
+    Math.round((Date.now() - oldest) / (365.25 * 24 * 60 * 60 * 1000))
   );
 
   return {
@@ -176,4 +104,41 @@ function buildAnalysis(
     radiusUsed,
     periodYears,
   };
+}
+
+export async function getDVFAnalysis(
+  _lat: number,
+  _lon: number,
+  propertyType: string | undefined,
+  codeInsee: string | undefined
+): Promise<DVFAnalysis | null> {
+  if (!codeInsee) return null;
+
+  // Try last 3 years first, then expand to 5
+  for (const years of [3, 5]) {
+    try {
+      const results = await fetchCerema(codeInsee, propertyType, years);
+      const transactions = processResults(results);
+      if (transactions.length >= 3) {
+        return buildAnalysis(transactions, 0);
+      }
+    } catch {
+      continue;
+    }
+  }
+
+  // Retry without type filter if too few results
+  for (const years of [3, 5]) {
+    try {
+      const results = await fetchCerema(codeInsee, undefined, years);
+      const transactions = processResults(results);
+      if (transactions.length >= 3) {
+        return buildAnalysis(transactions, 0);
+      }
+    } catch {
+      continue;
+    }
+  }
+
+  return null;
 }

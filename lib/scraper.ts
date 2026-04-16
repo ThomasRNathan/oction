@@ -128,13 +128,13 @@ export async function scrapeListicor(url: string): Promise<PropertyData> {
     tribunal = `Tribunal Judiciaire de ${tribunalMatch[1].trim()}`;
   }
 
-  // Visit date
+  // Visit date — handles "Visite sur place", "Visite :", "visite le", etc.
   let visitDate: string | undefined;
   const visitMatch = bodyText.match(
-    /visite[:\s]+(?:le\s+)?(lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche)\s+(\d{1,2})\s+(\w+)\s+(\d{4})[^,]*/i
+    /visite[\w\s]*?(?:le\s+)?(lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche)\s+(\d{1,2})\s+(janvier|f[ée]vrier|mars|avril|mai|juin|juillet|ao[uû]t|septembre|octobre|novembre|d[ée]cembre)\s+(\d{4})[^.;]*/i
   );
   if (visitMatch) {
-    visitDate = visitMatch[0].replace(/^visite[:\s]+/i, "").trim();
+    visitDate = visitMatch[0].trim();
   }
 
   // Rooms / description
