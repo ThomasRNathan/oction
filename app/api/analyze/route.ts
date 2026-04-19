@@ -7,6 +7,7 @@ import { PARIS_ARRONDISSEMENTS } from "@/lib/constants";
 import { AnalysisResult } from "@/lib/types";
 
 export const maxDuration = 30;
+export const preferredRegion = "cdg1"; // Paris — keeps CEREMA latency low
 
 /** Wraps a promise so it resolves to null after `ms` milliseconds instead of blocking. */
 function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T | null> {
