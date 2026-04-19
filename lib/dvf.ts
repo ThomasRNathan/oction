@@ -43,9 +43,10 @@ async function fetchCerema(
   });
   if (propertyType) params.set("type_local", propertyType);
 
+  // ⚠️ Do NOT add next:{revalidate} here — it wraps fetch and breaks AbortSignal
   const res = await fetch(`${CEREMA_BASE}?${params}`, {
-    signal: AbortSignal.timeout(8000),
-    next: { revalidate: 86400 }, // cache 24h on Vercel
+    signal: AbortSignal.timeout(5000),
+    headers: { "Accept": "application/json" },
   });
   if (!res.ok) throw new Error(`CEREMA DVF ${res.status}`);
   const data = await res.json();
@@ -114,29 +115,22 @@ export async function getDVFAnalysis(
 ): Promise<DVFAnalysis | null> {
   if (!codeInsee) return null;
 
-  // Try last 3 years first, then expand to 5
-  for (const years of [3, 5]) {
-    try {
-      const results = await fetchCerema(codeInsee, propertyType, years);
-      const transactions = processResults(results);
-      if (transactions.length >= 3) {
-        return buildAnalysis(transactions, 0);
-      }
-    } catch {
-      continue;
-    }
-  }
+  // Single pass: typed 3yr → typed 5yr → untyped 3yr (each with 5s abort)
+  const attempts: [string | undefined, number][] = [
+    [propertyType, 3],
+    [propertyType, 5],
+    [undefined, 3],
+  ];
 
-  // Retry without type filter if too few results
-  for (const years of [3, 5]) {
+  for (const [type, years] of attempts) {
     try {
-      const results = await fetchCerema(codeInsee, undefined, years);
+      const results = await fetchCerema(codeInsee, type, years);
       const transactions = processResults(results);
       if (transactions.length >= 3) {
         return buildAnalysis(transactions, 0);
       }
     } catch {
-      continue;
+      // timeout or network error — try next variant
     }
   }
 

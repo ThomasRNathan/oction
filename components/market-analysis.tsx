@@ -15,13 +15,28 @@ export function MarketAnalysis({
     <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-2xl p-6">
       <h2 className="text-lg font-semibold text-slate-300 mb-4 flex items-center gap-2">
         <span className="w-2 h-2 rounded-full bg-emerald-500" />
-        Analyse du marché (DVF)
+        Prix du marché (DVF)
       </h2>
 
+      {/* Hero: median price/sqm — always shown */}
+      <div className="text-center mb-5 py-4 rounded-xl bg-slate-900/60 border border-slate-700/50">
+        <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">
+          Prix médian de la zone
+        </p>
+        <p className="text-4xl font-black text-white">
+          {fmt(dvf.medianPricePerSqm)}
+          <span className="text-lg font-normal text-slate-400 ml-1">€/m²</span>
+        </p>
+        <p className="text-xs text-slate-600 mt-1">
+          sur {dvf.count} ventes · {dvf.periodYears} an{dvf.periodYears > 1 ? "s" : ""}
+        </p>
+      </div>
+
+      {/* Verdict badge + comparison */}
       {verdict && (
-        <div className="mb-6 text-center">
+        <div className="mb-5 text-center space-y-3">
           <div
-            className="inline-flex items-center px-4 py-2 rounded-full text-sm font-bold border"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-bold border"
             style={{
               color: verdict.color,
               borderColor: verdict.color + "40",
@@ -34,80 +49,66 @@ export function MarketAnalysis({
             {verdict.label}
           </div>
 
-          <div className="mt-4 grid grid-cols-2 gap-4">
-            <div>
-              <p className="text-xs text-slate-500">Prix enchère / m²</p>
-              <p className="text-2xl font-bold text-white">
-                {fmt(verdict.auctionPricePerSqm)} <span className="text-sm text-slate-400">EUR</span>
-              </p>
-            </div>
-            <div>
-              <p className="text-xs text-slate-500">Prix marché / m²</p>
-              <p className="text-2xl font-bold text-white">
-                {fmt(verdict.marketPricePerSqm)} <span className="text-sm text-slate-400">EUR</span>
-              </p>
+          {/* Price comparison bar */}
+          <div className="relative h-8 flex items-center rounded-lg overflow-hidden bg-slate-900/60">
+            {/* Auction price fill */}
+            <div
+              className="absolute left-0 top-0 h-full rounded-lg transition-all"
+              style={{
+                width: `${Math.min(100, (verdict.auctionPricePerSqm / verdict.marketPricePerSqm) * 100)}%`,
+                background: verdict.color + "30",
+                borderRight: `2px solid ${verdict.color}`,
+              }}
+            />
+            <div className="relative w-full flex justify-between px-3 text-xs">
+              <span style={{ color: verdict.color }} className="font-semibold">
+                Enchère : {fmt(verdict.auctionPricePerSqm)} €/m²
+              </span>
+              <span className="text-slate-400">
+                Marché : {fmt(verdict.marketPricePerSqm)} €/m²
+              </span>
             </div>
           </div>
 
-          <div className="mt-3">
-            <p className="text-sm">
-              <span
-                className="font-bold text-lg"
-                style={{ color: verdict.color }}
-              >
-                {verdict.discountPercent > 0 ? "-" : "+"}
-                {Math.abs(verdict.discountPercent)}%
-              </span>
-              <span className="text-slate-500 ml-2">
-                {verdict.discountPercent > 0
-                  ? "sous le prix du marché"
-                  : "au-dessus du marché"}
-              </span>
-            </p>
-          </div>
+          <p className="text-2xl font-black" style={{ color: verdict.color }}>
+            {verdict.discountPercent > 0 ? "−" : "+"}
+            {Math.abs(verdict.discountPercent)}%{" "}
+            <span className="text-sm font-normal text-slate-400">
+              {verdict.discountPercent > 0 ? "sous le marché" : "au-dessus du marché"}
+            </span>
+          </p>
         </div>
       )}
 
-      <div className="space-y-2 text-sm">
-        <div className="flex justify-between">
-          <span className="text-slate-500">Transactions analysées</span>
-          <span className="text-white">{dvf.count}</span>
-        </div>
-        <div className="flex justify-between">
-          <span className="text-slate-500">Prix médian / m²</span>
-          <span className="text-white">{fmt(dvf.medianPricePerSqm)} EUR</span>
-        </div>
-        <div className="flex justify-between">
-          <span className="text-slate-500">Prix moyen / m²</span>
-          <span className="text-white">{fmt(dvf.meanPricePerSqm)} EUR</span>
-        </div>
-        <div className="flex justify-between">
-          <span className="text-slate-500">Fourchette</span>
-          <span className="text-white">
-            {fmt(dvf.minPricePerSqm)} - {fmt(dvf.maxPricePerSqm)} EUR/m²
-          </span>
-        </div>
-        {dvf.radiusUsed > 0 && (
-          <div className="flex justify-between">
-            <span className="text-slate-500">Rayon de recherche</span>
-            <span className="text-white">{dvf.radiusUsed}m</span>
-          </div>
-        )}
-        <div className="flex justify-between">
-          <span className="text-slate-500">Période</span>
-          <span className="text-white">
-            {dvf.periodYears} an{dvf.periodYears > 1 ? "s" : ""}
-          </span>
-        </div>
+      {/* Stats table */}
+      <div className="space-y-2 text-sm border-t border-slate-700/50 pt-4">
+        <Row label="Prix moyen / m²" value={`${fmt(dvf.meanPricePerSqm)} €`} />
+        <Row
+          label="Fourchette"
+          value={`${fmt(dvf.minPricePerSqm)} – ${fmt(dvf.maxPricePerSqm)} €/m²`}
+        />
+        <Row label="Transactions" value={`${dvf.count} ventes`} />
+        <Row
+          label="Période"
+          value={`${dvf.periodYears} an${dvf.periodYears > 1 ? "s" : ""}`}
+        />
       </div>
 
       <div className="mt-4 p-3 bg-blue-500/10 border border-blue-500/20 rounded-lg">
         <p className="text-xs text-blue-400">
-          La mise à prix est le prix de départ. Les enchères finales
-          dépassent généralement la mise à prix de 50 à 100%. Source : DVF
-          (données foncières publiques).
+          La mise à prix est le prix plancher. Les enchères finales dépassent
+          généralement la mise à prix de 50 à 100%. Source : DVF (data.gouv.fr).
         </p>
       </div>
+    </div>
+  );
+}
+
+function Row({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex justify-between">
+      <span className="text-slate-500">{label}</span>
+      <span className="text-white font-medium">{value}</span>
     </div>
   );
 }
