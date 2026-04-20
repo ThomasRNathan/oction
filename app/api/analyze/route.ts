@@ -5,6 +5,7 @@ import { getDVFAnalysis } from "@/lib/dvf";
 import { computeVerdict, computeFinancing, computeAttractiveness } from "@/lib/analyzer";
 import { PARIS_ARRONDISSEMENTS } from "@/lib/constants";
 import { AnalysisResult } from "@/lib/types";
+import { saveAnalysis } from "@/lib/supabase";
 
 export const maxDuration = 30;
 export const preferredRegion = "cdg1"; // Paris — keeps CEREMA latency low
@@ -79,6 +80,9 @@ export async function POST(request: NextRequest) {
       financing,
       attractiveness,
     };
+
+    // Persist to Supabase — fire and forget, never blocks response
+    saveAnalysis(url, result);
 
     return NextResponse.json(result);
   } catch (error) {
