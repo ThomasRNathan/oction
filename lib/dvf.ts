@@ -93,7 +93,7 @@ async function fetchCerema(
   const params = new URLSearchParams({
     code_insee: codeInsee,
     ordering: "-datemut",
-    page_size: "200",
+    page_size: "100",   // smaller = faster server-side processing
     anneemut_min: yearMin.toString(),
   });
   if (propertyType) params.set("type_local", propertyType);
@@ -153,10 +153,11 @@ async function fetchFromCerema(
   codeInsee: string,
   propertyType: string | undefined
 ): Promise<DVFAnalysis | null> {
+  // Start with 2 years (faster for large communes), expand if too few results
   const attempts: [string | undefined, number][] = [
+    [propertyType, 2],
     [propertyType, 3],
-    [propertyType, 5],
-    [undefined, 3],
+    [undefined, 2],
   ];
   for (const [type, years] of attempts) {
     try {
