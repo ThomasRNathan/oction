@@ -4,6 +4,13 @@ function fmt(n: number): string {
   return n.toLocaleString("fr-FR");
 }
 
+/** Human-readable scope label — "rayon 500 m" or "commune entière". */
+function scopeLabel(radiusUsed: number): string {
+  if (radiusUsed <= 0) return "commune entière";
+  if (radiusUsed >= 1000) return `rayon ${(radiusUsed / 1000).toLocaleString("fr-FR")} km`;
+  return `rayon ${radiusUsed} m`;
+}
+
 export function MarketAnalysis({
   dvf,
   verdict,
@@ -28,7 +35,7 @@ export function MarketAnalysis({
           <span className="text-lg font-normal text-slate-400 ml-1">€/m²</span>
         </p>
         <p className="text-xs text-slate-600 mt-1">
-          sur {dvf.count} ventes · {dvf.periodYears} an{dvf.periodYears > 1 ? "s" : ""}
+          sur {dvf.count} ventes · {scopeLabel(dvf.radiusUsed)} · {dvf.periodYears} an{dvf.periodYears > 1 ? "s" : ""}
         </p>
       </div>
 

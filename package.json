@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "licitor:seed": "tsx scripts/licitor/seed-progress.ts",
+    "licitor:index": "tsx scripts/licitor/scrape-index.ts",
+    "licitor:detail": "tsx scripts/licitor/scrape-detail.ts",
+    "licitor:status": "tsx scripts/licitor/status.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.104.0",
@@ -20,9 +24,11 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dotenv": "^17.4.2",
     "eslint": "^9",
     "eslint-config-next": "16.2.3",
     "tailwindcss": "^4",
+    "tsx": "^4.21.0",
     "typescript": "^5"
   }
 }
