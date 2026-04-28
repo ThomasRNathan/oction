@@ -7,7 +7,7 @@
  * Fully resumable. Ctrl-C safe.
  *
  * CLI:  npx tsx scripts/licitor/scrape-detail.ts [batchSize]
- *   default batchSize = 800 (~35-45 min)
+ *   default batchSize = 600 (~25-35 min)
  */
 import { db, writeDetail, markRemoved } from "./db";
 import { politeFetch } from "./fetch";
@@ -28,7 +28,7 @@ async function claimBatch(size: number): Promise<Row[]> {
 }
 
 async function main() {
-  const batchSize = parseInt(process.argv[2] ?? "800", 10);
+  const batchSize = parseInt(process.argv[2] ?? "600", 10);
   const batch = await claimBatch(batchSize);
 
   if (batch.length === 0) {
@@ -91,6 +91,7 @@ async function main() {
   console.log(
     `\nDone: ${ok} ok, ${removed} removed (404), ${fail} failed. Elapsed ${Math.round(elapsed / 60)}m.`
   );
+  console.log(`BATCH DONE (detail): ok=${ok} removed=${removed} fail=${fail}`);
 }
 
 main().catch((e) => {

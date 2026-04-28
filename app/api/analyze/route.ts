@@ -3,6 +3,7 @@ import { scrapeListicor } from "@/lib/scraper";
 import { geocodeAddress } from "@/lib/geocoder";
 import { getDVFAnalysis } from "@/lib/dvf";
 import { computeVerdict, computeFinancing, computeAttractiveness } from "@/lib/analyzer";
+import { computeAllScores } from "@/lib/analytics/uncontested";
 import { PARIS_ARRONDISSEMENTS } from "@/lib/constants";
 import { AnalysisResult } from "@/lib/types";
 import { saveAnalysis } from "@/lib/supabase";
@@ -72,6 +73,11 @@ export async function POST(request: NextRequest) {
     // Step 5: Attractiveness
     const attractiveness = computeAttractiveness(property);
 
+    // Step 6: P(uncontested) — three views (exact / soft / market) computed in
+    // one pass off the baked rate-table JSON. Market mode also takes the live
+    // DVF median so we can apply the floor-vs-DVF hard gate.
+    const uncontested = computeAllScores(property, dvf?.medianPricePerSqm);
+
     const result: AnalysisResult = {
       property,
       geocoding: geocoding || undefined,
@@ -79,6 +85,7 @@ export async function POST(request: NextRequest) {
       verdict: verdict || undefined,
       financing,
       attractiveness,
+      uncontested,
     };
 
     // Persist to Supabase — fire and forget, never blocks response
