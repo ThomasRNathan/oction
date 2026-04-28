@@ -1,0 +1,1700 @@
+{
+  "generated_at": "2026-04-27T17:48:48.749Z",
+  "definition": "threshold",
+  "threshold_used": 0,
+  "n_total": 20171,
+  "baseline_rate": 0.0818,
+  "by_tribunal": {
+    "TJ Grasse": {
+      "n": 375,
+      "n_uncontested": 44,
+      "rate": 0.1173,
+      "lift": 1.434,
+      "ci_low": 0.0886,
+      "ci_high": 0.1539
+    },
+    "TJ Lille": {
+      "n": 894,
+      "n_uncontested": 64,
+      "rate": 0.0716,
+      "lift": 0.875,
+      "ci_low": 0.0565,
+      "ci_high": 0.0904
+    },
+    "TJ Bobigny": {
+      "n": 4182,
+      "n_uncontested": 415,
+      "rate": 0.0992,
+      "lift": 1.213,
+      "ci_low": 0.0905,
+      "ci_high": 0.1087
+    },
+    "TJ Perpignan": {
+      "n": 125,
+      "n_uncontested": 11,
+      "rate": 0.088,
+      "lift": 1.076,
+      "ci_low": 0.0498,
+      "ci_high": 0.1507
+    },
+    "TJ Paris": {
+      "n": 4081,
+      "n_uncontested": 219,
+      "rate": 0.0537,
+      "lift": 0.656,
+      "ci_low": 0.0472,
+      "ci_high": 0.061
+    },
+    "TJ Nice": {
+      "n": 292,
+      "n_uncontested": 18,
+      "rate": 0.0616,
+      "lift": 0.754,
+      "ci_low": 0.0393,
+      "ci_high": 0.0953
+    },
+    "TJ Limoges": {
+      "n": 47,
+      "n_uncontested": 3,
+      "rate": 0.0638,
+      "lift": 0.78,
+      "ci_low": 0.0219,
+      "ci_high": 0.1716
+    },
+    "TJ Bourges": {
+      "n": 14,
+      "n_uncontested": 2,
+      "rate": 0.1429,
+      "lift": 1.746,
+      "ci_low": 0.0401,
+      "ci_high": 0.3994
+    },
+    "TJ Versailles": {
+      "n": 1290,
+      "n_uncontested": 195,
+      "rate": 0.1512,
+      "lift": 1.848,
+      "ci_low": 0.1327,
+      "ci_high": 0.1717
+    },
+    "TJ Saint-Nazaire": {
+      "n": 126,
+      "n_uncontested": 6,
+      "rate": 0.0476,
+      "lift": 0.582,
+      "ci_low": 0.022,
+      "ci_high": 0.1
+    },
+    "TJ Amiens": {
+      "n": 158,
+      "n_uncontested": 19,
+      "rate": 0.1203,
+      "lift": 1.47,
+      "ci_low": 0.0784,
+      "ci_high": 0.1802
+    },
+    "TJ Grenoble": {
+      "n": 142,
+      "n_uncontested": 20,
+      "rate": 0.1408,
+      "lift": 1.722,
+      "ci_low": 0.0931,
+      "ci_high": 0.2076
+    },
+    "TJ Fontainebleau": {
+      "n": 196,
+      "n_uncontested": 14,
+      "rate": 0.0714,
+      "lift": 0.873,
+      "ci_low": 0.043,
+      "ci_high": 0.1163
+    },
+    "TJ Toulon": {
+      "n": 215,
+      "n_uncontested": 21,
+      "rate": 0.0977,
+      "lift": 1.194,
+      "ci_low": 0.0648,
+      "ci_high": 0.1447
+    },
+    "TJ Draguignan": {
+      "n": 218,
+      "n_uncontested": 28,
+      "rate": 0.1284,
+      "lift": 1.57,
+      "ci_low": 0.0904,
+      "ci_high": 0.1794
+    },
+    "TJ Bordeaux": {
+      "n": 359,
+      "n_uncontested": 14,
+      "rate": 0.039,
+      "lift": 0.477,
+      "ci_low": 0.0234,
+      "ci_high": 0.0644
+    },
+    "TJ Chateauroux": {
+      "n": 3,
+      "n_uncontested": 0,
+      "rate": 0,
+      "lift": 0,
+      "ci_low": 0,
+      "ci_high": 0.5615
+    },
+    "Autre": {
+      "n": 1487,
+      "n_uncontested": 86,
+      "rate": 0.0578,
+      "lift": 0.707,
+      "ci_low": 0.0471,
+      "ci_high": 0.0709
+    },
+    "TJ Rouen": {
+      "n": 3,
+      "n_uncontested": 0,
+      "rate": 0,
+      "lift": 0,
+      "ci_low": 0,
+      "ci_high": 0.5615
+    },
+    "TJ Nantes": {
+      "n": 312,
+      "n_uncontested": 21,
+      "rate": 0.0673,
+      "lift": 0.823,
+      "ci_low": 0.0444,
+      "ci_high": 0.1007
+    },
+    "TJ Dax": {
+      "n": 34,
+      "n_uncontested": 4,
+      "rate": 0.1176,
+      "lift": 1.438,
+      "ci_low": 0.0467,
+      "ci_high": 0.2662
+    },
+    "TJ Créteil": {
+      "n": 1925,
+      "n_uncontested": 157,
+      "rate": 0.0816,
+      "lift": 0.997,
+      "ci_low": 0.0701,
+      "ci_high": 0.0946
+    },
+    "TJ Lorient": {
+      "n": 13,
+      "n_uncontested": 1,
+      "rate": 0.0769,
+      "lift": 0.94,
+      "ci_low": 0.0137,
+      "ci_high": 0.3331
+    },
+    "TJ Bayonne": {
+      "n": 97,
+      "n_uncontested": 6,
+      "rate": 0.0619,
+      "lift": 0.756,
+      "ci_low": 0.0287,
+      "ci_high": 0.1284
+    },
+    "TJ Pontoise": {
+      "n": 1578,
+      "n_uncontested": 89,
+      "rate": 0.0564,
+      "lift": 0.689,
+      "ci_low": 0.0461,
+      "ci_high": 0.0689
+    },
+    "TJ Meaux": {
+      "n": 155,
+      "n_uncontested": 16,
+      "rate": 0.1032,
+      "lift": 1.262,
+      "ci_low": 0.0645,
+      "ci_high": 0.1611
+    },
+    "TJ Libourne": {
+      "n": 88,
+      "n_uncontested": 6,
+      "rate": 0.0682,
+      "lift": 0.834,
+      "ci_low": 0.0316,
+      "ci_high": 0.1409
+    },
+    "TJ Dijon": {
+      "n": 8,
+      "n_uncontested": 3,
+      "rate": 0.375,
+      "lift": 4.584,
+      "ci_low": 0.1368,
+      "ci_high": 0.6943
+    },
+    "TJ Mont de Marsan": {
+      "n": 22,
+      "n_uncontested": 5,
+      "rate": 0.2273,
+      "lift": 2.778,
+      "ci_low": 0.1012,
+      "ci_high": 0.4344
+    },
+    "TJ Toulouse": {
+      "n": 14,
+      "n_uncontested": 8,
+      "rate": 0.5714,
+      "lift": 6.986,
+      "ci_low": 0.3259,
+      "ci_high": 0.7862
+    },
+    "TJ Bethune": {
+      "n": 2,
+      "n_uncontested": 2,
+      "rate": 1,
+      "lift": 12.225,
+      "ci_low": 0.3424,
+      "ci_high": 1
+    },
+    "TJ Cahors": {
+      "n": 3,
+      "n_uncontested": 0,
+      "rate": 0,
+      "lift": 0,
+      "ci_low": 0,
+      "ci_high": 0.5615
+    },
+    "TJ Poitiers": {
+      "n": 11,
+      "n_uncontested": 1,
+      "rate": 0.0909,
+      "lift": 1.111,
+      "ci_low": 0.0162,
+      "ci_high": 0.3774
+    },
+    "TJ Angers": {
+      "n": 2,
+      "n_uncontested": 1,
+      "rate": 0.5,
+      "lift": 6.112,
+      "ci_low": 0.0945,
+      "ci_high": 0.9055
+    },
+    "TJ Agen": {
+      "n": 1,
+      "n_uncontested": 0,
+      "rate": 0,
+      "lift": 0,
+      "ci_low": 0,
+      "ci_high": 0.7935
+    },
+    "TJ Pau": {
+      "n": 15,
+      "n_uncontested": 0,
+      "rate": 0,
+      "lift": 0,
+      "ci_low": 0,
+      "ci_high": 0.2039
+    },
+    "TJ Tours": {
+      "n": 2,
+      "n_uncontested": 1,
+      "rate": 0.5,
+      "lift": 6.112,
+      "ci_low": 0.0945,
+      "ci_high": 0.9055
+    },
+    "TJ Nimes": {
+      "n": 89,
+      "n_uncontested": 5,
+      "rate": 0.0562,
+      "lift": 0.687,
+      "ci_low": 0.0242,
+      "ci_high": 0.1249
+    },
+    "TJ Belfort": {
+      "n": 1,
+      "n_uncontested": 0,
+      "rate": 0,
+      "lift": 0,
+      "ci_low": 0,
+      "ci_high": 0.7935
+    },
+    "TJ Marseille": {
+      "n": 76,
+      "n_uncontested": 12,
+      "rate": 0.1579,
+      "lift": 1.93,
+      "ci_low": 0.0927,
+      "ci_high": 0.256
+    },
+    "TJ Besancon": {
+      "n": 9,
+      "n_uncontested": 0,
+      "rate": 0,
+      "lift": 0,
+      "ci_low": 0,
+      "ci_high": 0.2992
+    },
+    "TJ Aix-en-Provence": {
+      "n": 5,
+      "n_uncontested": 0,
+      "rate": 0,
+      "lift": 0,
+      "ci_low": 0,
+      "ci_high": 0.4345
+    },
+    "TJ Nanterre": {
+      "n": 1319,
+      "n_uncontested": 114,
+      "rate": 0.0864,
+      "lift": 1.057,
+      "ci_low": 0.0724,
+      "ci_high": 0.1028
+    },
+    "TJ Lyon": {
+      "n": 9,
+      "n_uncontested": 5,
+      "rate": 0.5556,
+      "lift": 6.792,
+      "ci_low": 0.2666,
+      "ci_high": 0.8112
+    },
+    "TJ Beziers": {
+      "n": 2,
+      "n_uncontested": 0,
+      "rate": 0,
+      "lift": 0,
+      "ci_low": 0,
+      "ci_high": 0.6576
+    },
+    "TJ Carpentras": {
+      "n": 7,
+      "n_uncontested": 1,
+      "rate": 0.1429,
+      "lift": 1.746,
+      "ci_low": 0.0257,
+      "ci_high": 0.5131
+    },
+    "TJ Villefranche": {
+      "n": 16,
+      "n_uncontested": 0,
+      "rate": 0,
+      "lift": 0,
+      "ci_low": 0,
+      "ci_high": 0.1936
+    },
+    "TJ Tarascon": {
+      "n": 15,
+      "n_uncontested": 2,
+      "rate": 0.1333,
+      "lift": 1.63,
+      "ci_low": 0.0374,
+      "ci_high": 0.3788
+    },
+    "TJ Quimper": {
+      "n": 2,
+      "n_uncontested": 0,
+      "rate": 0,
+      "lift": 0,
+      "ci_low": 0,
+      "ci_high": 0.6576
+    },
+    "TJ Saint Etienne": {
+      "n": 8,
+      "n_uncontested": 0,
+      "rate": 0,
+      "lift": 0,
+      "ci_low": 0,
+      "ci_high": 0.3244
+    },
+    "TJ Avignon": {
+      "n": 7,
+      "n_uncontested": 0,
+      "rate": 0,
+      "lift": 0,
+      "ci_low": 0,
+      "ci_high": 0.3543
+    },
+    "TJ Chambéry": {
+      "n": 15,
+      "n_uncontested": 2,
+      "rate": 0.1333,
+      "lift": 1.63,
+      "ci_low": 0.0374,
+      "ci_high": 0.3788
+    },
+    "TJ Thonon": {
+      "n": 7,
+      "n_uncontested": 0,
+      "rate": 0,
+      "lift": 0,
+      "ci_low": 0,
+      "ci_high": 0.3543
+    },
+    "TJ Bonneville": {
+      "n": 2,
+      "n_uncontested": 1,
+      "rate": 0.5,
+      "lift": 6.112,
+      "ci_low": 0.0945,
+      "ci_high": 0.9055
+    },
+    "TJ Bourg en Bresse": {
+      "n": 5,
+      "n_uncontested": 0,
+      "rate": 0,
+      "lift": 0,
+      "ci_low": 0,
+      "ci_high": 0.4345
+    },
+    "TJ La Rochelle": {
+      "n": 1,
+      "n_uncontested": 0,
+      "rate": 0,
+      "lift": 0,
+      "ci_low": 0,
+      "ci_high": 0.7935
+    },
+    "TJ Alès": {
+      "n": 2,
+      "n_uncontested": 0,
+      "rate": 0,
+      "lift": 0,
+      "ci_low": 0,
+      "ci_high": 0.6576
+    },
+    "TJ Montpellier": {
+      "n": 5,
+      "n_uncontested": 1,
+      "rate": 0.2,
+      "lift": 2.445,
+      "ci_low": 0.0362,
+      "ci_high": 0.6245
+    },
+    "TJ Melun": {
+      "n": 62,
+      "n_uncontested": 6,
+      "rate": 0.0968,
+      "lift": 1.183,
+      "ci_low": 0.0451,
+      "ci_high": 0.1955
+    },
+    "TJ Gap": {
+      "n": 7,
+      "n_uncontested": 0,
+      "rate": 0,
+      "lift": 0,
+      "ci_low": 0,
+      "ci_high": 0.3543
+    },
+    "TJ Clermont-Ferrand": {
+      "n": 1,
+      "n_uncontested": 0,
+      "rate": 0,
+      "lift": 0,
+      "ci_low": 0,
+      "ci_high": 0.7935
+    },
+    "TJ Montargis": {
+      "n": 2,
+      "n_uncontested": 0,
+      "rate": 0,
+      "lift": 0,
+      "ci_low": 0,
+      "ci_high": 0.6576
+    },
+    "TJ Narbonne": {
+      "n": 1,
+      "n_uncontested": 0,
+      "rate": 0,
+      "lift": 0,
+      "ci_low": 0,
+      "ci_high": 0.7935
+    },
+    "TJ Sables d'Olonne": {
+      "n": 1,
+      "n_uncontested": 0,
+      "rate": 0,
+      "lift": 0,
+      "ci_low": 0,
+      "ci_high": 0.7935
+    },
+    "Notaire": {
+      "n": 1,
+      "n_uncontested": 0,
+      "rate": 0,
+      "lift": 0,
+      "ci_low": 0,
+      "ci_high": 0.7935
+    },
+    "Notaire (Nantes)": {
+      "n": 2,
+      "n_uncontested": 1,
+      "rate": 0.5,
+      "lift": 6.112,
+      "ci_low": 0.0945,
+      "ci_high": 0.9055
+    },
+    "TJ Nevers": {
+      "n": 1,
+      "n_uncontested": 0,
+      "rate": 0,
+      "lift": 0,
+      "ci_low": 0,
+      "ci_high": 0.7935
+    },
+    "TJ Verdun": {
+      "n": 1,
+      "n_uncontested": 0,
+      "rate": 0,
+      "lift": 0,
+      "ci_low": 0,
+      "ci_high": 0.7935
+    },
+    "TJ Albertville": {
+      "n": 1,
+      "n_uncontested": 0,
+      "rate": 0,
+      "lift": 0,
+      "ci_low": 0,
+      "ci_high": 0.7935
+    }
+  },
+  "by_property_type": {
+    "autre": {
+      "n": 1473,
+      "n_uncontested": 223,
+      "rate": 0.1514,
+      "lift": 1.851,
+      "ci_low": 0.134,
+      "ci_high": 0.1706
+    },
+    "maison": {
+      "n": 4451,
+      "n_uncontested": 403,
+      "rate": 0.0905,
+      "lift": 1.107,
+      "ci_low": 0.0825,
+      "ci_high": 0.0993
+    },
+    "appartement": {
+      "n": 10371,
+      "n_uncontested": 644,
+      "rate": 0.0621,
+      "lift": 0.759,
+      "ci_low": 0.0576,
+      "ci_high": 0.0669
+    },
+    "parking": {
+      "n": 338,
+      "n_uncontested": 90,
+      "rate": 0.2663,
+      "lift": 3.255,
+      "ci_low": 0.222,
+      "ci_high": 0.3158
+    },
+    "immeuble": {
+      "n": 673,
+      "n_uncontested": 65,
+      "rate": 0.0966,
+      "lift": 1.181,
+      "ci_low": 0.0765,
+      "ci_high": 0.1212
+    },
+    "studio": {
+      "n": 1604,
+      "n_uncontested": 97,
+      "rate": 0.0605,
+      "lift": 0.739,
+      "ci_low": 0.0498,
+      "ci_high": 0.0732
+    },
+    "terrain": {
+      "n": 279,
+      "n_uncontested": 36,
+      "rate": 0.129,
+      "lift": 1.577,
+      "ci_low": 0.0947,
+      "ci_high": 0.1735
+    },
+    "local": {
+      "n": 982,
+      "n_uncontested": 92,
+      "rate": 0.0937,
+      "lift": 1.145,
+      "ci_low": 0.077,
+      "ci_high": 0.1135
+    }
+  },
+  "by_tribunal_x_type": {
+    "TJ Grasse|autre": {
+      "n": 48,
+      "n_uncontested": 8,
+      "rate": 0.1667,
+      "lift": 2.037,
+      "ci_low": 0.087,
+      "ci_high": 0.2958
+    },
+    "TJ Lille|maison": {
+      "n": 358,
+      "n_uncontested": 18,
+      "rate": 0.0503,
+      "lift": 0.615,
+      "ci_low": 0.032,
+      "ci_high": 0.0781
+    },
+    "TJ Bobigny|appartement": {
+      "n": 2637,
+      "n_uncontested": 255,
+      "rate": 0.0967,
+      "lift": 1.182,
+      "ci_low": 0.086,
+      "ci_high": 0.1086
+    },
+    "TJ Perpignan|maison": {
+      "n": 50,
+      "n_uncontested": 4,
+      "rate": 0.08,
+      "lift": 0.978,
+      "ci_low": 0.0315,
+      "ci_high": 0.1884
+    },
+    "TJ Paris|appartement": {
+      "n": 2198,
+      "n_uncontested": 76,
+      "rate": 0.0346,
+      "lift": 0.423,
+      "ci_low": 0.0277,
+      "ci_high": 0.0431
+    },
+    "TJ Paris|autre": {
+      "n": 333,
+      "n_uncontested": 39,
+      "rate": 0.1171,
+      "lift": 1.432,
+      "ci_low": 0.0869,
+      "ci_high": 0.1561
+    },
+    "TJ Paris|parking": {
+      "n": 147,
+      "n_uncontested": 22,
+      "rate": 0.1497,
+      "lift": 1.83,
+      "ci_low": 0.101,
+      "ci_high": 0.2162
+    },
+    "TJ Nice|appartement": {
+      "n": 187,
+      "n_uncontested": 10,
+      "rate": 0.0535,
+      "lift": 0.654,
+      "ci_low": 0.0293,
+      "ci_high": 0.0956
+    },
+    "TJ Versailles|maison": {
+      "n": 443,
+      "n_uncontested": 66,
+      "rate": 0.149,
+      "lift": 1.821,
+      "ci_low": 0.1188,
+      "ci_high": 0.1852
+    },
+    "TJ Saint-Nazaire|maison": {
+      "n": 88,
+      "n_uncontested": 3,
+      "rate": 0.0341,
+      "lift": 0.417,
+      "ci_low": 0.0117,
+      "ci_high": 0.0955
+    },
+    "TJ Paris|immeuble": {
+      "n": 76,
+      "n_uncontested": 8,
+      "rate": 0.1053,
+      "lift": 1.287,
+      "ci_low": 0.0543,
+      "ci_high": 0.1942
+    },
+    "TJ Amiens|immeuble": {
+      "n": 34,
+      "n_uncontested": 2,
+      "rate": 0.0588,
+      "lift": 0.719,
+      "ci_low": 0.0163,
+      "ci_high": 0.1909
+    },
+    "TJ Amiens|maison": {
+      "n": 101,
+      "n_uncontested": 10,
+      "rate": 0.099,
+      "lift": 1.21,
+      "ci_low": 0.0547,
+      "ci_high": 0.1727
+    },
+    "TJ Grenoble|maison": {
+      "n": 34,
+      "n_uncontested": 8,
+      "rate": 0.2353,
+      "lift": 2.876,
+      "ci_low": 0.1244,
+      "ci_high": 0.4
+    },
+    "TJ Fontainebleau|maison": {
+      "n": 105,
+      "n_uncontested": 9,
+      "rate": 0.0857,
+      "lift": 1.048,
+      "ci_low": 0.0457,
+      "ci_high": 0.1549
+    },
+    "TJ Bobigny|autre": {
+      "n": 195,
+      "n_uncontested": 31,
+      "rate": 0.159,
+      "lift": 1.943,
+      "ci_low": 0.1143,
+      "ci_high": 0.2168
+    },
+    "TJ Toulon|maison": {
+      "n": 42,
+      "n_uncontested": 4,
+      "rate": 0.0952,
+      "lift": 1.164,
+      "ci_low": 0.0377,
+      "ci_high": 0.2207
+    },
+    "TJ Bobigny|maison": {
+      "n": 842,
+      "n_uncontested": 58,
+      "rate": 0.0689,
+      "lift": 0.842,
+      "ci_low": 0.0537,
+      "ci_high": 0.088
+    },
+    "TJ Toulon|appartement": {
+      "n": 124,
+      "n_uncontested": 9,
+      "rate": 0.0726,
+      "lift": 0.887,
+      "ci_low": 0.0387,
+      "ci_high": 0.1322
+    },
+    "TJ Draguignan|maison": {
+      "n": 87,
+      "n_uncontested": 14,
+      "rate": 0.1609,
+      "lift": 1.967,
+      "ci_low": 0.0983,
+      "ci_high": 0.2522
+    },
+    "TJ Bordeaux|maison": {
+      "n": 178,
+      "n_uncontested": 9,
+      "rate": 0.0506,
+      "lift": 0.618,
+      "ci_low": 0.0268,
+      "ci_high": 0.0933
+    },
+    "TJ Lille|appartement": {
+      "n": 184,
+      "n_uncontested": 10,
+      "rate": 0.0543,
+      "lift": 0.664,
+      "ci_low": 0.0298,
+      "ci_high": 0.0971
+    },
+    "Autre|studio": {
+      "n": 91,
+      "n_uncontested": 5,
+      "rate": 0.0549,
+      "lift": 0.672,
+      "ci_low": 0.0237,
+      "ci_high": 0.1222
+    },
+    "TJ Paris|terrain": {
+      "n": 74,
+      "n_uncontested": 4,
+      "rate": 0.0541,
+      "lift": 0.661,
+      "ci_low": 0.0212,
+      "ci_high": 0.1309
+    },
+    "TJ Grasse|appartement": {
+      "n": 195,
+      "n_uncontested": 19,
+      "rate": 0.0974,
+      "lift": 1.191,
+      "ci_low": 0.0633,
+      "ci_high": 0.1472
+    },
+    "TJ Grasse|maison": {
+      "n": 69,
+      "n_uncontested": 13,
+      "rate": 0.1884,
+      "lift": 2.303,
+      "ci_low": 0.1135,
+      "ci_high": 0.2961
+    },
+    "TJ Nantes|maison": {
+      "n": 141,
+      "n_uncontested": 9,
+      "rate": 0.0638,
+      "lift": 0.78,
+      "ci_low": 0.0339,
+      "ci_high": 0.1169
+    },
+    "TJ Nantes|autre": {
+      "n": 31,
+      "n_uncontested": 3,
+      "rate": 0.0968,
+      "lift": 1.183,
+      "ci_low": 0.0335,
+      "ci_high": 0.249
+    },
+    "Autre|appartement": {
+      "n": 844,
+      "n_uncontested": 26,
+      "rate": 0.0308,
+      "lift": 0.377,
+      "ci_low": 0.0211,
+      "ci_high": 0.0448
+    },
+    "TJ Nantes|appartement": {
+      "n": 95,
+      "n_uncontested": 6,
+      "rate": 0.0632,
+      "lift": 0.772,
+      "ci_low": 0.0293,
+      "ci_high": 0.131
+    },
+    "TJ Dax|maison": {
+      "n": 20,
+      "n_uncontested": 1,
+      "rate": 0.05,
+      "lift": 0.611,
+      "ci_low": 0.0089,
+      "ci_high": 0.2361
+    },
+    "TJ Lille|immeuble": {
+      "n": 219,
+      "n_uncontested": 19,
+      "rate": 0.0868,
+      "lift": 1.061,
+      "ci_low": 0.0562,
+      "ci_high": 0.1315
+    },
+    "TJ Grenoble|appartement": {
+      "n": 81,
+      "n_uncontested": 8,
+      "rate": 0.0988,
+      "lift": 1.207,
+      "ci_low": 0.0509,
+      "ci_high": 0.183
+    },
+    "Autre|maison": {
+      "n": 392,
+      "n_uncontested": 31,
+      "rate": 0.0791,
+      "lift": 0.967,
+      "ci_low": 0.0563,
+      "ci_high": 0.1101
+    },
+    "TJ Créteil|appartement": {
+      "n": 1066,
+      "n_uncontested": 57,
+      "rate": 0.0535,
+      "lift": 0.654,
+      "ci_low": 0.0415,
+      "ci_high": 0.0687
+    },
+    "TJ Créteil|maison": {
+      "n": 370,
+      "n_uncontested": 36,
+      "rate": 0.0973,
+      "lift": 1.189,
+      "ci_low": 0.0711,
+      "ci_high": 0.1318
+    },
+    "TJ Bayonne|maison": {
+      "n": 32,
+      "n_uncontested": 4,
+      "rate": 0.125,
+      "lift": 1.528,
+      "ci_low": 0.0497,
+      "ci_high": 0.2807
+    },
+    "TJ Pontoise|appartement": {
+      "n": 898,
+      "n_uncontested": 35,
+      "rate": 0.039,
+      "lift": 0.476,
+      "ci_low": 0.0282,
+      "ci_high": 0.0537
+    },
+    "TJ Versailles|appartement": {
+      "n": 523,
+      "n_uncontested": 50,
+      "rate": 0.0956,
+      "lift": 1.169,
+      "ci_low": 0.0733,
+      "ci_high": 0.1238
+    },
+    "TJ Libourne|immeuble": {
+      "n": 20,
+      "n_uncontested": 1,
+      "rate": 0.05,
+      "lift": 0.611,
+      "ci_low": 0.0089,
+      "ci_high": 0.2361
+    },
+    "TJ Bordeaux|appartement": {
+      "n": 100,
+      "n_uncontested": 1,
+      "rate": 0.01,
+      "lift": 0.122,
+      "ci_low": 0.0018,
+      "ci_high": 0.0545
+    },
+    "TJ Paris|maison": {
+      "n": 138,
+      "n_uncontested": 8,
+      "rate": 0.058,
+      "lift": 0.709,
+      "ci_low": 0.0297,
+      "ci_high": 0.1102
+    },
+    "TJ Perpignan|appartement": {
+      "n": 50,
+      "n_uncontested": 5,
+      "rate": 0.1,
+      "lift": 1.222,
+      "ci_low": 0.0435,
+      "ci_high": 0.2136
+    },
+    "TJ Nice|studio": {
+      "n": 25,
+      "n_uncontested": 0,
+      "rate": 0,
+      "lift": 0,
+      "ci_low": 0,
+      "ci_high": 0.1332
+    },
+    "TJ Versailles|local": {
+      "n": 44,
+      "n_uncontested": 13,
+      "rate": 0.2955,
+      "lift": 3.612,
+      "ci_low": 0.1816,
+      "ci_high": 0.4422
+    },
+    "TJ Libourne|maison": {
+      "n": 47,
+      "n_uncontested": 3,
+      "rate": 0.0638,
+      "lift": 0.78,
+      "ci_low": 0.0219,
+      "ci_high": 0.1716
+    },
+    "Autre|autre": {
+      "n": 83,
+      "n_uncontested": 15,
+      "rate": 0.1807,
+      "lift": 2.209,
+      "ci_low": 0.1127,
+      "ci_high": 0.277
+    },
+    "TJ Pontoise|studio": {
+      "n": 46,
+      "n_uncontested": 3,
+      "rate": 0.0652,
+      "lift": 0.797,
+      "ci_low": 0.0224,
+      "ci_high": 0.175
+    },
+    "TJ Paris|studio": {
+      "n": 692,
+      "n_uncontested": 42,
+      "rate": 0.0607,
+      "lift": 0.742,
+      "ci_low": 0.0452,
+      "ci_high": 0.081
+    },
+    "TJ Draguignan|appartement": {
+      "n": 76,
+      "n_uncontested": 4,
+      "rate": 0.0526,
+      "lift": 0.643,
+      "ci_low": 0.0207,
+      "ci_high": 0.1277
+    },
+    "TJ Paris|local": {
+      "n": 423,
+      "n_uncontested": 20,
+      "rate": 0.0473,
+      "lift": 0.578,
+      "ci_low": 0.0308,
+      "ci_high": 0.0719
+    },
+    "TJ Bordeaux|immeuble": {
+      "n": 37,
+      "n_uncontested": 0,
+      "rate": 0,
+      "lift": 0,
+      "ci_low": 0,
+      "ci_high": 0.0941
+    },
+    "TJ Versailles|autre": {
+      "n": 142,
+      "n_uncontested": 35,
+      "rate": 0.2465,
+      "lift": 3.013,
+      "ci_low": 0.1829,
+      "ci_high": 0.3234
+    },
+    "TJ Draguignan|autre": {
+      "n": 33,
+      "n_uncontested": 7,
+      "rate": 0.2121,
+      "lift": 2.593,
+      "ci_low": 0.1068,
+      "ci_high": 0.3775
+    },
+    "TJ Versailles|terrain": {
+      "n": 25,
+      "n_uncontested": 7,
+      "rate": 0.28,
+      "lift": 3.423,
+      "ci_low": 0.1428,
+      "ci_high": 0.4758
+    },
+    "TJ Lille|local": {
+      "n": 38,
+      "n_uncontested": 4,
+      "rate": 0.1053,
+      "lift": 1.287,
+      "ci_low": 0.0417,
+      "ci_high": 0.2413
+    },
+    "TJ Nice|autre": {
+      "n": 25,
+      "n_uncontested": 1,
+      "rate": 0.04,
+      "lift": 0.489,
+      "ci_low": 0.0071,
+      "ci_high": 0.1954
+    },
+    "TJ Versailles|immeuble": {
+      "n": 30,
+      "n_uncontested": 8,
+      "rate": 0.2667,
+      "lift": 3.26,
+      "ci_low": 0.1418,
+      "ci_high": 0.4445
+    },
+    "TJ Lille|autre": {
+      "n": 61,
+      "n_uncontested": 11,
+      "rate": 0.1803,
+      "lift": 2.204,
+      "ci_low": 0.1038,
+      "ci_high": 0.2947
+    },
+    "TJ Bayonne|appartement": {
+      "n": 42,
+      "n_uncontested": 1,
+      "rate": 0.0238,
+      "lift": 0.291,
+      "ci_low": 0.0042,
+      "ci_high": 0.1232
+    },
+    "TJ Nimes|appartement": {
+      "n": 34,
+      "n_uncontested": 2,
+      "rate": 0.0588,
+      "lift": 0.719,
+      "ci_low": 0.0163,
+      "ci_high": 0.1909
+    },
+    "TJ Nice|maison": {
+      "n": 34,
+      "n_uncontested": 6,
+      "rate": 0.1765,
+      "lift": 2.157,
+      "ci_low": 0.0835,
+      "ci_high": 0.3351
+    },
+    "TJ Bobigny|studio": {
+      "n": 246,
+      "n_uncontested": 18,
+      "rate": 0.0732,
+      "lift": 0.895,
+      "ci_low": 0.0468,
+      "ci_high": 0.1127
+    },
+    "TJ Nimes|maison": {
+      "n": 33,
+      "n_uncontested": 2,
+      "rate": 0.0606,
+      "lift": 0.741,
+      "ci_low": 0.0168,
+      "ci_high": 0.1961
+    },
+    "TJ Nanterre|autre": {
+      "n": 102,
+      "n_uncontested": 13,
+      "rate": 0.1275,
+      "lift": 1.558,
+      "ci_low": 0.076,
+      "ci_high": 0.2059
+    },
+    "TJ Créteil|autre": {
+      "n": 177,
+      "n_uncontested": 24,
+      "rate": 0.1356,
+      "lift": 1.658,
+      "ci_low": 0.0928,
+      "ci_high": 0.1938
+    },
+    "TJ Nanterre|immeuble": {
+      "n": 32,
+      "n_uncontested": 5,
+      "rate": 0.1563,
+      "lift": 1.91,
+      "ci_low": 0.0686,
+      "ci_high": 0.3175
+    },
+    "TJ Nanterre|appartement": {
+      "n": 739,
+      "n_uncontested": 44,
+      "rate": 0.0595,
+      "lift": 0.728,
+      "ci_low": 0.0446,
+      "ci_high": 0.079
+    },
+    "Autre|terrain": {
+      "n": 21,
+      "n_uncontested": 3,
+      "rate": 0.1429,
+      "lift": 1.746,
+      "ci_low": 0.0498,
+      "ci_high": 0.3464
+    },
+    "TJ Nanterre|maison": {
+      "n": 125,
+      "n_uncontested": 23,
+      "rate": 0.184,
+      "lift": 2.249,
+      "ci_low": 0.1259,
+      "ci_high": 0.261
+    },
+    "TJ Créteil|studio": {
+      "n": 130,
+      "n_uncontested": 8,
+      "rate": 0.0615,
+      "lift": 0.752,
+      "ci_low": 0.0315,
+      "ci_high": 0.1167
+    },
+    "TJ Versailles|studio": {
+      "n": 61,
+      "n_uncontested": 3,
+      "rate": 0.0492,
+      "lift": 0.601,
+      "ci_low": 0.0169,
+      "ci_high": 0.1349
+    },
+    "TJ Meaux|maison": {
+      "n": 68,
+      "n_uncontested": 6,
+      "rate": 0.0882,
+      "lift": 1.079,
+      "ci_low": 0.0411,
+      "ci_high": 0.1794
+    },
+    "TJ Grasse|studio": {
+      "n": 34,
+      "n_uncontested": 0,
+      "rate": 0,
+      "lift": 0,
+      "ci_low": 0,
+      "ci_high": 0.1015
+    },
+    "TJ Versailles|parking": {
+      "n": 22,
+      "n_uncontested": 13,
+      "rate": 0.5909,
+      "lift": 7.224,
+      "ci_low": 0.3873,
+      "ci_high": 0.7674
+    },
+    "TJ Créteil|parking": {
+      "n": 31,
+      "n_uncontested": 15,
+      "rate": 0.4839,
+      "lift": 5.915,
+      "ci_low": 0.3197,
+      "ci_high": 0.6516
+    },
+    "TJ Nanterre|studio": {
+      "n": 192,
+      "n_uncontested": 14,
+      "rate": 0.0729,
+      "lift": 0.891,
+      "ci_low": 0.0439,
+      "ci_high": 0.1187
+    },
+    "TJ Créteil|local": {
+      "n": 100,
+      "n_uncontested": 11,
+      "rate": 0.11,
+      "lift": 1.345,
+      "ci_low": 0.0625,
+      "ci_high": 0.1863
+    },
+    "TJ Pontoise|maison": {
+      "n": 489,
+      "n_uncontested": 33,
+      "rate": 0.0675,
+      "lift": 0.825,
+      "ci_low": 0.0485,
+      "ci_high": 0.0933
+    },
+    "TJ Nanterre|parking": {
+      "n": 34,
+      "n_uncontested": 7,
+      "rate": 0.2059,
+      "lift": 2.517,
+      "ci_low": 0.1035,
+      "ci_high": 0.368
+    },
+    "TJ Pontoise|autre": {
+      "n": 73,
+      "n_uncontested": 10,
+      "rate": 0.137,
+      "lift": 1.675,
+      "ci_low": 0.0761,
+      "ci_high": 0.2341
+    },
+    "TJ Meaux|appartement": {
+      "n": 59,
+      "n_uncontested": 3,
+      "rate": 0.0508,
+      "lift": 0.622,
+      "ci_low": 0.0174,
+      "ci_high": 0.1392
+    },
+    "TJ Marseille|appartement": {
+      "n": 54,
+      "n_uncontested": 8,
+      "rate": 0.1481,
+      "lift": 1.811,
+      "ci_low": 0.077,
+      "ci_high": 0.266
+    },
+    "TJ Bobigny|immeuble": {
+      "n": 67,
+      "n_uncontested": 7,
+      "rate": 0.1045,
+      "lift": 1.277,
+      "ci_low": 0.0515,
+      "ci_high": 0.2003
+    },
+    "TJ Bobigny|terrain": {
+      "n": 36,
+      "n_uncontested": 6,
+      "rate": 0.1667,
+      "lift": 2.037,
+      "ci_low": 0.0787,
+      "ci_high": 0.3189
+    },
+    "TJ Bobigny|local": {
+      "n": 127,
+      "n_uncontested": 21,
+      "rate": 0.1654,
+      "lift": 2.021,
+      "ci_low": 0.1108,
+      "ci_high": 0.2396
+    },
+    "TJ Fontainebleau|autre": {
+      "n": 24,
+      "n_uncontested": 1,
+      "rate": 0.0417,
+      "lift": 0.509,
+      "ci_low": 0.0074,
+      "ci_high": 0.2024
+    },
+    "Autre|local": {
+      "n": 38,
+      "n_uncontested": 1,
+      "rate": 0.0263,
+      "lift": 0.322,
+      "ci_low": 0.0047,
+      "ci_high": 0.135
+    },
+    "TJ Créteil|immeuble": {
+      "n": 32,
+      "n_uncontested": 3,
+      "rate": 0.0938,
+      "lift": 1.146,
+      "ci_low": 0.0324,
+      "ci_high": 0.2422
+    },
+    "TJ Pontoise|local": {
+      "n": 31,
+      "n_uncontested": 2,
+      "rate": 0.0645,
+      "lift": 0.789,
+      "ci_low": 0.0179,
+      "ci_high": 0.2072
+    },
+    "TJ Bobigny|parking": {
+      "n": 32,
+      "n_uncontested": 19,
+      "rate": 0.5938,
+      "lift": 7.259,
+      "ci_low": 0.4226,
+      "ci_high": 0.7448
+    },
+    "TJ Melun|maison": {
+      "n": 33,
+      "n_uncontested": 5,
+      "rate": 0.1515,
+      "lift": 1.852,
+      "ci_low": 0.0665,
+      "ci_high": 0.3092
+    },
+    "TJ Nanterre|local": {
+      "n": 80,
+      "n_uncontested": 6,
+      "rate": 0.075,
+      "lift": 0.917,
+      "ci_low": 0.0348,
+      "ci_high": 0.1541
+    },
+    "TJ Fontainebleau|appartement": {
+      "n": 40,
+      "n_uncontested": 3,
+      "rate": 0.075,
+      "lift": 0.917,
+      "ci_low": 0.0258,
+      "ci_high": 0.1986
+    },
+    "TJ Melun|appartement": {
+      "n": 21,
+      "n_uncontested": 1,
+      "rate": 0.0476,
+      "lift": 0.582,
+      "ci_low": 0.0085,
+      "ci_high": 0.2267
+    }
+  },
+  "by_surface_bucket": {
+    ">150 m²": {
+      "n": 1377,
+      "n_uncontested": 178,
+      "rate": 0.1293,
+      "lift": 1.58,
+      "ci_low": 0.1126,
+      "ci_high": 0.148
+    },
+    "?": {
+      "n": 6973,
+      "n_uncontested": 782,
+      "rate": 0.1121,
+      "lift": 1.371,
+      "ci_low": 0.105,
+      "ci_high": 0.1198
+    },
+    "40–60 m²": {
+      "n": 2489,
+      "n_uncontested": 137,
+      "rate": 0.055,
+      "lift": 0.673,
+      "ci_low": 0.0467,
+      "ci_high": 0.0647
+    },
+    "60–100 m²": {
+      "n": 4091,
+      "n_uncontested": 245,
+      "rate": 0.0599,
+      "lift": 0.732,
+      "ci_low": 0.053,
+      "ci_high": 0.0676
+    },
+    "100–150 m²": {
+      "n": 1175,
+      "n_uncontested": 95,
+      "rate": 0.0809,
+      "lift": 0.988,
+      "ci_low": 0.0666,
+      "ci_high": 0.0978
+    },
+    "20–40 m²": {
+      "n": 2787,
+      "n_uncontested": 119,
+      "rate": 0.0427,
+      "lift": 0.522,
+      "ci_low": 0.0358,
+      "ci_high": 0.0509
+    },
+    "<20 m²": {
+      "n": 1279,
+      "n_uncontested": 94,
+      "rate": 0.0735,
+      "lift": 0.898,
+      "ci_low": 0.0604,
+      "ci_high": 0.0891
+    }
+  },
+  "by_mise_bucket": {
+    "<50k €": {
+      "n": 10524,
+      "n_uncontested": 585,
+      "rate": 0.0556,
+      "lift": 0.68,
+      "ci_low": 0.0514,
+      "ci_high": 0.0601
+    },
+    "50–100k €": {
+      "n": 4924,
+      "n_uncontested": 318,
+      "rate": 0.0646,
+      "lift": 0.79,
+      "ci_low": 0.0581,
+      "ci_high": 0.0718
+    },
+    "100–200k €": {
+      "n": 2689,
+      "n_uncontested": 320,
+      "rate": 0.119,
+      "lift": 1.455,
+      "ci_low": 0.1073,
+      "ci_high": 0.1318
+    },
+    "200–500k €": {
+      "n": 1426,
+      "n_uncontested": 285,
+      "rate": 0.1999,
+      "lift": 2.443,
+      "ci_low": 0.1799,
+      "ci_high": 0.2214
+    },
+    ">500k €": {
+      "n": 608,
+      "n_uncontested": 142,
+      "rate": 0.2336,
+      "lift": 2.855,
+      "ci_low": 0.2017,
+      "ci_high": 0.2688
+    }
+  },
+  "by_mise_per_sqm_bucket": {
+    "<1k €/m²": {
+      "n": 7648,
+      "n_uncontested": 307,
+      "rate": 0.0401,
+      "lift": 0.491,
+      "ci_low": 0.036,
+      "ci_high": 0.0448
+    },
+    "?": {
+      "n": 6974,
+      "n_uncontested": 782,
+      "rate": 0.1121,
+      "lift": 1.371,
+      "ci_low": 0.1049,
+      "ci_high": 0.1198
+    },
+    "1–2k €/m²": {
+      "n": 3197,
+      "n_uncontested": 220,
+      "rate": 0.0688,
+      "lift": 0.841,
+      "ci_low": 0.0605,
+      "ci_high": 0.0781
+    },
+    "2–4k €/m²": {
+      "n": 1557,
+      "n_uncontested": 186,
+      "rate": 0.1195,
+      "lift": 1.46,
+      "ci_low": 0.1043,
+      "ci_high": 0.1365
+    },
+    "4–7k €/m²": {
+      "n": 512,
+      "n_uncontested": 87,
+      "rate": 0.1699,
+      "lift": 2.077,
+      "ci_low": 0.1399,
+      "ci_high": 0.2049
+    },
+    ">7k €/m²": {
+      "n": 283,
+      "n_uncontested": 68,
+      "rate": 0.2403,
+      "lift": 2.937,
+      "ci_low": 0.1942,
+      "ci_high": 0.2933
+    }
+  },
+  "by_occupancy": {
+    "?": {
+      "n": 18361,
+      "n_uncontested": 1496,
+      "rate": 0.0815,
+      "lift": 0.996,
+      "ci_low": 0.0776,
+      "ci_high": 0.0855
+    },
+    "libre": {
+      "n": 1810,
+      "n_uncontested": 154,
+      "rate": 0.0851,
+      "lift": 1.04,
+      "ci_low": 0.0731,
+      "ci_high": 0.0988
+    }
+  },
+  "by_month": {
+    "1": {
+      "n": 2065,
+      "n_uncontested": 211,
+      "rate": 0.1022,
+      "lift": 1.249,
+      "ci_low": 0.0898,
+      "ci_high": 0.116
+    },
+    "2": {
+      "n": 1824,
+      "n_uncontested": 149,
+      "rate": 0.0817,
+      "lift": 0.999,
+      "ci_low": 0.07,
+      "ci_high": 0.0952
+    },
+    "3": {
+      "n": 2308,
+      "n_uncontested": 163,
+      "rate": 0.0706,
+      "lift": 0.863,
+      "ci_low": 0.0609,
+      "ci_high": 0.0818
+    },
+    "4": {
+      "n": 1533,
+      "n_uncontested": 119,
+      "rate": 0.0776,
+      "lift": 0.949,
+      "ci_low": 0.0653,
+      "ci_high": 0.0921
+    },
+    "5": {
+      "n": 1666,
+      "n_uncontested": 131,
+      "rate": 0.0786,
+      "lift": 0.961,
+      "ci_low": 0.0667,
+      "ci_high": 0.0925
+    },
+    "6": {
+      "n": 2264,
+      "n_uncontested": 200,
+      "rate": 0.0883,
+      "lift": 1.08,
+      "ci_low": 0.0773,
+      "ci_high": 0.1007
+    },
+    "7": {
+      "n": 725,
+      "n_uncontested": 68,
+      "rate": 0.0938,
+      "lift": 1.147,
+      "ci_low": 0.0747,
+      "ci_high": 0.1172
+    },
+    "8": {
+      "n": 21,
+      "n_uncontested": 1,
+      "rate": 0.0476,
+      "lift": 0.582,
+      "ci_low": 0.0085,
+      "ci_high": 0.2267
+    },
+    "9": {
+      "n": 2304,
+      "n_uncontested": 178,
+      "rate": 0.0773,
+      "lift": 0.944,
+      "ci_low": 0.067,
+      "ci_high": 0.0889
+    },
+    "10": {
+      "n": 2358,
+      "n_uncontested": 185,
+      "rate": 0.0785,
+      "lift": 0.959,
+      "ci_low": 0.0683,
+      "ci_high": 0.09
+    },
+    "11": {
+      "n": 1702,
+      "n_uncontested": 145,
+      "rate": 0.0852,
+      "lift": 1.041,
+      "ci_low": 0.0728,
+      "ci_high": 0.0994
+    },
+    "12": {
+      "n": 1401,
+      "n_uncontested": 100,
+      "rate": 0.0714,
+      "lift": 0.873,
+      "ci_low": 0.059,
+      "ci_high": 0.0861
+    }
+  },
+  "by_audience_bucket": {
+    "1": {
+      "n": 1145,
+      "n_uncontested": 136,
+      "rate": 0.1188,
+      "lift": 1.452,
+      "ci_low": 0.1013,
+      "ci_high": 0.1388
+    },
+    "4–10": {
+      "n": 12739,
+      "n_uncontested": 981,
+      "rate": 0.077,
+      "lift": 0.941,
+      "ci_low": 0.0725,
+      "ci_high": 0.0818
+    },
+    "2–3": {
+      "n": 4689,
+      "n_uncontested": 401,
+      "rate": 0.0855,
+      "lift": 1.045,
+      "ci_low": 0.0779,
+      "ci_high": 0.0939
+    },
+    "11+": {
+      "n": 1598,
+      "n_uncontested": 132,
+      "rate": 0.0826,
+      "lift": 1.01,
+      "ci_low": 0.0701,
+      "ci_high": 0.0971
+    }
+  },
+  "by_annonce_bucket": {
+    "1": {
+      "n": 20171,
+      "n_uncontested": 1650,
+      "rate": 0.0818,
+      "lift": 1,
+      "ci_low": 0.0781,
+      "ci_high": 0.0857
+    }
+  },
+  "by_first_lot": {}
+}
