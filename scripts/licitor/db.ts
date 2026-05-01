@@ -96,6 +96,25 @@ export async function upsertIndexListings(rows: IndexListing[]): Promise<void> {
 }
 
 /**
+ * Drop keys whose value is `null` or `undefined`. Used by `writeDetail` to make
+ * Supabase updates additive: the parser emits `null` for any field it didn't
+ * find on the page, and we never want to overwrite an already-stored positive
+ * value with `null`. Critical for re-detail-fetching a sold auction that was
+ * previously detailed while upcoming — the post-sale page no longer carries
+ * `visit_date`, but we want to keep the value captured during the upcoming
+ * window.
+ *
+ * `0` and `""` are NOT stripped — those are legitimate parsed values.
+ */
+function compact<T extends Record<string, unknown>>(o: T): Partial<T> {
+  const out: Record<string, unknown> = {};
+  for (const [k, v] of Object.entries(o)) {
+    if (v !== null && v !== undefined) out[k] = v;
+  }
+  return out as Partial<T>;
+}
+
+/**
  * Update a row with detail-page data.
  *
  * Shared fields (tribunal, lawyer, auction_date, city, address, visit_date) are
@@ -105,6 +124,12 @@ export async function upsertIndexListings(rows: IndexListing[]): Promise<void> {
  *
  * detail_fetched_at is set on all rows so the scraper doesn't re-fetch the
  * same URL for each lot.
+ *
+ * NULL-SAFE: each update payload is filtered through `compact()` so that fields
+ * the parser couldn't extract (e.g. `visit_date` on a post-sale page) are
+ * omitted from the SQL UPDATE rather than overwritten with NULL. The mandatory
+ * timestamp fields (`detail_fetched_at`, `last_fetched_at`) and `status` are
+ * always non-null so they always go through.
  */
 export async function writeDetail(d: DetailData): Promise<void> {
   const now = new Date().toISOString();
@@ -112,37 +137,41 @@ export async function writeDetail(d: DetailData): Promise<void> {
   // 1. Shared fields — all lots of this announcement
   const { error: errShared } = await db
     .from("past_auctions")
-    .update({
-      tribunal: d.tribunal,
-      auction_date: d.auction_date,
-      city: d.city,
-      address: d.address,
-      visit_date: d.visit_date,
-      lawyer_name: d.lawyer_name,
-      lawyer_firm: d.lawyer_firm,
-      lawyer_address: d.lawyer_address,
-      published_at: d.published_at,
-      detail_fetched_at: now,
-      last_fetched_at: now,
-    })
+    .update(
+      compact({
+        tribunal: d.tribunal,
+        auction_date: d.auction_date,
+        city: d.city,
+        address: d.address,
+        visit_date: d.visit_date,
+        lawyer_name: d.lawyer_name,
+        lawyer_firm: d.lawyer_firm,
+        lawyer_address: d.lawyer_address,
+        published_at: d.published_at,
+        detail_fetched_at: now,
+        last_fetched_at: now,
+      })
+    )
     .eq("licitor_id", d.licitor_id);
   if (errShared) throw new Error(JSON.stringify(errShared));
 
   // 2. Per-lot fields — only lot 0 (detail parser reads only first SousLot)
   const { error: errLot } = await db
     .from("past_auctions")
-    .update({
-      property_type: d.property_type,
-      property_description: d.property_description,
-      surface: d.surface,
-      surface_annexe: d.surface_annexe,
-      occupancy: d.occupancy,
-      floor: d.floor,
-      mise_a_prix: d.mise_a_prix,
-      adjudication_price: d.adjudication_price,
-      status: d.status,
-      raw_html: d.raw_html,
-    })
+    .update(
+      compact({
+        property_type: d.property_type,
+        property_description: d.property_description,
+        surface: d.surface,
+        surface_annexe: d.surface_annexe,
+        occupancy: d.occupancy,
+        floor: d.floor,
+        mise_a_prix: d.mise_a_prix,
+        adjudication_price: d.adjudication_price,
+        status: d.status,
+        raw_html: d.raw_html,
+      })
+    )
     .eq("licitor_id", d.licitor_id)
     .eq("lot_index", 0);
   if (errLot) throw new Error(JSON.stringify(errLot));
