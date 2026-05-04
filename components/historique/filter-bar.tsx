@@ -3,6 +3,7 @@
 import type { BrowseFilters } from "@/lib/analytics/past-browse";
 import type { PropertyTypeBucket } from "@/lib/analytics/normalize-property-type";
 import type { OccupancyBucket } from "@/lib/analytics/normalize-occupancy";
+import { MultiSelect } from "@/components/historique/multi-select";
 
 interface Props {
   filters: BrowseFilters;
@@ -12,9 +13,6 @@ interface Props {
   propertyTypes: readonly PropertyTypeBucket[];
   occupancies: readonly OccupancyBucket[];
 }
-
-const SELECT_CLASSES =
-  "px-3 py-2 bg-slate-800/70 border border-slate-700 rounded-lg text-white text-sm focus:outline-none focus:ring-1 focus:ring-orange-500/50 disabled:opacity-50";
 
 const TYPE_LABELS_FR: Record<PropertyTypeBucket, string> = {
   appartement: "Appartement",
@@ -27,7 +25,9 @@ const TYPE_LABELS_FR: Record<PropertyTypeBucket, string> = {
   autre: "Autre",
 };
 
-const OCC_LABELS_FR: Record<OccupancyBucket & string, string> = {
+type NonNullOcc = Exclude<OccupancyBucket, null>;
+
+const OCC_LABELS_FR: Record<NonNullOcc, string> = {
   libre: "Libre",
   "occupé": "Occupé",
   "loué": "Loué",
@@ -42,16 +42,22 @@ export function FilterBar({
   occupancies,
 }: Props) {
   const hasAny =
-    !!filters.tribunal ||
-    !!filters.propertyType ||
-    !!filters.year ||
-    !!filters.occupancy ||
+    (filters.tribunals?.length ?? 0) > 0 ||
+    (filters.propertyTypes?.length ?? 0) > 0 ||
+    (filters.years?.length ?? 0) > 0 ||
+    (filters.occupancies?.length ?? 0) > 0 ||
     !!filters.city;
+
+  // Drop nulls — null is a valid OccupancyBucket but never appears in the
+  // dropdown allow-list passed by the API.
+  const occOptions = occupancies
+    .filter((o): o is NonNullOcc => o !== null)
+    .map((o) => ({ value: o, label: OCC_LABELS_FR[o] }));
 
   return (
     <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-2xl p-4">
       <div className="flex flex-wrap gap-3 items-end">
-        {/* City contains-search */}
+        {/* City contains-search — stays a free-text input, not a multi-select */}
         <label className="flex flex-col gap-1 flex-1 min-w-[200px]">
           <span className="text-[10px] uppercase tracking-wider text-slate-500">
             Ville (contient)
@@ -63,106 +69,63 @@ export function FilterBar({
               setFilters({ ...filters, city: e.target.value || undefined })
             }
             placeholder="Versailles, Marseille…"
-            className={SELECT_CLASSES}
+            className="px-3 py-2 bg-slate-800/70 border border-slate-700 rounded-lg text-white text-sm placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-orange-500/50"
           />
         </label>
 
-        {/* Tribunal */}
-        <label className="flex flex-col gap-1">
-          <span className="text-[10px] uppercase tracking-wider text-slate-500">
-            Tribunal
-          </span>
-          <select
-            value={filters.tribunal ?? ""}
-            onChange={(e) =>
-              setFilters({ ...filters, tribunal: e.target.value || undefined })
-            }
-            className={SELECT_CLASSES}
-          >
-            <option value="">Tous</option>
-            {tribunals.map((t) => (
-              <option key={t} value={t}>
-                {t}
-              </option>
-            ))}
-          </select>
-        </label>
+        <MultiSelect<string>
+          label="Tribunal"
+          options={tribunals.map((t) => ({ value: t, label: t }))}
+          selected={filters.tribunals ?? []}
+          onChange={(next) =>
+            setFilters({
+              ...filters,
+              tribunals: next.length ? next : undefined,
+            })
+          }
+          width="min-w-[180px]"
+        />
 
-        {/* Property type */}
-        <label className="flex flex-col gap-1">
-          <span className="text-[10px] uppercase tracking-wider text-slate-500">
-            Type
-          </span>
-          <select
-            value={filters.propertyType ?? ""}
-            onChange={(e) =>
-              setFilters({
-                ...filters,
-                propertyType: (e.target.value || undefined) as
-                  | PropertyTypeBucket
-                  | undefined,
-              })
-            }
-            className={SELECT_CLASSES}
-          >
-            <option value="">Tous</option>
-            {propertyTypes.map((t) => (
-              <option key={t} value={t}>
-                {TYPE_LABELS_FR[t]}
-              </option>
-            ))}
-          </select>
-        </label>
+        <MultiSelect<PropertyTypeBucket>
+          label="Type"
+          options={propertyTypes.map((t) => ({
+            value: t,
+            label: TYPE_LABELS_FR[t],
+          }))}
+          selected={filters.propertyTypes ?? []}
+          onChange={(next) =>
+            setFilters({
+              ...filters,
+              propertyTypes: next.length ? next : undefined,
+            })
+          }
+          width="min-w-[140px]"
+        />
 
-        {/* Year */}
-        <label className="flex flex-col gap-1">
-          <span className="text-[10px] uppercase tracking-wider text-slate-500">
-            Année
-          </span>
-          <select
-            value={filters.year ?? ""}
-            onChange={(e) =>
-              setFilters({
-                ...filters,
-                year: e.target.value ? parseInt(e.target.value, 10) : undefined,
-              })
-            }
-            className={SELECT_CLASSES}
-          >
-            <option value="">Toutes</option>
-            {years.map((y) => (
-              <option key={y} value={y}>
-                {y}
-              </option>
-            ))}
-          </select>
-        </label>
+        <MultiSelect<number>
+          label="Année"
+          options={years.map((y) => ({ value: y, label: String(y) }))}
+          selected={filters.years ?? []}
+          onChange={(next) =>
+            setFilters({ ...filters, years: next.length ? next : undefined })
+          }
+          width="min-w-[120px]"
+        />
 
-        {/* Occupancy */}
-        <label className="flex flex-col gap-1">
-          <span className="text-[10px] uppercase tracking-wider text-slate-500">
-            Occupation
-          </span>
-          <select
-            value={filters.occupancy ?? ""}
-            onChange={(e) =>
-              setFilters({
-                ...filters,
-                occupancy: (e.target.value || undefined) as
-                  | OccupancyBucket
-                  | undefined,
-              })
-            }
-            className={SELECT_CLASSES}
-          >
-            <option value="">Toutes</option>
-            {occupancies.map((o) => (
-              <option key={o} value={o ?? ""}>
-                {OCC_LABELS_FR[o as keyof typeof OCC_LABELS_FR]}
-              </option>
-            ))}
-          </select>
-        </label>
+        <MultiSelect<NonNullOcc>
+          label="Occupation"
+          options={occOptions}
+          selected={(filters.occupancies ?? []).filter(
+            (o): o is NonNullOcc => o !== null
+          )}
+          onChange={(next) =>
+            setFilters({
+              ...filters,
+              occupancies: next.length ? next : undefined,
+            })
+          }
+          width="min-w-[140px]"
+        />
 
         {hasAny && (
           <button

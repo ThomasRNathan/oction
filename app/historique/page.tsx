@@ -30,10 +30,13 @@ function buildQuery(
 ): string {
   const sp = new URLSearchParams();
   sp.set("mode", mode);
-  if (filters.tribunal) sp.set("tribunal", filters.tribunal);
-  if (filters.propertyType) sp.set("propertyType", filters.propertyType);
-  if (filters.year) sp.set("year", String(filters.year));
-  if (filters.occupancy) sp.set("occupancy", filters.occupancy);
+  // Repeat each param once per selected value — the API decodes via .getAll().
+  filters.tribunals?.forEach((t) => sp.append("tribunal", t));
+  filters.propertyTypes?.forEach((t) => sp.append("propertyType", t));
+  filters.years?.forEach((y) => sp.append("year", String(y)));
+  filters.occupancies?.forEach((o) => {
+    if (o !== null) sp.append("occupancy", o);
+  });
   if (filters.city) sp.set("city", filters.city);
   if (page > 1) sp.set("page", String(page));
   return sp.toString();
