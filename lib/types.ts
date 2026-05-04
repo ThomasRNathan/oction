@@ -1,6 +1,8 @@
 export interface PropertyData {
   id?: string;
   type?: string;
+  /** "Dix parkings" → 10 (parsed from ordinal in raw type string). 1 for "Un appartement". */
+  nUnits?: number;
   address?: string;
   city?: string;
   arrondissement?: number;
@@ -15,7 +17,30 @@ export interface PropertyData {
   visitDate?: string;
   lawyer?: string;
   lawyerPhone?: string;
+  /** Lawyer's office address — kept separate from the *property* address so the
+   *  analyser doesn't conflate them. */
+  lawyerAddress?: string;
   warnings: string[];
+}
+
+/**
+ * Parking-specific comparables block (returned in addition to / instead of
+ * `verdict` when the property is a parking lot).
+ *
+ * `verdict` divides MAP by surface for €/m², which is meaningless for parking
+ * lots that don't expose a surface. Instead, we surface the median adjudication
+ * per parking unit from the same tribunal, and a ratio vs the live mise à prix.
+ */
+export interface ParkingComparables {
+  nUnits: number;          // 10 for "Dix parkings"
+  miseAPrixPerUnit: number; // miseAPrix / nUnits
+  comparableCount: number;  // how many past sold parking lots in the comparison set
+  medianAdjPerUnit: number; // median adjudication / n_units across comparable past lots
+  meanAdjPerUnit: number;
+  ratio: number;            // miseAPrixPerUnit / medianAdjPerUnit (e.g. 0.40 = MAP is 40% of typical adj)
+  capRateHint: number | null; // estimated yearly rent / adjudication, if rent is rough-known
+  rationale: string;        // human-readable verdict line
+  scope: "tribunal" | "department" | "national"; // how comparables were filtered
 }
 
 export interface GeocodingResult {
@@ -122,6 +147,8 @@ export interface AnalysisResult {
   geocoding?: GeocodingResult;
   dvf?: DVFAnalysis;
   verdict?: Verdict;
+  /** Parking-specific comparables, populated only when property type is parking/cave/box/garage. */
+  parkingComparables?: ParkingComparables;
   financing?: FinancingSimulation;
   attractiveness?: AttractivenessScore;
   uncontested?: UncontestedScores;

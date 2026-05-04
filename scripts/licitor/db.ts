@@ -38,21 +38,6 @@ export type IndexListing = {
   status: "sold" | "upcoming" | "unknown";
 };
 
-export type IndexResultRow = {
-  licitor_id: number;
-  lot_index: number;
-  index_date: string; // YYYY-MM-DD (required for results table)
-  index_price: number | null;
-  url: string;
-  region: string;
-  department_code: string | null;
-  city: string | null;
-  property_type: string | null;
-  property_description: string | null;
-  status: "sold" | "upcoming" | "unknown";
-  last_fetched_at: string; // ISO
-};
-
 export type DetailData = {
   licitor_id: number;
   tribunal: string | null;
@@ -106,46 +91,6 @@ export async function upsertIndexListings(rows: IndexListing[]): Promise<void> {
       typeof error === "object" && error !== null
         ? JSON.stringify(error)
         : String(error);
-    throw new Error(pretty);
-  }
-}
-
-/**
- * Upsert index results into `past_auction_results`.
- *
- * This table is meant to store *every adjudication result row* even when the same
- * `licitor_id` appears multiple times across the archive (e.g. re-auctions).
- *
- * Requires a unique constraint / PK on (licitor_id, index_date, lot_index).
- */
-export async function upsertIndexResults(rows: IndexListing[]): Promise<void> {
-  const now = new Date().toISOString();
-  const payload: IndexResultRow[] = rows
-    .filter((r) => !!r.index_date)
-    .map((r) => ({
-      licitor_id: r.licitor_id,
-      lot_index: r.lot_index,
-      index_date: r.index_date as string,
-      index_price: r.index_price,
-      url: r.url,
-      region: r.region,
-      department_code: r.department_code,
-      city: r.city,
-      property_type: r.property_type,
-      property_description: r.property_description,
-      status: r.status,
-      last_fetched_at: now,
-    }));
-
-  if (payload.length === 0) return;
-
-  const { error } = await db.from("past_auction_results").upsert(payload, {
-    onConflict: "licitor_id,index_date,lot_index",
-    ignoreDuplicates: false,
-  });
-  if (error) {
-    const pretty =
-      typeof error === "object" && error !== null ? JSON.stringify(error) : String(error);
     throw new Error(pretty);
   }
 }

@@ -4,6 +4,7 @@ import { geocodeAddress } from "@/lib/geocoder";
 import { getDVFAnalysis } from "@/lib/dvf";
 import { computeVerdict, computeFinancing, computeAttractiveness } from "@/lib/analyzer";
 import { computeAllScores } from "@/lib/analytics/uncontested";
+import { computeParkingComparables } from "@/lib/parking-comparables";
 import { PARIS_ARRONDISSEMENTS } from "@/lib/constants";
 import { AnalysisResult } from "@/lib/types";
 import { saveAnalysis } from "@/lib/supabase";
@@ -78,11 +79,20 @@ export async function POST(request: NextRequest) {
     // DVF median so we can apply the floor-vs-DVF hard gate.
     const uncontested = computeAllScores(property, dvf?.medianPricePerSqm);
 
+    // Step 7: Parking-aware comparables. Returns null for non-parking types
+    // or when MAP / nUnits is missing. Wrapped in withTimeout(3s) to keep the
+    // overall route within maxDuration even on a slow Supabase query.
+    const parkingComparables = await withTimeout(
+      computeParkingComparables(property),
+      3000
+    );
+
     const result: AnalysisResult = {
       property,
       geocoding: geocoding || undefined,
       dvf: dvf || undefined,
       verdict: verdict || undefined,
+      parkingComparables: parkingComparables || undefined,
       financing,
       attractiveness,
       uncontested,
