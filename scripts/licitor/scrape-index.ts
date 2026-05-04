@@ -6,14 +6,19 @@
  *
  * Fully resumable — safe to Ctrl-C any time and restart later.
  *
- * Batch control via CLI arg: `npx tsx scripts/licitor/scrape-index.ts 200`
- *   → process at most 200 pending pages this run.
+ * Batch control:
+ *   - `npx tsx scripts/licitor/scrape-index.ts 200`
+ *       → process at most 200 pending pages this run. (back-compat)
+ *   - `npx tsx scripts/licitor/scrape-index.ts --maxRows 600`
+ *       → stop once ~600 past_auctions rows were upserted this run.
+ *   - `npx tsx scripts/licitor/scrape-index.ts --maxPages 200 --maxRows 600`
+ *       → whichever limit is hit first.
  *
  * Default batch: 500 pages (~25-30 min).
  *
  * Recommended between batches: rotate VPN, then re-run.
  */
-import { db, upsertIndexListings } from "./db";
+import { db, upsertIndexListings, upsertIndexResults } from "./db";
 import { politeFetch } from "./fetch";
 import { parseIndexPage } from "./parser";
 import { indexUrl, type RegionSlug } from "./regions";
@@ -24,6 +29,52 @@ type ProgressRow = {
   page: number;
   status: string;
 };
+
+type CliOptions = {
+  maxPages: number;
+  maxRows: number | null;
+  includeDone: boolean;
+  writeResults: boolean;
+};
+
+function parseArgs(argv: string[]): CliOptions {
+  // Back-compat: if first arg is a number, treat it as maxPages.
+  const first = argv[0];
+  const numericFirst = first && /^\d+$/.test(first) ? parseInt(first, 10) : null;
+
+  let maxPages = numericFirst ?? 500;
+  let maxRows: number | null = null;
+  let includeDone = false;
+  let writeResults = false;
+
+  for (let i = 0; i < argv.length; i++) {
+    const a = argv[i];
+    if (a === "--maxPages") {
+      const v = argv[i + 1];
+      if (!v || !/^\d+$/.test(v)) throw new Error("Expected number after --maxPages");
+      maxPages = parseInt(v, 10);
+      i++;
+      continue;
+    }
+    if (a === "--maxRows") {
+      const v = argv[i + 1];
+      if (!v || !/^\d+$/.test(v)) throw new Error("Expected number after --maxRows");
+      maxRows = parseInt(v, 10);
+      i++;
+      continue;
+    }
+    if (a === "--includeDone") {
+      includeDone = true;
+      continue;
+    }
+    if (a === "--writeResults") {
+      writeResults = true;
+      continue;
+    }
+  }
+
+  return { maxPages, maxRows, includeDone, writeResults };
+}
 
 async function claimBatch(size: number): Promise<ProgressRow[]> {
   // Simple claim: fetch pending rows, oldest failure first, then ordered by region+page.
@@ -62,8 +113,17 @@ async function markFailed(id: string, err: string) {
 }
 
 async function main() {
-  const batchSize = parseInt(process.argv[2] ?? "500", 10);
-  const batch = await claimBatch(batchSize);
+  const { maxPages, maxRows, includeDone, writeResults } = parseArgs(process.argv.slice(2));
+
+  const statuses: string[] = includeDone ? ["pending", "failed", "done"] : ["pending", "failed"];
+  const { data, error } = await db
+    .from("scrape_progress")
+    .select("id, region, page, status")
+    .in("status", statuses)
+    .order("page", { ascending: true })
+    .limit(maxPages);
+  if (error) throw error;
+  const batch = (data ?? []) as ProgressRow[];
 
   if (batch.length === 0) {
     console.log("No pending pages — all done.");
@@ -73,6 +133,9 @@ async function main() {
   console.log(
     `Claimed ${batch.length} pending pages. ETA ≈ ${Math.round((batch.length * 2.5) / 60)} min.`
   );
+  if (maxRows) console.log(`Row cap enabled: will stop after ~${maxRows} rows upserted.`);
+  if (includeDone) console.log(`IncludeDone enabled: re-processing already done pages.`);
+  if (writeResults) console.log(`WriteResults enabled: upserting into past_auction_results.`);
 
   let ok = 0;
   let fail = 0;
@@ -80,6 +143,10 @@ async function main() {
   const t0 = Date.now();
 
   for (const row of batch) {
+    if (maxRows && listings >= maxRows) {
+      console.log(`Reached maxRows (${maxRows}). Stopping this batch early.`);
+      break;
+    }
     const url = indexUrl(row.region as RegionSlug, row.page);
     try {
       const { status, body } = await politeFetch(url);
@@ -96,10 +163,17 @@ async function main() {
       const { listings: parsed } = parseIndexPage(body, row.region);
       if (parsed.length > 0) {
         await upsertIndexListings(parsed);
+        if (writeResults) {
+          await upsertIndexResults(parsed);
+        }
       }
       await markDone(row.id, parsed.length);
       ok++;
       listings += parsed.length;
+      if (maxRows && listings >= maxRows) {
+        console.log(`Reached maxRows (${maxRows}). Stopping this batch early.`);
+        break;
+      }
       if (ok % 10 === 0 || ok === batch.length) {
         const elapsed = (Date.now() - t0) / 1000;
         const rate = ok / elapsed;
@@ -132,6 +206,7 @@ async function main() {
   console.log(
     `\nDone: ${ok} ok, ${fail} failed, ${listings} listings upserted. Elapsed ${Math.round(elapsed / 60)}m.`
   );
+  console.log(`BATCH DONE (index): pages_ok=${ok} pages_failed=${fail} rows_upserted=${listings}`);
 }
 
 main().catch((e) => {

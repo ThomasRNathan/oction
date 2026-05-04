@@ -7,7 +7,7 @@ import { PropertyCard } from "@/components/property-card";
 import { AuctionInfo } from "@/components/auction-info";
 import { MarketAnalysis } from "@/components/market-analysis";
 import { FinancingSimulator } from "@/components/financing-simulator";
-import { AttractivenessCard } from "@/components/attractiveness-score";
+import { AttractivenessCard, UncontestedCard } from "@/components/attractiveness-score";
 import { LoadingSkeleton } from "@/components/loading-skeleton";
 import { AnalysisResult } from "@/lib/types";
 
@@ -62,16 +62,12 @@ export default function Home() {
         <div className="absolute top-1/3 -right-40 w-[500px] h-[500px] rounded-full bg-purple-600/6 blur-3xl" />
       </div>
 
-      {/* ── COLLAPSED TOP BAR (results mode) ── */}
+      {/* ── INLINE SEARCH BAR (results mode) ── stacks under the global Nav.
+              The Nav owns the brand + tabs; this row carries the re-analyze
+              affordance specific to the home route. */}
       {isCollapsed && (
-        <div className="sticky top-0 z-50 backdrop-blur-md bg-[#0a0f1a]/80 border-b border-slate-800">
+        <div className="sticky top-[53px] z-40 backdrop-blur-md bg-[#0a0f1a]/80 border-b border-slate-800">
           <div className="max-w-6xl mx-auto px-4 py-3 flex items-center gap-4">
-            {/* Logo */}
-            <span className="text-xl font-black bg-gradient-to-r from-amber-300 via-orange-500 to-red-500 bg-clip-text text-transparent flex-shrink-0">
-              OCTION
-            </span>
-
-            {/* Inline search bar */}
             <form
               className="flex-1 flex gap-2"
               onSubmit={(e) => {
@@ -155,6 +151,14 @@ export default function Home() {
                 <AttractivenessCard attractiveness={result.attractiveness} />
               )}
             </div>
+
+            {/* Row 2.5: Uncontested probability */}
+            {result.uncontested && (
+              <div className="grid md:grid-cols-2 gap-6">
+                <UncontestedCard uncontested={result.uncontested} />
+                <div className="hidden md:block" />
+              </div>
+            )}
 
             {/* Row 3: Financing */}
             {result.property.miseAPrix && (

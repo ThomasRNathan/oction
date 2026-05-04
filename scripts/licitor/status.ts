@@ -32,6 +32,10 @@ async function main() {
   const { count: total } = await db
     .from("past_auctions")
     .select("*", { count: "exact", head: true });
+  const { count: totalDistinctAuctions } = await db
+    .from("past_auctions")
+    .select("licitor_id", { count: "exact", head: true })
+    .eq("lot_index", 0);
   const { count: detailed } = await db
     .from("past_auctions")
     .select("*", { count: "exact", head: true })
@@ -47,10 +51,20 @@ async function main() {
 
   console.log("\n=== DETAIL SCRAPE PROGRESS ===");
   console.log(`  total listings in DB:       ${total}`);
+  console.log(`  distinct auctions (lot 0):  ${totalDistinctAuctions}`);
   console.log(`  detail fetched:             ${detailed}`);
   console.log(`    of which sold:            ${sold}`);
   console.log(`    of which 404'd (removed): ${removed}`);
   console.log(`  missing detail:             ${(total ?? 0) - (detailed ?? 0)}`);
+
+  // Results table progress (optional)
+  const { count: resultsRows, error: resultsErr } = await db
+    .from("past_auction_results")
+    .select("*", { count: "exact", head: true });
+  if (!resultsErr) {
+    console.log("\n=== INDEX RESULTS TABLE ===");
+    console.log(`  past_auction_results rows:  ${resultsRows}`);
+  }
 }
 
 main().catch((e) => {
