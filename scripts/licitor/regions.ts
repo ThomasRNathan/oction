@@ -16,3 +16,16 @@ export type RegionSlug = (typeof REGIONS)[number]["slug"];
 export function indexUrl(region: RegionSlug, page: number): string {
   return `https://www.licitor.com/ventes-aux-encheres-immobilieres/${region}/historique-des-adjudications.html?p=${page}`;
 }
+
+/**
+ * URL for the per-region "upcoming sales" listing.
+ * Same `<ul class="AdResults">` markup as the historique pages, so
+ * `parseIndexPage()` works unchanged. Listings here have no `Archives`
+ * class on `a.Ad`, so the parser classifies them as `status='upcoming'`.
+ *
+ * Page sizing: 5 listings per page (Paris: 31 pages / ~152 listings as of
+ * 2026-04). Total volume is small — typically <200 upcoming per region.
+ */
+export function upcomingUrl(region: RegionSlug, page: number): string {
+  return `https://www.licitor.com/ventes-aux-encheres-immobilieres/${region}/prochaines-ventes.html?p=${page}`;
+}
