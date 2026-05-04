@@ -6,6 +6,7 @@ import { UrlInput } from "@/components/url-input";
 import { PropertyCard } from "@/components/property-card";
 import { AuctionInfo } from "@/components/auction-info";
 import { MarketAnalysis } from "@/components/market-analysis";
+import { ParkingComparablesCard } from "@/components/parking-comparables";
 import { FinancingSimulator } from "@/components/financing-simulator";
 import { AttractivenessCard, UncontestedCard } from "@/components/attractiveness-score";
 import { LoadingSkeleton } from "@/components/loading-skeleton";
@@ -136,7 +137,10 @@ export default function Home() {
 
             {/* Row 2 */}
             <div className="grid md:grid-cols-2 gap-6">
-              {result.dvf ? (
+              {result.parkingComparables ? (
+                // Parking lots: show parking-specific comparables instead of DVF €/m².
+                <ParkingComparablesCard comparables={result.parkingComparables} />
+              ) : result.dvf ? (
                 <MarketAnalysis dvf={result.dvf} verdict={result.verdict ?? null} />
               ) : (
                 <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-2xl p-6 flex flex-col items-center justify-center gap-2">

@@ -18,7 +18,7 @@
  *
  * Recommended between batches: rotate VPN, then re-run.
  */
-import { db, upsertIndexListings, upsertIndexResults } from "./db";
+import { db, upsertIndexListings } from "./db";
 import { politeFetch } from "./fetch";
 import { parseIndexPage } from "./parser";
 import { indexUrl, type RegionSlug } from "./regions";
@@ -34,7 +34,6 @@ type CliOptions = {
   maxPages: number;
   maxRows: number | null;
   includeDone: boolean;
-  writeResults: boolean;
 };
 
 function parseArgs(argv: string[]): CliOptions {
@@ -45,7 +44,6 @@ function parseArgs(argv: string[]): CliOptions {
   let maxPages = numericFirst ?? 500;
   let maxRows: number | null = null;
   let includeDone = false;
-  let writeResults = false;
 
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
@@ -67,13 +65,9 @@ function parseArgs(argv: string[]): CliOptions {
       includeDone = true;
       continue;
     }
-    if (a === "--writeResults") {
-      writeResults = true;
-      continue;
-    }
   }
 
-  return { maxPages, maxRows, includeDone, writeResults };
+  return { maxPages, maxRows, includeDone };
 }
 
 async function claimBatch(size: number): Promise<ProgressRow[]> {
@@ -113,7 +107,7 @@ async function markFailed(id: string, err: string) {
 }
 
 async function main() {
-  const { maxPages, maxRows, includeDone, writeResults } = parseArgs(process.argv.slice(2));
+  const { maxPages, maxRows, includeDone } = parseArgs(process.argv.slice(2));
 
   const statuses: string[] = includeDone ? ["pending", "failed", "done"] : ["pending", "failed"];
   const { data, error } = await db
@@ -135,7 +129,6 @@ async function main() {
   );
   if (maxRows) console.log(`Row cap enabled: will stop after ~${maxRows} rows upserted.`);
   if (includeDone) console.log(`IncludeDone enabled: re-processing already done pages.`);
-  if (writeResults) console.log(`WriteResults enabled: upserting into past_auction_results.`);
 
   let ok = 0;
   let fail = 0;
@@ -163,9 +156,6 @@ async function main() {
       const { listings: parsed } = parseIndexPage(body, row.region);
       if (parsed.length > 0) {
         await upsertIndexListings(parsed);
-        if (writeResults) {
-          await upsertIndexResults(parsed);
-        }
       }
       await markDone(row.id, parsed.length);
       ok++;
