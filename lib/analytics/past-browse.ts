@@ -34,11 +34,16 @@ export type BrowseRow = {
 };
 
 export interface BrowseFilters {
-  tribunal?: string;
-  propertyType?: PropertyTypeBucket;
-  year?: number;
-  occupancy?: OccupancyBucket;
-  city?: string; // case-insensitive contains
+  /** Match if the row's tribunal is in this list. Empty/undefined = no filter. */
+  tribunals?: string[];
+  /** Match if the row's normalized property-type bucket is in this list. */
+  propertyTypes?: PropertyTypeBucket[];
+  /** Match if the row's auction year is in this list. */
+  years?: number[];
+  /** Match if the row's occupancy bucket is in this list. */
+  occupancies?: OccupancyBucket[];
+  /** Case-insensitive contains over the row's city. Single value (not multi). */
+  city?: string;
 }
 
 export interface BrowsePage {
@@ -102,11 +107,18 @@ export function queryBrowse(
 
   const cityNeedle = filters.city?.trim().toLowerCase();
 
+  // Pre-compute "is filter active" once per filter so the hot path stays a
+  // simple includes() check on a small array (1-30 entries each).
+  const tribunals = filters.tribunals?.length ? filters.tribunals : null;
+  const types = filters.propertyTypes?.length ? filters.propertyTypes : null;
+  const years = filters.years?.length ? filters.years : null;
+  const occs = filters.occupancies?.length ? filters.occupancies : null;
+
   const filtered = pool.filter((r) => {
-    if (filters.tribunal && r.tribunal !== filters.tribunal) return false;
-    if (filters.propertyType && r.propertyType !== filters.propertyType) return false;
-    if (filters.year && r.year !== filters.year) return false;
-    if (filters.occupancy && r.occupancy !== filters.occupancy) return false;
+    if (tribunals && (r.tribunal === null || !tribunals.includes(r.tribunal))) return false;
+    if (types && !types.includes(r.propertyType)) return false;
+    if (years && (r.year === null || !years.includes(r.year))) return false;
+    if (occs && !occs.includes(r.occupancy)) return false;
     if (cityNeedle && !(r.city ?? "").toLowerCase().includes(cityNeedle)) return false;
     return true;
   });

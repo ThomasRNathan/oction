@@ -42,24 +42,31 @@ export function GET(request: NextRequest) {
 
   const filters: BrowseFilters = {};
 
-  const tribunal = sp.get("tribunal");
-  if (tribunal && ALLOWED_TRIBUNALS.has(tribunal)) filters.tribunal = tribunal;
+  // Repeated params are decoded with .getAll() — e.g. ?tribunal=A&tribunal=B.
+  // Each value is whitelisted against the allow-set so a malformed query can
+  // never reach the in-memory pool with garbage.
+  const tribunalSel = sp.getAll("tribunal").filter((t) => ALLOWED_TRIBUNALS.has(t));
+  if (tribunalSel.length) filters.tribunals = tribunalSel;
 
-  const propertyType = sp.get("propertyType");
-  if (propertyType && (PROPERTY_TYPES as readonly string[]).includes(propertyType)) {
-    filters.propertyType = propertyType as PropertyTypeBucket;
-  }
+  const typeSel = sp
+    .getAll("propertyType")
+    .filter((t): t is PropertyTypeBucket =>
+      (PROPERTY_TYPES as readonly string[]).includes(t)
+    );
+  if (typeSel.length) filters.propertyTypes = typeSel;
 
-  const yearStr = sp.get("year");
-  if (yearStr) {
-    const y = parseInt(yearStr, 10);
-    if (Number.isFinite(y) && ALLOWED_YEARS.has(y)) filters.year = y;
-  }
+  const yearSel = sp
+    .getAll("year")
+    .map((y) => parseInt(y, 10))
+    .filter((y) => Number.isFinite(y) && ALLOWED_YEARS.has(y));
+  if (yearSel.length) filters.years = yearSel;
 
-  const occupancy = sp.get("occupancy");
-  if (occupancy && (OCCUPANCIES as readonly string[]).includes(occupancy)) {
-    filters.occupancy = occupancy as OccupancyBucket;
-  }
+  const occSel = sp
+    .getAll("occupancy")
+    .filter((o): o is Exclude<OccupancyBucket, null> =>
+      (OCCUPANCIES as readonly string[]).includes(o)
+    );
+  if (occSel.length) filters.occupancies = occSel;
 
   const city = sp.get("city");
   if (city && city.trim()) filters.city = city.trim();
