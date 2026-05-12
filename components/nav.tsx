@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { UserChip } from "@/components/auth/user-chip";
 
 const TABS = [
   { href: "/", label: "Analyser" },
@@ -47,6 +48,12 @@ export function Nav() {
             );
           })}
         </nav>
+
+        {/* Right-aligned user chip — hidden when signed-out (the home page's
+            AuthGate handles promotion in context). */}
+        <div className="ml-auto">
+          <UserChip />
+        </div>
       </div>
     </header>
   );
