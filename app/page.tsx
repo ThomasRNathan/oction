@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Hero } from "@/components/hero";
 import { UrlInput } from "@/components/url-input";
 import { PropertyCard } from "@/components/property-card";
@@ -10,6 +10,8 @@ import { ParkingComparablesCard } from "@/components/parking-comparables";
 import { FinancingSimulator } from "@/components/financing-simulator";
 import { AttractivenessCard, UncontestedCard } from "@/components/attractiveness-score";
 import { LoadingSkeleton } from "@/components/loading-skeleton";
+import { AuthGate } from "@/components/auth/auth-gate";
+import { useAuth } from "@/components/auth/use-auth";
 import { AnalysisResult } from "@/lib/types";
 
 type PageState = "idle" | "loading" | "result" | "error";
@@ -19,6 +21,22 @@ export default function Home() {
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [errorMsg, setErrorMsg] = useState<string>("");
   const [analyzedUrl, setAnalyzedUrl] = useState<string>("");
+  const auth = useAuth();
+  const [authError, setAuthError] = useState<string | null>(null);
+
+  // Read the ?auth_error=... query-string set by /auth/callback on failure.
+  // Done in an effect so server-render / static-prerender don't need a
+  // Suspense boundary just to surface an error code in the modal.
+  useEffect(() => {
+    const sp = new URLSearchParams(window.location.search);
+    setAuthError(sp.get("auth_error"));
+  }, []);
+
+  // Gate visibility: only when a result exists AND the user is signed-out
+  // AND we've finished probing the session (avoid a flash for already-signed
+  // users while Supabase boots on first render).
+  const showAuthGate =
+    state === "result" && auth.status === "signed-out";
 
   const handleAnalyze = async (url: string) => {
     setState("loading");
@@ -127,7 +145,15 @@ export default function Home() {
 
         {/* ── RESULTS ── */}
         {state === "result" && result && (
-          <div className="space-y-6 mt-6">
+          <div
+            className={
+              "space-y-6 mt-6 transition-[filter] duration-200 " +
+              (showAuthGate
+                ? "blur-md pointer-events-none select-none"
+                : "")
+            }
+            aria-hidden={showAuthGate}
+          >
 
             {/* Row 1 */}
             <div className="grid md:grid-cols-2 gap-6">
@@ -246,6 +272,17 @@ export default function Home() {
           </footer>
         )}
       </div>
+
+      {/* Auth gate — sits above everything when an unauthed user has just
+          generated a result. The result is already in memory; the blur +
+          modal exist to push the user to authenticate before reading it. */}
+      {showAuthGate && (
+        <AuthGate
+          reason="Créez un compte pour voir l'analyse complète et la sauvegarder."
+          redirectTo="/"
+          errorCode={authError}
+        />
+      )}
     </main>
   );
 }

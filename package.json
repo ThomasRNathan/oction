@@ -13,6 +13,7 @@
     "licitor:status": "tsx scripts/licitor/status.ts"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.10.3",
     "@supabase/supabase-js": "^2.104.0",
     "cheerio": "^1.2.0",
     "next": "16.2.3",
