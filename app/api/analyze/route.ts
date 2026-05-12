@@ -40,7 +40,9 @@ export async function POST(request: NextRequest) {
     const property = await scrapeListicor(url);
     const geocoding = await geocodeAddress(addressQuery(property), property.arrondissement).catch(() => null);
 
-    // Step 2: DVF — capped at 7s so total response stays under maxDuration
+    // Step 2: DVF — capped at 12s so total response stays under maxDuration.
+    // Cold-start CEREMA calls + Supabase cache reads can stack up to ~10s;
+    // 7s was clipping a non-trivial fraction of first-hits as "indisponible".
     let dvf = null;
     if (geocoding) {
       const codeInsee =
@@ -49,14 +51,17 @@ export async function POST(request: NextRequest) {
           ? PARIS_ARRONDISSEMENTS[property.arrondissement]?.code
           : undefined);
 
+      // DVF's `type_local` enum has no "Studio" — studios are filed under
+      // "Appartement". Map accordingly so we still get a typed-ring query.
+      const t = property.type?.toLowerCase();
       const propertyType =
-        property.type?.toLowerCase() === "appartement" ? "Appartement"
-        : property.type?.toLowerCase() === "maison" ? "Maison"
+        t === "appartement" || t === "studio" ? "Appartement"
+        : t === "maison" ? "Maison"
         : undefined;
 
       dvf = await withTimeout(
         getDVFAnalysis(geocoding.lat, geocoding.lon, propertyType, codeInsee),
-        7000
+        12000
       );
     }
 

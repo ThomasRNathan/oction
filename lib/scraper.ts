@@ -114,11 +114,14 @@ export async function scrapeListicor(url: string): Promise<PropertyData> {
   let nUnits: number | undefined;
   if (typeRaw) {
     nUnits = parseLeadingCount(typeRaw) ?? undefined;
-    // Single-word noun extracted: parking, appartement, maison, …
+    // Single-word noun extracted: studio, parking, appartement, maison, …
+    // `studio` is matched BEFORE the generic `lot` to avoid the bodytext
+    // fallback latching onto "en un lot de vente" (a phrase that appears on
+    // virtually every listing) when the real type is studio.
     const tNoun = typeRaw
       .toLowerCase()
       .match(
-        /(appartement|maison|local|terrain|immeuble|parking|emplacement|cave|garage|box|bureau|lot)/
+        /(studio|appartement|maison|local|terrain|immeuble|parking|emplacement|cave|garage|box|bureau|lot)/
       );
     if (tNoun) {
       type = tNoun[1].charAt(0).toUpperCase() + tNoun[1].slice(1);
@@ -126,7 +129,7 @@ export async function scrapeListicor(url: string): Promise<PropertyData> {
   }
   if (!type) {
     const m = bodyText.match(
-      /(?:un|une|des|deux|trois|quatre|cinq|six|sept|huit|neuf|dix|onze|douze|vingt|trente)\s+(appartement|maison|local|terrain|immeuble|parking|emplacement|cave|garage|box|bureau|lot)/i
+      /(?:un|une|des|deux|trois|quatre|cinq|six|sept|huit|neuf|dix|onze|douze|vingt|trente)\s+(studio|appartement|maison|local|terrain|immeuble|parking|emplacement|cave|garage|box|bureau|lot)/i
     );
     if (m) {
       type = m[1].charAt(0).toUpperCase() + m[1].slice(1).toLowerCase();
