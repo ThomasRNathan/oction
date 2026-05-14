@@ -7,6 +7,7 @@ import { PropertyCard } from "@/components/property-card";
 import { AuctionInfo } from "@/components/auction-info";
 import { MarketAnalysis } from "@/components/market-analysis";
 import { ParkingComparablesCard } from "@/components/parking-comparables";
+import { ClosestAuctionsCard } from "@/components/closest-auctions";
 import { FinancingSimulator } from "@/components/financing-simulator";
 import { AttractivenessCard, UncontestedCard } from "@/components/attractiveness-score";
 import { LoadingSkeleton } from "@/components/loading-skeleton";
@@ -162,6 +163,11 @@ export default function Home() {
                 <UncontestedCard uncontested={result.uncontested} />
                 <div className="hidden md:block" />
               </div>
+            )}
+
+            {/* Row 2.7: 5 closest recent auctions */}
+            {result.closestAuctions && result.closestAuctions.length > 0 && (
+              <ClosestAuctionsCard closest={result.closestAuctions} />
             )}
 
             {/* Row 3: Financing */}

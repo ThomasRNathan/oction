@@ -152,4 +152,10 @@ export interface AnalysisResult {
   financing?: FinancingSimulation;
   attractiveness?: AttractivenessScore;
   uncontested?: UncontestedScores;
+  /**
+   * Up to 5 recent past auctions close to the live lot (same city,
+   * tribunal, or département). Powered by the pre-baked past-auctions
+   * sidecar; pure in-memory lookup. Empty when no matches.
+   */
+  closestAuctions?: import("./analytics/closest-auctions").ClosestAuction[];
 }
