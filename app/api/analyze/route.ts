@@ -5,6 +5,11 @@ import { getDVFAnalysis } from "@/lib/dvf";
 import { computeVerdict, computeFinancing, computeAttractiveness } from "@/lib/analyzer";
 import { computeAllScores } from "@/lib/analytics/uncontested";
 import { computeParkingComparables } from "@/lib/parking-comparables";
+import {
+  findClosestAuctions,
+  buildCityKey,
+} from "@/lib/analytics/closest-auctions";
+import { normalizePropertyType } from "@/lib/analytics/normalize-property-type";
 import { PARIS_ARRONDISSEMENTS } from "@/lib/constants";
 import { AnalysisResult } from "@/lib/types";
 import { saveAnalysis } from "@/lib/supabase";
@@ -92,6 +97,24 @@ export async function POST(request: NextRequest) {
       3000
     );
 
+    // Step 8: 5 closest recent auctions (same city / tribunal / dept,
+    // same property-type bucket). Pure in-memory sidecar lookup — adds
+    // ~5–10ms, no I/O.
+    const cityKey = buildCityKey(property.city, property.arrondissement);
+    const closestAuctions = findClosestAuctions({
+      city: cityKey,
+      tribunal: property.tribunal,
+      department: cityKey
+        ? cityKey.match(/\bParis\b/) ? "75"
+          : cityKey.match(/\bLyon\b/) ? "69"
+          : cityKey.match(/\bMarseille\b/) ? "13"
+          : undefined
+        : undefined,
+      propertyTypeBucket: normalizePropertyType(property.type),
+      excludeId: property.id,
+      limit: 5,
+    });
+
     const result: AnalysisResult = {
       property,
       geocoding: geocoding || undefined,
@@ -101,6 +124,7 @@ export async function POST(request: NextRequest) {
       financing,
       attractiveness,
       uncontested,
+      closestAuctions: closestAuctions.length ? closestAuctions : undefined,
     };
 
     // Persist to Supabase — fire and forget, never blocks response
