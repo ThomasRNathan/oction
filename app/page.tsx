@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useCallback, useEffect, useRef, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
 import { Hero } from "@/components/hero";
 import { UrlInput } from "@/components/url-input";
 import { PropertyCard } from "@/components/property-card";
@@ -11,21 +13,27 @@ import { ClosestAuctionsCard } from "@/components/closest-auctions";
 import { FinancingSimulator } from "@/components/financing-simulator";
 import { AttractivenessCard, UncontestedCard } from "@/components/attractiveness-score";
 import { LoadingSkeleton } from "@/components/loading-skeleton";
+import { Radar } from "@/components/home/radar";
+import { WatchlistStrip } from "@/components/home/watchlist-strip";
 import { AnalysisResult } from "@/lib/types";
 
 type PageState = "idle" | "loading" | "result" | "error";
 
-export default function Home() {
+function HomeContent() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   const [state, setState] = useState<PageState>("idle");
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [errorMsg, setErrorMsg] = useState<string>("");
   const [analyzedUrl, setAnalyzedUrl] = useState<string>("");
 
-  const handleAnalyze = async (url: string) => {
+  const handleAnalyze = useCallback(async (url: string) => {
     setState("loading");
     setResult(null);
     setErrorMsg("");
     setAnalyzedUrl(url);
+    window.scrollTo({ top: 0, behavior: "smooth" });
 
     try {
       const response = await fetch("/api/analyze", {
@@ -41,17 +49,57 @@ export default function Home() {
       setErrorMsg(err instanceof Error ? err.message : "Erreur lors de l'analyse");
       setState("error");
     }
-  };
+  }, []);
+
+  /**
+   * Deep link: /?url=<licitor> auto-runs the analysis. Used by the deal
+   * cards on this page, the À venir / Historique tables, and shareable
+   * permalinks. consumedRef prevents re-firing on unrelated re-renders.
+   */
+  const urlParam = searchParams.get("url");
+  const consumedRef = useRef<string | null>(null);
+  useEffect(() => {
+    if (urlParam && urlParam !== consumedRef.current) {
+      consumedRef.current = urlParam;
+      handleAnalyze(urlParam);
+    }
+  }, [urlParam, handleAnalyze]);
+
+  /** Analyze + reflect the URL in the address bar so the analysis is shareable. */
+  const analyzeAndShare = useCallback(
+    (url: string) => {
+      consumedRef.current = url;
+      router.replace(`/?url=${encodeURIComponent(url)}`, { scroll: false });
+      handleAnalyze(url);
+    },
+    [router, handleAnalyze]
+  );
 
   const handleReset = () => {
     setState("idle");
     setResult(null);
     setErrorMsg("");
+    consumedRef.current = null;
+    router.replace("/", { scroll: false });
   };
 
   const lawyerSearchUrl = (r: AnalysisResult) => {
     const city = r.property.tribunal?.replace("Tribunal Judiciaire de ", "") || "Paris";
     return `https://www.barreau-paris.fr/trouver-un-avocat/?specialite=encheres-immobilieres&ville=${encodeURIComponent(city)}`;
+  };
+
+  // Hand the lot's figures to the fee calculator. Seeds adjudication with the
+  // mise à prix (the floor) so a breakdown renders on arrival; the user bumps
+  // it to their target bid.
+  const calculateurHref = (r: AnalysisResult) => {
+    const sp = new URLSearchParams();
+    if (r.property.miseAPrix) {
+      sp.set("adj", String(r.property.miseAPrix));
+      sp.set("map", String(r.property.miseAPrix));
+    }
+    if (r.property.surface) sp.set("surface", String(r.property.surface));
+    const qs = sp.toString();
+    return qs ? `/calculateur?${qs}` : "/calculateur";
   };
 
   const isCollapsed = state === "result" || state === "loading";
@@ -75,7 +123,7 @@ export default function Home() {
               onSubmit={(e) => {
                 e.preventDefault();
                 const input = (e.currentTarget.elements.namedItem("url") as HTMLInputElement);
-                if (input.value.trim()) handleAnalyze(input.value.trim());
+                if (input.value.trim()) analyzeAndShare(input.value.trim());
               }}
             >
               <input
@@ -106,21 +154,24 @@ export default function Home() {
         </div>
       )}
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4 py-16">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 py-12">
 
-        {/* ── HERO + INPUT (idle / error) ── */}
+        {/* ── HERO + INPUT + RADAR (idle / error) ── */}
         {!isCollapsed && (
           <>
             <Hero />
-            <UrlInput onSubmit={handleAnalyze} loading={false} />
-          </>
-        )}
+            <UrlInput onSubmit={analyzeAndShare} loading={false} />
 
-        {/* ── ERROR ── */}
-        {state === "error" && (
-          <div className="max-w-2xl mx-auto mb-8 p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-center text-sm">
-            {errorMsg}
-          </div>
+            {/* ── ERROR ── */}
+            {state === "error" && (
+              <div className="max-w-2xl mx-auto mb-8 p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-center text-sm animate-fade-up">
+                {errorMsg}
+              </div>
+            )}
+
+            <WatchlistStrip onAnalyze={analyzeAndShare} />
+            <Radar onAnalyze={analyzeAndShare} />
+          </>
         )}
 
         {/* ── LOADING ── */}
@@ -131,13 +182,13 @@ export default function Home() {
           <div className="space-y-6 mt-6">
 
             {/* Row 1 */}
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 gap-6 animate-fade-up">
               <PropertyCard property={result.property} />
               <AuctionInfo property={result.property} />
             </div>
 
             {/* Row 2 */}
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 gap-6 animate-fade-up" style={{ animationDelay: "80ms" }}>
               {result.parkingComparables ? (
                 // Parking lots: show parking-specific comparables instead of DVF €/m².
                 <ParkingComparablesCard comparables={result.parkingComparables} />
@@ -159,7 +210,7 @@ export default function Home() {
 
             {/* Row 2.5: Uncontested probability */}
             {result.uncontested && (
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid md:grid-cols-2 gap-6 animate-fade-up" style={{ animationDelay: "160ms" }}>
                 <UncontestedCard uncontested={result.uncontested} />
                 <div className="hidden md:block" />
               </div>
@@ -167,19 +218,23 @@ export default function Home() {
 
             {/* Row 2.7: 5 closest recent auctions */}
             {result.closestAuctions && result.closestAuctions.length > 0 && (
-              <ClosestAuctionsCard closest={result.closestAuctions} />
+              <div className="animate-fade-up" style={{ animationDelay: "240ms" }}>
+                <ClosestAuctionsCard closest={result.closestAuctions} />
+              </div>
             )}
 
             {/* Row 3: Financing */}
             {result.property.miseAPrix && (
-              <FinancingSimulator
-                miseAPrix={result.property.miseAPrix}
-                initialFinancing={result.financing}
-              />
+              <div className="animate-fade-up" style={{ animationDelay: "320ms" }}>
+                <FinancingSimulator
+                  miseAPrix={result.property.miseAPrix}
+                  initialFinancing={result.financing}
+                />
+              </div>
             )}
 
             {/* CTA: Trouver un avocat */}
-            <div className="relative overflow-hidden rounded-2xl border border-orange-500/20 bg-gradient-to-r from-orange-500/10 via-orange-500/5 to-transparent p-6 md:p-8">
+            <div className="relative overflow-hidden rounded-2xl border border-orange-500/20 bg-gradient-to-r from-orange-500/10 via-orange-500/5 to-transparent p-6 md:p-8 animate-fade-up" style={{ animationDelay: "400ms" }}>
               <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                 <div>
                   <p className="text-xs text-orange-400 font-semibold uppercase tracking-wider mb-1">
@@ -220,6 +275,12 @@ export default function Home() {
                   >
                     Trouver un avocat →
                   </a>
+                  <Link
+                    href={calculateurHref(result)}
+                    className="px-6 py-3 bg-slate-700/50 border border-slate-600 text-slate-300 font-medium rounded-xl hover:bg-slate-700 transition-all text-sm text-center whitespace-nowrap"
+                  >
+                    Estimer les frais →
+                  </Link>
                   <a
                     href={analyzedUrl}
                     target="_blank"
@@ -253,5 +314,17 @@ export default function Home() {
         )}
       </div>
     </main>
+  );
+}
+
+/**
+ * useSearchParams (deep-link analyze) requires a Suspense boundary on a
+ * prerendered route — see node_modules/next/dist/docs/.../use-search-params.md.
+ */
+export default function Home() {
+  return (
+    <Suspense fallback={<main className="min-h-screen bg-[#0a0f1a]" />}>
+      <HomeContent />
+    </Suspense>
   );
 }

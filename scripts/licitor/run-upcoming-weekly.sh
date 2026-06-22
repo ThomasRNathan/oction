@@ -21,4 +21,16 @@ LOG="/tmp/oction-upcoming-$(date +%Y%m%d).log"
   echo
 } >> "$LOG"
 
-exec npx tsx scripts/licitor/scrape-upcoming.ts >> "$LOG" 2>&1
+npx tsx scripts/licitor/scrape-upcoming.ts >> "$LOG" 2>&1
+
+# DVF enrichment for the fresh upcoming pool: fetch medians for any new
+# localities from CEREMA, then stamp them onto rows. Powers the décote
+# column on /upcoming and the home-page radar. Best-effort — a CEREMA
+# outage must not mark the (already successful) scrape run as failed.
+{
+  echo "=== DVF enrich upcoming — $(date '+%H:%M:%S') ==="
+  npx tsx scripts/analytics/enrich-past-auctions-dvf.ts --status upcoming ||
+    echo "WARN: enrich-past-auctions-dvf --status upcoming failed (CEREMA down?)"
+  npx tsx scripts/analytics/apply-dvf-to-past-auctions.ts --status upcoming ||
+    echo "WARN: apply-dvf-to-past-auctions --status upcoming failed"
+} >> "$LOG" 2>&1

@@ -36,6 +36,11 @@ const flag = (name: string): string | undefined => {
 };
 const limit = flag("limit") ? Number(flag("limit")) : Infinity;
 const concurrency = Number(flag("concurrency") ?? "5");
+// --status upcoming: source the locality tuples from the live upcoming pool
+// (no adjudication yet) instead of sold history. Same JSON cache either way.
+const status = flag("status") ?? "sold";
+if (status !== "sold" && status !== "upcoming")
+  throw new Error(`--status must be "sold" or "upcoming", got "${status}"`);
 
 // ──────────────────────────────────────────────────────────────────────────
 // Supabase
@@ -255,20 +260,31 @@ async function main() {
   let from = 0;
   // eslint-disable-next-line no-constant-condition
   while (true) {
-    const { data, error } = await db
+    // The conditional .not() pushes supabase-js's accumulated filter generics
+    // past tsc's instantiation depth (TS2589), so the builder runs untyped
+    // and rows are typed on read instead.
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let q: any = db
       .from("past_auctions")
       .select("city, department_code, property_type")
-      .eq("status", "sold")
+      .eq("status", status)
       .not("mise_a_prix", "is", null)
-      .not("adjudication_price", "is", null)
       .gt("mise_a_prix", 0)
       .not("city", "is", null)
       .not("surface", "is", null)
-      .gt("surface", 0)
-      .range(from, from + pageSize - 1);
+      .gt("surface", 0);
+    if (status === "sold") q = q.not("adjudication_price", "is", null);
+    const { data, error } = (await q.range(from, from + pageSize - 1)) as {
+      data: Array<{
+        city: string | null;
+        department_code: string | null;
+        property_type: string | null;
+      }> | null;
+      error: { message: string } | null;
+    };
     if (error) throw error;
     if (!data || data.length === 0) break;
-    for (const r of data as Array<{ city: string | null; department_code: string | null; property_type: string | null }>) {
+    for (const r of data) {
       if (!r.city) continue;
       const t = normalizePropertyType(r.property_type);
       const k = localityKey(r.city, r.department_code, t);

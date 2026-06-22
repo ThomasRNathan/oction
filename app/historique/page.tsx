@@ -47,42 +47,63 @@ export default function HistoriquePage() {
   const [filters, setFilters] = useState<BrowseFilters>({});
   const [page, setPage] = useState(1);
 
-  const [data, setData] = useState<BrowsePage | null>(null);
-  const [meta, setMeta] = useState<BrowseMeta | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  /**
+   * Derived-key fetch (mirrors /upcoming): loading/error fall out of
+   * comparing the stored response's key with the current query string — no
+   * setState in the effect body, and a mode/filter change triggers exactly
+   * one request instead of a stale-page fetch followed by the page-1 refetch.
+   */
+  const queryString = buildQuery(mode, filters, page);
 
-  // Reset to page 1 whenever the result-set shape changes.
-  // Use a ref-style guard so we don't fight the page-only effect below.
-  useEffect(() => {
-    setPage(1);
-  }, [mode, filters]);
+  const [snap, setSnap] = useState<{
+    key: string;
+    data: BrowsePage;
+    meta: BrowseMeta | null;
+  } | null>(null);
+  const [err, setErr] = useState<{ key: string; msg: string } | null>(null);
 
   useEffect(() => {
     let cancelled = false;
-    setLoading(true);
-    setError(null);
-    fetch(`/api/past?${buildQuery(mode, filters, page)}`)
+    fetch(`/api/past?${queryString}`)
       .then((r) => {
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         return r.json() as Promise<ApiResponse>;
       })
       .then((json) => {
         if (cancelled) return;
-        setData(json);
-        if (json.meta) setMeta(json.meta);
+        setSnap((prev) => ({
+          key: queryString,
+          data: json,
+          // meta only ships on page 1 — carry it across page turns.
+          meta: json.meta ?? prev?.meta ?? null,
+        }));
       })
       .catch((e) => {
         if (cancelled) return;
-        setError(e instanceof Error ? e.message : "Erreur de chargement");
-      })
-      .finally(() => {
-        if (!cancelled) setLoading(false);
+        setErr({
+          key: queryString,
+          msg: e instanceof Error ? e.message : "Erreur de chargement",
+        });
       });
     return () => {
       cancelled = true;
     };
-  }, [mode, filters, page]);
+  }, [queryString]);
+
+  const data = snap?.data ?? null;
+  const meta = snap?.meta ?? null;
+  const error = err?.key === queryString ? err.msg : null;
+  const loading = !error && snap?.key !== queryString;
+
+  /** Mode/filter changes restart pagination — done in the event, not an effect. */
+  const applyMode = (m: BrowseMode) => {
+    setMode(m);
+    setPage(1);
+  };
+  const applyFilters = (f: BrowseFilters) => {
+    setFilters(f);
+    setPage(1);
+  };
 
   const totalPages = data ? Math.max(1, Math.ceil(data.total / data.pageSize)) : 1;
 
@@ -116,7 +137,7 @@ export default function HistoriquePage() {
                 <button
                   key={opt.id}
                   type="button"
-                  onClick={() => setMode(opt.id)}
+                  onClick={() => applyMode(opt.id)}
                   aria-pressed={active}
                   className={
                     active
@@ -145,7 +166,7 @@ export default function HistoriquePage() {
         {meta && (
           <FilterBar
             filters={filters}
-            setFilters={setFilters}
+            setFilters={applyFilters}
             tribunals={meta.tribunals}
             years={meta.years}
             propertyTypes={meta.propertyTypes}

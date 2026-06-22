@@ -5,15 +5,16 @@
       "name": "oction-dev",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
-      "port": 3000
+      "port": 3000,
+      "autoPort": true
     },
     {
-      "name": "brain-dev",
+      "name": "braingames-dev",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
       "port": 3001,
       "autoPort": true,
-      "cwd": "../brain"
+      "cwd": "../braingames"
     }
   ]
 }

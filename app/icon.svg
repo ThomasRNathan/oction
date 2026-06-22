@@ -1,0 +1,18 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="oct" x1="104" y1="84" x2="412" y2="432" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fcd34d" />
+      <stop offset="0.45" stop-color="#f97316" />
+      <stop offset="1" stop-color="#ef4444" />
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.4" r="0.6">
+      <stop stop-color="#f97316" stop-opacity="0.32" />
+      <stop offset="1" stop-color="#f97316" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <!-- App-icon tile: dark navy matches the site background (#0a0f1a). -->
+  <rect width="512" height="512" rx="116" fill="#0a0f1a" />
+  <rect width="512" height="512" rx="116" fill="url(#glow)" />
+  <!-- The OCTION "O": bold ring in the brand gradient (amber → orange → red). -->
+  <circle cx="256" cy="256" r="148" stroke="url(#oct)" stroke-width="70" />
+</svg>
