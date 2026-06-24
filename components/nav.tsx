@@ -8,7 +8,6 @@ const TABS = [
   { href: "/upcoming", label: "À venir" },
   { href: "/historique", label: "Historique" },
   { href: "/calculateur", label: "Calculateur" },
-  { href: "/calisthenics", label: "Street Workout" },
 ] as const;
 
 /**

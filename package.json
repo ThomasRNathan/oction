@@ -10,22 +10,17 @@
     "licitor:seed": "tsx scripts/licitor/seed-progress.ts",
     "licitor:index": "tsx scripts/licitor/scrape-index.ts",
     "licitor:detail": "tsx scripts/licitor/scrape-detail.ts",
-    "licitor:status": "tsx scripts/licitor/status.ts",
-    "calisthenics:scrape": "tsx scripts/calisthenics-parks/scrape-spots.ts",
-    "calisthenics:details": "tsx scripts/calisthenics-parks/scrape-spot-details.ts"
+    "licitor:status": "tsx scripts/licitor/status.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.104.0",
     "cheerio": "^1.2.0",
-    "leaflet": "^1.9.4",
-    "leaflet.markercluster": "^1.5.3",
     "next": "16.2.3",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
-    "@types/leaflet": "^1.9.21",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
