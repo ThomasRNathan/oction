@@ -113,7 +113,7 @@ export function ResultsTable({ rows, loading }: Props) {
                       {r.url ? (
                         <span className="inline-flex items-center gap-2">
                           <Link
-                            href={`/?url=${encodeURIComponent(r.url)}`}
+                            href={`/admin?url=${encodeURIComponent(r.url)}`}
                             className="text-xs font-semibold text-orange-400 hover:text-orange-300 transition-colors"
                             title="Lancer l'analyse complète"
                           >
@@ -196,7 +196,7 @@ export function ResultsTable({ rows, loading }: Props) {
               {r.url && (
                 <div className="flex gap-2 mt-2.5">
                   <Link
-                    href={`/?url=${encodeURIComponent(r.url)}`}
+                    href={`/admin?url=${encodeURIComponent(r.url)}`}
                     className="flex-1 text-center px-3 py-1.5 text-xs font-semibold rounded-lg bg-gradient-to-r from-orange-500 to-red-500 text-white transition-all"
                   >
                     Analyser →

@@ -19,7 +19,7 @@ const TABS: { id: RadarTab; label: string }[] = [
 
 /**
  * "Radar des opportunités" — the live heart of the home page. Pulls curated
- * picks from /api/highlights (same 5-min pool cache as /upcoming) and lets
+ * picks from /api/highlights (same 5-min pool cache as /admin/upcoming) and lets
  * the investor jump straight into a full analysis.
  */
 export function Radar({ onAnalyze }: Props) {
@@ -55,12 +55,12 @@ export function Radar({ onAnalyze }: Props) {
     {
       value: stats ? stats.poolTotal.toLocaleString("fr-FR") : null,
       label: "ventes à venir",
-      href: "/upcoming",
+      href: "/admin/upcoming",
     },
     {
       value: stats ? String(stats.next7Days) : null,
       label: "sous 7 jours",
-      href: "/upcoming?withinDays=7",
+      href: "/admin/upcoming?withinDays=7",
     },
     {
       // "—" (not shimmer) once stats are loaded but no row has DVF data yet.
@@ -92,7 +92,7 @@ export function Radar({ onAnalyze }: Props) {
           Radar des opportunités
         </h2>
         <Link
-          href="/upcoming"
+          href="/admin/upcoming"
           className="text-xs text-orange-400 hover:underline underline-offset-4"
         >
           Voir les {stats ? stats.poolTotal.toLocaleString("fr-FR") : ""} ventes

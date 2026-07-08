@@ -1,0 +1,1997 @@
+[
+  {
+    "slug": "paris",
+    "ville": "Paris",
+    "tribunal": "Tribunal Judiciaire de Paris",
+    "department": null,
+    "stats": {
+      "total": 4563,
+      "sold": 4463,
+      "upcoming": 46,
+      "medianMiseAPrix": 40000,
+      "medianAdjudication": 134000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "appartement",
+        "count": 2398
+      },
+      {
+        "type": "studio",
+        "count": 772
+      },
+      {
+        "type": "local",
+        "count": 466
+      },
+      {
+        "type": "autre",
+        "count": 418
+      }
+    ],
+    "lastAuctionDate": "2026-07-09T14:00:00+00:00"
+  },
+  {
+    "slug": "bobigny",
+    "ville": "Bobigny",
+    "tribunal": "Tribunal Judiciaire de Bobigny",
+    "department": null,
+    "stats": {
+      "total": 4336,
+      "sold": 4265,
+      "upcoming": 20,
+      "medianMiseAPrix": 34000,
+      "medianAdjudication": 87000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "appartement",
+        "count": 2720
+      },
+      {
+        "type": "maison",
+        "count": 862
+      },
+      {
+        "type": "studio",
+        "count": 259
+      },
+      {
+        "type": "autre",
+        "count": 212
+      }
+    ],
+    "lastAuctionDate": "2026-07-07T14:00:00+00:00"
+  },
+  {
+    "slug": "creteil",
+    "ville": "Créteil",
+    "tribunal": "Tribunal Judiciaire de Créteil",
+    "department": null,
+    "stats": {
+      "total": 2018,
+      "sold": 1984,
+      "upcoming": 24,
+      "medianMiseAPrix": 47000,
+      "medianAdjudication": 121000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "appartement",
+        "count": 1111
+      },
+      {
+        "type": "maison",
+        "count": 378
+      },
+      {
+        "type": "autre",
+        "count": 187
+      },
+      {
+        "type": "studio",
+        "count": 139
+      }
+    ],
+    "lastAuctionDate": "2026-07-02T09:30:00+00:00"
+  },
+  {
+    "slug": "pontoise",
+    "ville": "Pontoise",
+    "tribunal": "Tribunal Judiciaire de Pontoise",
+    "department": null,
+    "stats": {
+      "total": 1647,
+      "sold": 1611,
+      "upcoming": 16,
+      "medianMiseAPrix": 50000,
+      "medianAdjudication": 110000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "appartement",
+        "count": 934
+      },
+      {
+        "type": "maison",
+        "count": 499
+      },
+      {
+        "type": "autre",
+        "count": 82
+      },
+      {
+        "type": "studio",
+        "count": 49
+      }
+    ],
+    "lastAuctionDate": "2026-06-30T14:00:00+00:00"
+  },
+  {
+    "slug": "versailles",
+    "ville": "Versailles",
+    "tribunal": "Tribunal Judiciaire de Versailles",
+    "department": null,
+    "stats": {
+      "total": 1399,
+      "sold": 1361,
+      "upcoming": 21,
+      "medianMiseAPrix": 66000,
+      "medianAdjudication": 125000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "appartement",
+        "count": 547
+      },
+      {
+        "type": "maison",
+        "count": 461
+      },
+      {
+        "type": "autre",
+        "count": 171
+      },
+      {
+        "type": "studio",
+        "count": 65
+      }
+    ],
+    "lastAuctionDate": "2026-07-08T09:30:00+00:00"
+  },
+  {
+    "slug": "nanterre",
+    "ville": "Nanterre",
+    "tribunal": "Tribunal Judiciaire de Nanterre",
+    "department": null,
+    "stats": {
+      "total": 1396,
+      "sold": 1365,
+      "upcoming": 18,
+      "medianMiseAPrix": 55000,
+      "medianAdjudication": 143000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "appartement",
+        "count": 768
+      },
+      {
+        "type": "studio",
+        "count": 204
+      },
+      {
+        "type": "maison",
+        "count": 128
+      },
+      {
+        "type": "autre",
+        "count": 118
+      }
+    ],
+    "lastAuctionDate": "2026-07-02T14:30:00+00:00"
+  },
+  {
+    "slug": "lille",
+    "ville": "Lille",
+    "tribunal": "Tribunal Judiciaire de Lille",
+    "department": null,
+    "stats": {
+      "total": 950,
+      "sold": 917,
+      "upcoming": 16,
+      "medianMiseAPrix": 40000,
+      "medianAdjudication": 84000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "maison",
+        "count": 365
+      },
+      {
+        "type": "immeuble",
+        "count": 226
+      },
+      {
+        "type": "appartement",
+        "count": 194
+      },
+      {
+        "type": "autre",
+        "count": 75
+      }
+    ],
+    "lastAuctionDate": "2026-07-08T14:00:00+00:00"
+  },
+  {
+    "slug": "grasse",
+    "ville": "Grasse",
+    "tribunal": "Tribunal Judiciaire de Grasse",
+    "department": null,
+    "stats": {
+      "total": 428,
+      "sold": 402,
+      "upcoming": 10,
+      "medianMiseAPrix": 80000,
+      "medianAdjudication": 167000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "appartement",
+        "count": 221
+      },
+      {
+        "type": "maison",
+        "count": 70
+      },
+      {
+        "type": "autre",
+        "count": 60
+      },
+      {
+        "type": "studio",
+        "count": 40
+      }
+    ],
+    "lastAuctionDate": "2026-07-09T09:00:00+00:00"
+  },
+  {
+    "slug": "bordeaux",
+    "ville": "Bordeaux",
+    "tribunal": "Tribunal Judiciaire de Bordeaux",
+    "department": null,
+    "stats": {
+      "total": 389,
+      "sold": 381,
+      "upcoming": 1,
+      "medianMiseAPrix": 70000,
+      "medianAdjudication": 149000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "maison",
+        "count": 180
+      },
+      {
+        "type": "appartement",
+        "count": 108
+      },
+      {
+        "type": "immeuble",
+        "count": 40
+      },
+      {
+        "type": "autre",
+        "count": 28
+      }
+    ],
+    "lastAuctionDate": "2026-06-11T15:00:00+00:00"
+  },
+  {
+    "slug": "nice",
+    "ville": "Nice",
+    "tribunal": "Tribunal Judiciaire de Nice",
+    "department": null,
+    "stats": {
+      "total": 338,
+      "sold": 305,
+      "upcoming": 20,
+      "medianMiseAPrix": 50000,
+      "medianAdjudication": 149500,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "appartement",
+        "count": 210
+      },
+      {
+        "type": "autre",
+        "count": 37
+      },
+      {
+        "type": "maison",
+        "count": 37
+      },
+      {
+        "type": "studio",
+        "count": 28
+      }
+    ],
+    "lastAuctionDate": "2026-07-09T09:00:00+00:00"
+  },
+  {
+    "slug": "nantes",
+    "ville": "Nantes",
+    "tribunal": "Tribunal Judiciaire de Nantes",
+    "department": null,
+    "stats": {
+      "total": 335,
+      "sold": 328,
+      "upcoming": 4,
+      "medianMiseAPrix": 55000,
+      "medianAdjudication": 106000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "maison",
+        "count": 145
+      },
+      {
+        "type": "appartement",
+        "count": 99
+      },
+      {
+        "type": "autre",
+        "count": 42
+      },
+      {
+        "type": "local",
+        "count": 16
+      }
+    ],
+    "lastAuctionDate": "2026-07-17T10:00:00+00:00"
+  },
+  {
+    "slug": "draguignan",
+    "ville": "Draguignan",
+    "tribunal": "Tribunal Judiciaire de Draguignan",
+    "department": null,
+    "stats": {
+      "total": 253,
+      "sold": 227,
+      "upcoming": 13,
+      "medianMiseAPrix": 80000,
+      "medianAdjudication": 156000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "maison",
+        "count": 102
+      },
+      {
+        "type": "appartement",
+        "count": 81
+      },
+      {
+        "type": "autre",
+        "count": 39
+      },
+      {
+        "type": "studio",
+        "count": 11
+      }
+    ],
+    "lastAuctionDate": "2026-07-03T09:30:00+00:00"
+  },
+  {
+    "slug": "toulon",
+    "ville": "Toulon",
+    "tribunal": "Tribunal Judiciaire de Toulon",
+    "department": null,
+    "stats": {
+      "total": 236,
+      "sold": 222,
+      "upcoming": 11,
+      "medianMiseAPrix": 50000,
+      "medianAdjudication": 116000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "appartement",
+        "count": 133
+      },
+      {
+        "type": "maison",
+        "count": 49
+      },
+      {
+        "type": "autre",
+        "count": 18
+      },
+      {
+        "type": "local",
+        "count": 11
+      }
+    ],
+    "lastAuctionDate": "2026-06-25T15:00:00+00:00"
+  },
+  {
+    "slug": "fontainebleau",
+    "ville": "Fontainebleau",
+    "tribunal": "Tribunal Judiciaire de Fontainebleau",
+    "department": null,
+    "stats": {
+      "total": 212,
+      "sold": 208,
+      "upcoming": 0,
+      "medianMiseAPrix": 50000,
+      "medianAdjudication": 94500,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "maison",
+        "count": 109
+      },
+      {
+        "type": "appartement",
+        "count": 48
+      },
+      {
+        "type": "autre",
+        "count": 27
+      },
+      {
+        "type": "immeuble",
+        "count": 15
+      }
+    ],
+    "lastAuctionDate": "2026-06-09T14:00:00+00:00"
+  },
+  {
+    "slug": "grenoble",
+    "ville": "Grenoble",
+    "tribunal": "Tribunal Judiciaire de Grenoble",
+    "department": null,
+    "stats": {
+      "total": 172,
+      "sold": 154,
+      "upcoming": 3,
+      "medianMiseAPrix": 44000,
+      "medianAdjudication": 70000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "appartement",
+        "count": 91
+      },
+      {
+        "type": "maison",
+        "count": 37
+      },
+      {
+        "type": "autre",
+        "count": 14
+      },
+      {
+        "type": "studio",
+        "count": 9
+      }
+    ],
+    "lastAuctionDate": "2026-07-07T14:00:00+00:00"
+  },
+  {
+    "slug": "amiens",
+    "ville": "Amiens",
+    "tribunal": "Tribunal Judiciaire de Amiens",
+    "department": null,
+    "stats": {
+      "total": 167,
+      "sold": 161,
+      "upcoming": 6,
+      "medianMiseAPrix": 34000,
+      "medianAdjudication": 54500,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "maison",
+        "count": 103
+      },
+      {
+        "type": "immeuble",
+        "count": 36
+      },
+      {
+        "type": "appartement",
+        "count": 12
+      },
+      {
+        "type": "autre",
+        "count": 9
+      }
+    ],
+    "lastAuctionDate": "2026-07-09T15:00:00+00:00"
+  },
+  {
+    "slug": "meaux",
+    "ville": "Meaux",
+    "tribunal": "Tribunal Judiciaire de Meaux",
+    "department": null,
+    "stats": {
+      "total": 166,
+      "sold": 156,
+      "upcoming": 7,
+      "medianMiseAPrix": 60000,
+      "medianAdjudication": 122000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "maison",
+        "count": 75
+      },
+      {
+        "type": "appartement",
+        "count": 61
+      },
+      {
+        "type": "autre",
+        "count": 11
+      },
+      {
+        "type": "studio",
+        "count": 6
+      }
+    ],
+    "lastAuctionDate": "2026-07-02T10:00:00+00:00"
+  },
+  {
+    "slug": "perpignan",
+    "ville": "Perpignan",
+    "tribunal": "Tribunal Judiciaire de Perpignan",
+    "department": null,
+    "stats": {
+      "total": 146,
+      "sold": 131,
+      "upcoming": 7,
+      "medianMiseAPrix": 43200,
+      "medianAdjudication": 82000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "appartement",
+        "count": 60
+      },
+      {
+        "type": "maison",
+        "count": 54
+      },
+      {
+        "type": "autre",
+        "count": 13
+      },
+      {
+        "type": "immeuble",
+        "count": 7
+      }
+    ],
+    "lastAuctionDate": "2026-06-26T09:00:00+00:00"
+  },
+  {
+    "slug": "saint-nazaire",
+    "ville": "Saint-Nazaire",
+    "tribunal": "Tribunal Judiciaire de Saint-Nazaire",
+    "department": null,
+    "stats": {
+      "total": 137,
+      "sold": 130,
+      "upcoming": 1,
+      "medianMiseAPrix": 59250,
+      "medianAdjudication": 109750,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "maison",
+        "count": 94
+      },
+      {
+        "type": "autre",
+        "count": 18
+      },
+      {
+        "type": "appartement",
+        "count": 13
+      },
+      {
+        "type": "local",
+        "count": 5
+      }
+    ],
+    "lastAuctionDate": "2026-06-19T10:00:00+00:00"
+  },
+  {
+    "slug": "marseille",
+    "ville": "Marseille",
+    "tribunal": "Tribunal Judiciaire de Marseille",
+    "department": null,
+    "stats": {
+      "total": 124,
+      "sold": 80,
+      "upcoming": 14,
+      "medianMiseAPrix": 35100,
+      "medianAdjudication": 70000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "appartement",
+        "count": 81
+      },
+      {
+        "type": "maison",
+        "count": 15
+      },
+      {
+        "type": "local",
+        "count": 9
+      },
+      {
+        "type": "autre",
+        "count": 6
+      }
+    ],
+    "lastAuctionDate": "2026-07-08T09:30:00+00:00"
+  },
+  {
+    "slug": "bayonne",
+    "ville": "Bayonne",
+    "tribunal": "Tribunal Judiciaire de Bayonne",
+    "department": null,
+    "stats": {
+      "total": 109,
+      "sold": 107,
+      "upcoming": 1,
+      "medianMiseAPrix": 88000,
+      "medianAdjudication": 181000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "appartement",
+        "count": 44
+      },
+      {
+        "type": "maison",
+        "count": 32
+      },
+      {
+        "type": "autre",
+        "count": 17
+      },
+      {
+        "type": "studio",
+        "count": 9
+      }
+    ],
+    "lastAuctionDate": "2026-06-11T14:00:00+00:00"
+  },
+  {
+    "slug": "nimes",
+    "ville": "Nimes",
+    "tribunal": "Tribunal Judiciaire de Nimes",
+    "department": null,
+    "stats": {
+      "total": 108,
+      "sold": 97,
+      "upcoming": 9,
+      "medianMiseAPrix": 47000,
+      "medianAdjudication": 90500,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "appartement",
+        "count": 44
+      },
+      {
+        "type": "maison",
+        "count": 38
+      },
+      {
+        "type": "autre",
+        "count": 9
+      },
+      {
+        "type": "immeuble",
+        "count": 9
+      }
+    ],
+    "lastAuctionDate": "2026-07-09T09:30:00+00:00"
+  },
+  {
+    "slug": "libourne",
+    "ville": "Libourne",
+    "tribunal": "Tribunal Judiciaire de Libourne",
+    "department": null,
+    "stats": {
+      "total": 91,
+      "sold": 89,
+      "upcoming": 1,
+      "medianMiseAPrix": 48200,
+      "medianAdjudication": 75500,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "maison",
+        "count": 49
+      },
+      {
+        "type": "immeuble",
+        "count": 20
+      },
+      {
+        "type": "autre",
+        "count": 9
+      },
+      {
+        "type": "appartement",
+        "count": 9
+      }
+    ],
+    "lastAuctionDate": "2026-07-03T14:00:00+00:00"
+  },
+  {
+    "slug": "melun",
+    "ville": "Melun",
+    "tribunal": "Tribunal Judiciaire de Melun",
+    "department": null,
+    "stats": {
+      "total": 77,
+      "sold": 64,
+      "upcoming": 8,
+      "medianMiseAPrix": 38000,
+      "medianAdjudication": 89500,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "maison",
+        "count": 39
+      },
+      {
+        "type": "appartement",
+        "count": 26
+      },
+      {
+        "type": "terrain",
+        "count": 4
+      },
+      {
+        "type": "autre",
+        "count": 3
+      }
+    ],
+    "lastAuctionDate": "2026-07-02T14:00:00+00:00"
+  },
+  {
+    "slug": "limoges",
+    "ville": "Limoges",
+    "tribunal": "Tribunal Judiciaire de Limoges",
+    "department": null,
+    "stats": {
+      "total": 61,
+      "sold": 53,
+      "upcoming": 5,
+      "medianMiseAPrix": 27000,
+      "medianAdjudication": 41000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "appartement",
+        "count": 21
+      },
+      {
+        "type": "maison",
+        "count": 19
+      },
+      {
+        "type": "immeuble",
+        "count": 8
+      },
+      {
+        "type": "autre",
+        "count": 5
+      }
+    ],
+    "lastAuctionDate": "2026-07-06T14:30:00+00:00"
+  },
+  {
+    "slug": "lyon",
+    "ville": "Lyon",
+    "tribunal": "Tribunal Judiciaire de Lyon",
+    "department": null,
+    "stats": {
+      "total": 55,
+      "sold": 12,
+      "upcoming": 24,
+      "medianMiseAPrix": 55000,
+      "medianAdjudication": 130100,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "appartement",
+        "count": 23
+      },
+      {
+        "type": "maison",
+        "count": 11
+      },
+      {
+        "type": "autre",
+        "count": 9
+      },
+      {
+        "type": "parking",
+        "count": 4
+      }
+    ],
+    "lastAuctionDate": "2026-07-07T14:30:00+00:00"
+  },
+  {
+    "slug": "dax",
+    "ville": "Dax",
+    "tribunal": "Tribunal Judiciaire de Dax",
+    "department": null,
+    "stats": {
+      "total": 34,
+      "sold": 34,
+      "upcoming": 0,
+      "medianMiseAPrix": 65900,
+      "medianAdjudication": 133500,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "maison",
+        "count": 20
+      },
+      {
+        "type": "appartement",
+        "count": 7
+      },
+      {
+        "type": "immeuble",
+        "count": 3
+      },
+      {
+        "type": "terrain",
+        "count": 3
+      }
+    ],
+    "lastAuctionDate": "2025-11-27T10:30:00+00:00"
+  },
+  {
+    "slug": "toulouse",
+    "ville": "Toulouse",
+    "tribunal": "Tribunal Judiciaire de Toulouse",
+    "department": null,
+    "stats": {
+      "total": 26,
+      "sold": 14,
+      "upcoming": 4,
+      "medianMiseAPrix": 157000,
+      "medianAdjudication": 138000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "maison",
+        "count": 9
+      },
+      {
+        "type": "appartement",
+        "count": 8
+      },
+      {
+        "type": "autre",
+        "count": 8
+      },
+      {
+        "type": "local",
+        "count": 1
+      }
+    ],
+    "lastAuctionDate": "2026-06-25T14:00:00+00:00"
+  },
+  {
+    "slug": "bourges",
+    "ville": "Bourges",
+    "tribunal": "Tribunal Judiciaire de Bourges",
+    "department": null,
+    "stats": {
+      "total": 24,
+      "sold": 14,
+      "upcoming": 6,
+      "medianMiseAPrix": 21650,
+      "medianAdjudication": 56000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "maison",
+        "count": 14
+      },
+      {
+        "type": "immeuble",
+        "count": 3
+      },
+      {
+        "type": "appartement",
+        "count": 3
+      },
+      {
+        "type": "autre",
+        "count": 2
+      }
+    ],
+    "lastAuctionDate": "2026-06-24T09:00:00+00:00"
+  },
+  {
+    "slug": "mont-de-marsan",
+    "ville": "Mont de Marsan",
+    "tribunal": "Tribunal Judiciaire de Mont de Marsan",
+    "department": null,
+    "stats": {
+      "total": 23,
+      "sold": 23,
+      "upcoming": 0,
+      "medianMiseAPrix": 66000,
+      "medianAdjudication": 95750,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "maison",
+        "count": 12
+      },
+      {
+        "type": "appartement",
+        "count": 7
+      },
+      {
+        "type": "autre",
+        "count": 2
+      },
+      {
+        "type": "immeuble",
+        "count": 1
+      }
+    ],
+    "lastAuctionDate": "2025-06-26T14:30:00+00:00"
+  },
+  {
+    "slug": "tarascon",
+    "ville": "Tarascon",
+    "tribunal": "Tribunal Judiciaire de Tarascon",
+    "department": null,
+    "stats": {
+      "total": 23,
+      "sold": 18,
+      "upcoming": 3,
+      "medianMiseAPrix": 100000,
+      "medianAdjudication": 223000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "autre",
+        "count": 9
+      },
+      {
+        "type": "appartement",
+        "count": 5
+      },
+      {
+        "type": "maison",
+        "count": 5
+      },
+      {
+        "type": "local",
+        "count": 2
+      }
+    ],
+    "lastAuctionDate": "2026-06-10T09:00:00+00:00"
+  },
+  {
+    "slug": "saint-etienne",
+    "ville": "Saint Etienne",
+    "tribunal": "Tribunal Judiciaire de Saint Etienne",
+    "department": null,
+    "stats": {
+      "total": 22,
+      "sold": 8,
+      "upcoming": 6,
+      "medianMiseAPrix": 20000,
+      "medianAdjudication": 39000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "appartement",
+        "count": 10
+      },
+      {
+        "type": "autre",
+        "count": 3
+      },
+      {
+        "type": "maison",
+        "count": 3
+      },
+      {
+        "type": "parking",
+        "count": 2
+      }
+    ],
+    "lastAuctionDate": "2026-07-02T14:00:00+00:00"
+  },
+  {
+    "slug": "bourg-en-bresse",
+    "ville": "Bourg en Bresse",
+    "tribunal": "Tribunal Judiciaire de Bourg en Bresse",
+    "department": null,
+    "stats": {
+      "total": 22,
+      "sold": 5,
+      "upcoming": 11,
+      "medianMiseAPrix": 45000,
+      "medianAdjudication": 75500,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "maison",
+        "count": 12
+      },
+      {
+        "type": "appartement",
+        "count": 7
+      },
+      {
+        "type": "autre",
+        "count": 2
+      },
+      {
+        "type": "terrain",
+        "count": 1
+      }
+    ],
+    "lastAuctionDate": "2026-06-30T14:00:00+00:00"
+  },
+  {
+    "slug": "dijon",
+    "ville": "Dijon",
+    "tribunal": "Tribunal Judiciaire de Dijon",
+    "department": null,
+    "stats": {
+      "total": 21,
+      "sold": 9,
+      "upcoming": 7,
+      "medianMiseAPrix": 20000,
+      "medianAdjudication": 47500,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "maison",
+        "count": 7
+      },
+      {
+        "type": "appartement",
+        "count": 6
+      },
+      {
+        "type": "autre",
+        "count": 3
+      },
+      {
+        "type": "immeuble",
+        "count": 2
+      }
+    ],
+    "lastAuctionDate": "2026-07-01T10:30:00+00:00"
+  },
+  {
+    "slug": "pau",
+    "ville": "Pau",
+    "tribunal": "Tribunal Judiciaire de Pau",
+    "department": null,
+    "stats": {
+      "total": 20,
+      "sold": 16,
+      "upcoming": 4,
+      "medianMiseAPrix": 60000,
+      "medianAdjudication": 105000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "appartement",
+        "count": 11
+      },
+      {
+        "type": "maison",
+        "count": 5
+      },
+      {
+        "type": "autre",
+        "count": 2
+      },
+      {
+        "type": "studio",
+        "count": 2
+      }
+    ],
+    "lastAuctionDate": "2026-06-19T09:30:00+00:00"
+  },
+  {
+    "slug": "villefranche",
+    "ville": "Villefranche",
+    "tribunal": "Tribunal Judiciaire de Villefranche",
+    "department": null,
+    "stats": {
+      "total": 20,
+      "sold": 17,
+      "upcoming": 2,
+      "medianMiseAPrix": 35000,
+      "medianAdjudication": 68500,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "appartement",
+        "count": 8
+      },
+      {
+        "type": "maison",
+        "count": 5
+      },
+      {
+        "type": "autre",
+        "count": 4
+      },
+      {
+        "type": "immeuble",
+        "count": 2
+      }
+    ],
+    "lastAuctionDate": "2026-07-09T09:00:00+00:00"
+  },
+  {
+    "slug": "lorient",
+    "ville": "Lorient",
+    "tribunal": "Tribunal Judiciaire de Lorient",
+    "department": null,
+    "stats": {
+      "total": 19,
+      "sold": 13,
+      "upcoming": 3,
+      "medianMiseAPrix": 120000,
+      "medianAdjudication": 187000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "maison",
+        "count": 14
+      },
+      {
+        "type": "autre",
+        "count": 4
+      },
+      {
+        "type": "immeuble",
+        "count": 1
+      }
+    ],
+    "lastAuctionDate": "2026-07-06T14:00:00+00:00"
+  },
+  {
+    "slug": "poitiers",
+    "ville": "Poitiers",
+    "tribunal": "Tribunal Judiciaire de Poitiers",
+    "department": null,
+    "stats": {
+      "total": 18,
+      "sold": 11,
+      "upcoming": 5,
+      "medianMiseAPrix": 23000,
+      "medianAdjudication": 61000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "maison",
+        "count": 15
+      },
+      {
+        "type": "immeuble",
+        "count": 2
+      },
+      {
+        "type": "autre",
+        "count": 1
+      }
+    ],
+    "lastAuctionDate": "2026-07-07T09:00:00+00:00"
+  },
+  {
+    "slug": "besancon",
+    "ville": "Besancon",
+    "tribunal": "Tribunal Judiciaire de Besancon",
+    "department": null,
+    "stats": {
+      "total": 18,
+      "sold": 9,
+      "upcoming": 2,
+      "medianMiseAPrix": 90000,
+      "medianAdjudication": 91200,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "appartement",
+        "count": 7
+      },
+      {
+        "type": "maison",
+        "count": 6
+      },
+      {
+        "type": "local",
+        "count": 2
+      },
+      {
+        "type": "studio",
+        "count": 1
+      }
+    ],
+    "lastAuctionDate": "2026-07-03T10:00:00+00:00"
+  },
+  {
+    "slug": "chambery",
+    "ville": "Chambéry",
+    "tribunal": "Tribunal Judiciaire de Chambéry",
+    "department": null,
+    "stats": {
+      "total": 18,
+      "sold": 15,
+      "upcoming": 1,
+      "medianMiseAPrix": 43000,
+      "medianAdjudication": 100000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "maison",
+        "count": 11
+      },
+      {
+        "type": "appartement",
+        "count": 6
+      },
+      {
+        "type": "parking",
+        "count": 1
+      }
+    ],
+    "lastAuctionDate": "2026-07-07T09:00:00+00:00"
+  },
+  {
+    "slug": "thonon",
+    "ville": "Thonon",
+    "tribunal": "Tribunal Judiciaire de Thonon",
+    "department": null,
+    "stats": {
+      "total": 17,
+      "sold": 7,
+      "upcoming": 9,
+      "medianMiseAPrix": 150000,
+      "medianAdjudication": 192000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "appartement",
+        "count": 11
+      },
+      {
+        "type": "maison",
+        "count": 5
+      },
+      {
+        "type": "studio",
+        "count": 1
+      }
+    ],
+    "lastAuctionDate": "2026-06-26T15:00:00+00:00"
+  },
+  {
+    "slug": "aix-en-provence",
+    "ville": "Aix-en-Provence",
+    "tribunal": "Tribunal Judiciaire de Aix-en-Provence",
+    "department": null,
+    "stats": {
+      "total": 16,
+      "sold": 5,
+      "upcoming": 4,
+      "medianMiseAPrix": 60000,
+      "medianAdjudication": 65000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "appartement",
+        "count": 6
+      },
+      {
+        "type": "autre",
+        "count": 5
+      },
+      {
+        "type": "maison",
+        "count": 4
+      },
+      {
+        "type": "immeuble",
+        "count": 1
+      }
+    ],
+    "lastAuctionDate": "2026-07-06T09:00:00+00:00"
+  },
+  {
+    "slug": "carpentras",
+    "ville": "Carpentras",
+    "tribunal": "Tribunal Judiciaire de Carpentras",
+    "department": null,
+    "stats": {
+      "total": 14,
+      "sold": 7,
+      "upcoming": 3,
+      "medianMiseAPrix": 58000,
+      "medianAdjudication": 110000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "appartement",
+        "count": 6
+      },
+      {
+        "type": "maison",
+        "count": 4
+      },
+      {
+        "type": "autre",
+        "count": 4
+      }
+    ],
+    "lastAuctionDate": "2026-06-11T10:30:00+00:00"
+  },
+  {
+    "slug": "avignon",
+    "ville": "Avignon",
+    "tribunal": "Tribunal Judiciaire de Avignon",
+    "department": null,
+    "stats": {
+      "total": 14,
+      "sold": 7,
+      "upcoming": 7,
+      "medianMiseAPrix": 30000,
+      "medianAdjudication": 56000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "appartement",
+        "count": 10
+      },
+      {
+        "type": "maison",
+        "count": 3
+      },
+      {
+        "type": "autre",
+        "count": 1
+      }
+    ],
+    "lastAuctionDate": "2026-06-18T14:00:00+00:00"
+  },
+  {
+    "slug": "montpellier",
+    "ville": "Montpellier",
+    "tribunal": "Tribunal Judiciaire de Montpellier",
+    "department": null,
+    "stats": {
+      "total": 14,
+      "sold": 5,
+      "upcoming": 1,
+      "medianMiseAPrix": 100000,
+      "medianAdjudication": 103200,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "appartement",
+        "count": 9
+      },
+      {
+        "type": "autre",
+        "count": 2
+      },
+      {
+        "type": "maison",
+        "count": 2
+      },
+      {
+        "type": "local",
+        "count": 1
+      }
+    ],
+    "lastAuctionDate": "2026-06-15T14:00:00+00:00"
+  },
+  {
+    "slug": "clermont-ferrand",
+    "ville": "Clermont-Ferrand",
+    "tribunal": "Tribunal Judiciaire de Clermont-Ferrand",
+    "department": null,
+    "stats": {
+      "total": 14,
+      "sold": 1,
+      "upcoming": 7,
+      "medianMiseAPrix": 28800,
+      "medianAdjudication": 57000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "studio",
+        "count": 4
+      },
+      {
+        "type": "maison",
+        "count": 4
+      },
+      {
+        "type": "appartement",
+        "count": 2
+      },
+      {
+        "type": "immeuble",
+        "count": 2
+      }
+    ],
+    "lastAuctionDate": "2026-07-10T10:00:00+00:00"
+  },
+  {
+    "slug": "nevers",
+    "ville": "Nevers",
+    "tribunal": "Tribunal Judiciaire de Nevers",
+    "department": null,
+    "stats": {
+      "total": 14,
+      "sold": 1,
+      "upcoming": 3,
+      "medianMiseAPrix": 14000,
+      "medianAdjudication": 30000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "maison",
+        "count": 9
+      },
+      {
+        "type": "autre",
+        "count": 3
+      },
+      {
+        "type": "immeuble",
+        "count": 2
+      }
+    ],
+    "lastAuctionDate": "2026-06-23T10:45:00+00:00"
+  },
+  {
+    "slug": "nancy",
+    "ville": "Nancy",
+    "tribunal": "Tribunal Judiciaire de Nancy",
+    "department": null,
+    "stats": {
+      "total": 13,
+      "sold": 0,
+      "upcoming": 7,
+      "medianMiseAPrix": null,
+      "medianAdjudication": null,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "maison",
+        "count": 5
+      },
+      {
+        "type": "appartement",
+        "count": 3
+      },
+      {
+        "type": "immeuble",
+        "count": 2
+      },
+      {
+        "type": "autre",
+        "count": 2
+      }
+    ],
+    "lastAuctionDate": "2026-07-09T14:00:00+00:00"
+  },
+  {
+    "slug": "quimper",
+    "ville": "Quimper",
+    "tribunal": "Tribunal Judiciaire de Quimper",
+    "department": null,
+    "stats": {
+      "total": 12,
+      "sold": 2,
+      "upcoming": 6,
+      "medianMiseAPrix": 37500,
+      "medianAdjudication": 61500,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "maison",
+        "count": 9
+      },
+      {
+        "type": "appartement",
+        "count": 1
+      },
+      {
+        "type": "autre",
+        "count": 1
+      },
+      {
+        "type": "terrain",
+        "count": 1
+      }
+    ],
+    "lastAuctionDate": "2026-07-01T11:00:00+00:00"
+  },
+  {
+    "slug": "orleans",
+    "ville": "Orléans",
+    "tribunal": "Tribunal Judiciaire de Orléans",
+    "department": null,
+    "stats": {
+      "total": 12,
+      "sold": 0,
+      "upcoming": 7,
+      "medianMiseAPrix": null,
+      "medianAdjudication": null,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "maison",
+        "count": 7
+      },
+      {
+        "type": "appartement",
+        "count": 2
+      },
+      {
+        "type": "terrain",
+        "count": 1
+      },
+      {
+        "type": "autre",
+        "count": 1
+      }
+    ],
+    "lastAuctionDate": "2026-07-02T14:00:00+00:00"
+  },
+  {
+    "slug": "tours",
+    "ville": "Tours",
+    "tribunal": "Tribunal Judiciaire de Tours",
+    "department": null,
+    "stats": {
+      "total": 11,
+      "sold": 2,
+      "upcoming": 5,
+      "medianMiseAPrix": 24400,
+      "medianAdjudication": 63500,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "maison",
+        "count": 5
+      },
+      {
+        "type": "appartement",
+        "count": 3
+      },
+      {
+        "type": "immeuble",
+        "count": 1
+      },
+      {
+        "type": "local",
+        "count": 1
+      }
+    ],
+    "lastAuctionDate": "2026-06-23T14:30:00+00:00"
+  },
+  {
+    "slug": "brest",
+    "ville": "Brest",
+    "tribunal": "Tribunal Judiciaire de Brest",
+    "department": null,
+    "stats": {
+      "total": 11,
+      "sold": 0,
+      "upcoming": 7,
+      "medianMiseAPrix": null,
+      "medianAdjudication": null,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "maison",
+        "count": 6
+      },
+      {
+        "type": "autre",
+        "count": 2
+      },
+      {
+        "type": "terrain",
+        "count": 2
+      },
+      {
+        "type": "appartement",
+        "count": 1
+      }
+    ],
+    "lastAuctionDate": "2026-06-30T14:00:00+00:00"
+  },
+  {
+    "slug": "gap",
+    "ville": "Gap",
+    "tribunal": "Tribunal Judiciaire de Gap",
+    "department": null,
+    "stats": {
+      "total": 10,
+      "sold": 8,
+      "upcoming": 0,
+      "medianMiseAPrix": 160000,
+      "medianAdjudication": 753000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "maison",
+        "count": 5
+      },
+      {
+        "type": "appartement",
+        "count": 4
+      },
+      {
+        "type": "autre",
+        "count": 1
+      }
+    ],
+    "lastAuctionDate": "2026-06-04T14:00:00+00:00"
+  },
+  {
+    "slug": "montargis",
+    "ville": "Montargis",
+    "tribunal": "Tribunal Judiciaire de Montargis",
+    "department": null,
+    "stats": {
+      "total": 8,
+      "sold": 2,
+      "upcoming": 2,
+      "medianMiseAPrix": 21250,
+      "medianAdjudication": 29000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "maison",
+        "count": 5
+      },
+      {
+        "type": "immeuble",
+        "count": 2
+      },
+      {
+        "type": "autre",
+        "count": 1
+      }
+    ],
+    "lastAuctionDate": "2026-06-18T14:00:00+00:00"
+  },
+  {
+    "slug": "beziers",
+    "ville": "Beziers",
+    "tribunal": "Tribunal Judiciaire de Beziers",
+    "department": null,
+    "stats": {
+      "total": 7,
+      "sold": 2,
+      "upcoming": 3,
+      "medianMiseAPrix": 17500,
+      "medianAdjudication": 37000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "maison",
+        "count": 6
+      },
+      {
+        "type": "studio",
+        "count": 1
+      }
+    ],
+    "lastAuctionDate": "2026-06-16T11:00:00+00:00"
+  },
+  {
+    "slug": "bonneville",
+    "ville": "Bonneville",
+    "tribunal": "Tribunal Judiciaire de Bonneville",
+    "department": null,
+    "stats": {
+      "total": 7,
+      "sold": 2,
+      "upcoming": 1,
+      "medianMiseAPrix": 267500,
+      "medianAdjudication": 237000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "appartement",
+        "count": 3
+      },
+      {
+        "type": "maison",
+        "count": 3
+      },
+      {
+        "type": "local",
+        "count": 1
+      }
+    ],
+    "lastAuctionDate": "2026-06-11T14:00:00+00:00"
+  },
+  {
+    "slug": "rennes",
+    "ville": "Rennes",
+    "tribunal": "Tribunal Judiciaire de Rennes",
+    "department": null,
+    "stats": {
+      "total": 7,
+      "sold": 0,
+      "upcoming": 1,
+      "medianMiseAPrix": null,
+      "medianAdjudication": null,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "appartement",
+        "count": 4
+      },
+      {
+        "type": "parking",
+        "count": 1
+      },
+      {
+        "type": "immeuble",
+        "count": 1
+      },
+      {
+        "type": "maison",
+        "count": 1
+      }
+    ],
+    "lastAuctionDate": "2026-06-25T10:00:00+00:00"
+  },
+  {
+    "slug": "cahors",
+    "ville": "Cahors",
+    "tribunal": "Tribunal Judiciaire de Cahors",
+    "department": null,
+    "stats": {
+      "total": 6,
+      "sold": 3,
+      "upcoming": 1,
+      "medianMiseAPrix": 42000,
+      "medianAdjudication": 102000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "maison",
+        "count": 5
+      },
+      {
+        "type": "appartement",
+        "count": 1
+      }
+    ],
+    "lastAuctionDate": "2026-06-25T14:00:00+00:00"
+  },
+  {
+    "slug": "narbonne",
+    "ville": "Narbonne",
+    "tribunal": "Tribunal Judiciaire de Narbonne",
+    "department": null,
+    "stats": {
+      "total": 6,
+      "sold": 1,
+      "upcoming": 1,
+      "medianMiseAPrix": 80000,
+      "medianAdjudication": 207000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "maison",
+        "count": 3
+      },
+      {
+        "type": "local",
+        "count": 1
+      },
+      {
+        "type": "immeuble",
+        "count": 1
+      },
+      {
+        "type": "autre",
+        "count": 1
+      }
+    ],
+    "lastAuctionDate": "2026-06-15T09:00:00+00:00"
+  },
+  {
+    "slug": "albertville",
+    "ville": "Albertville",
+    "tribunal": "Tribunal Judiciaire de Albertville",
+    "department": null,
+    "stats": {
+      "total": 6,
+      "sold": 1,
+      "upcoming": 2,
+      "medianMiseAPrix": 17000,
+      "medianAdjudication": 104000,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "studio",
+        "count": 2
+      },
+      {
+        "type": "maison",
+        "count": 2
+      },
+      {
+        "type": "appartement",
+        "count": 2
+      }
+    ],
+    "lastAuctionDate": "2026-07-03T14:00:00+00:00"
+  },
+  {
+    "slug": "vienne",
+    "ville": "Vienne",
+    "tribunal": "Tribunal Judiciaire de Vienne",
+    "department": null,
+    "stats": {
+      "total": 6,
+      "sold": 0,
+      "upcoming": 3,
+      "medianMiseAPrix": null,
+      "medianAdjudication": null,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "maison",
+        "count": 4
+      },
+      {
+        "type": "appartement",
+        "count": 1
+      },
+      {
+        "type": "immeuble",
+        "count": 1
+      }
+    ],
+    "lastAuctionDate": "2026-07-07T09:00:00+00:00"
+  },
+  {
+    "slug": "carcassonne",
+    "ville": "Carcassonne",
+    "tribunal": "Tribunal Judiciaire de Carcassonne",
+    "department": null,
+    "stats": {
+      "total": 5,
+      "sold": 0,
+      "upcoming": 0,
+      "medianMiseAPrix": null,
+      "medianAdjudication": null,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "maison",
+        "count": 4
+      },
+      {
+        "type": "appartement",
+        "count": 1
+      }
+    ],
+    "lastAuctionDate": "2026-06-02T09:30:00+00:00"
+  },
+  {
+    "slug": "douai",
+    "ville": "Douai",
+    "tribunal": "Tribunal Judiciaire de Douai",
+    "department": null,
+    "stats": {
+      "total": 5,
+      "sold": 0,
+      "upcoming": 5,
+      "medianMiseAPrix": null,
+      "medianAdjudication": null,
+      "medianDecoteVsDvf": null
+    },
+    "topPropertyTypes": [
+      {
+        "type": "autre",
+        "count": 5
+      }
+    ],
+    "lastAuctionDate": "2026-07-03T09:30:00+00:00"
+  }
+]

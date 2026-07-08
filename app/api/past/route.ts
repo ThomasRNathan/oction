@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireApiAuth } from "@/lib/auth/dal";
 import {
   queryBrowse,
   distinctTribunals,
@@ -35,7 +36,10 @@ const ALLOWED_YEARS = new Set(distinctYears());
  * Returns an extra `meta` block on page=1 so the client can populate filter
  * dropdowns without a second round-trip.
  */
-export function GET(request: NextRequest) {
+export async function GET(request: NextRequest) {
+  const guard = await requireApiAuth();
+  if (guard) return guard;
+
   const sp = request.nextUrl.searchParams;
 
   const mode: BrowseMode = sp.get("mode") === "market" ? "market" : "uncontested";

@@ -89,6 +89,11 @@
     "n": 131,
     "radiusUsed": 0
   },
+  "annemasse|74|studio": {
+    "medianPerSqm": 3405,
+    "n": 146,
+    "radiusUsed": 0
+  },
   "antony|92|appartement": {
     "medianPerSqm": 5302,
     "n": 150,
@@ -97,6 +102,11 @@
   "arbonne|64|maison": {
     "medianPerSqm": 5807,
     "n": 64,
+    "radiusUsed": 0
+  },
+  "argenteuil|95|appartement": {
+    "medianPerSqm": 3542,
+    "n": 162,
     "radiusUsed": 0
   },
   "argenteuil|95|maison": {
@@ -172,6 +182,11 @@
   "aubers|59|maison": {
     "medianPerSqm": 2301,
     "n": 59,
+    "radiusUsed": 0
+  },
+  "aubervilliers|93|appartement": {
+    "medianPerSqm": 4049,
+    "n": 126,
     "radiusUsed": 0
   },
   "audierne|29|appartement": {
@@ -499,6 +514,16 @@
     "n": 21,
     "radiusUsed": 0
   },
+  "blois|41|studio": {
+    "medianPerSqm": 1886,
+    "n": 166,
+    "radiusUsed": 0
+  },
+  "bois-d'arcy|78|appartement": {
+    "medianPerSqm": 3600,
+    "n": 170,
+    "radiusUsed": 0
+  },
   "bois-grenier|59|immeuble": {
     "medianPerSqm": 2820,
     "n": 44,
@@ -567,6 +592,11 @@
   "bonneville-sur-touques (calvados)|14|maison": {
     "medianPerSqm": 3584,
     "n": 17,
+    "radiusUsed": 0
+  },
+  "bonne|74|maison": {
+    "medianPerSqm": 4016,
+    "n": 139,
     "radiusUsed": 0
   },
   "bonnières sur seine|78|immeuble": {
@@ -1269,6 +1299,11 @@
     "n": 29,
     "radiusUsed": 0
   },
+  "châlette-sur-loing|45|maison": {
+    "medianPerSqm": 1386,
+    "n": 155,
+    "radiusUsed": 0
+  },
   "château-landon (seine-et-marne)|77|maison": {
     "medianPerSqm": 1529,
     "n": 101,
@@ -1327,6 +1362,11 @@
   "colomars|06|autre": {
     "medianPerSqm": 4222,
     "n": 61,
+    "radiusUsed": 0
+  },
+  "colombes|92|appartement": {
+    "medianPerSqm": 5244,
+    "n": 138,
     "radiusUsed": 0
   },
   "combrit (finistère)|29|maison": {
@@ -1479,6 +1519,11 @@
     "n": 89,
     "radiusUsed": 0
   },
+  "créteil|94|appartement": {
+    "medianPerSqm": 3648,
+    "n": 154,
+    "radiusUsed": 0
+  },
   "curchy|80|immeuble": {
     "medianPerSqm": 774,
     "n": 10,
@@ -1532,6 +1577,11 @@
   "digoin|71|appartement": {
     "medianPerSqm": 752,
     "n": 173,
+    "radiusUsed": 0
+  },
+  "dijon|21|appartement": {
+    "medianPerSqm": 2559,
+    "n": 166,
     "radiusUsed": 0
   },
   "divonne-les-bains|01|maison": {
@@ -1884,6 +1934,16 @@
     "n": 14,
     "radiusUsed": 0
   },
+  "franconville|95|appartement": {
+    "medianPerSqm": 3228,
+    "n": 159,
+    "radiusUsed": 0
+  },
+  "franconville|95|maison": {
+    "medianPerSqm": 3228,
+    "n": 159,
+    "radiusUsed": 0
+  },
   "freneuse|78|maison": {
     "medianPerSqm": 2386,
     "n": 113,
@@ -1942,6 +2002,11 @@
   "garges les gonesse (val d'oise)|95|appartement": {
     "medianPerSqm": 2500,
     "n": 180,
+    "radiusUsed": 0
+  },
+  "garges-lès-gonesse|95|appartement": {
+    "medianPerSqm": 2420,
+    "n": 183,
     "radiusUsed": 0
   },
   "garéoult|83|maison": {
@@ -2764,6 +2829,11 @@
     "n": 70,
     "radiusUsed": 0
   },
+  "le blanc-mesnil|93|appartement": {
+    "medianPerSqm": 3647,
+    "n": 75,
+    "radiusUsed": 0
+  },
   "le bourg-d'oisans|38|maison": {
     "medianPerSqm": 2802,
     "n": 113,
@@ -3219,6 +3289,11 @@
     "n": 52,
     "radiusUsed": 0
   },
+  "longny-au-perche|61|maison": {
+    "medianPerSqm": 1304,
+    "n": 121,
+    "radiusUsed": 0
+  },
   "longpont-sur-orge|91|maison": {
     "medianPerSqm": 3326,
     "n": 154,
@@ -3484,6 +3559,11 @@
     "n": 64,
     "radiusUsed": 0
   },
+  "marseille 14ème|13|appartement": {
+    "medianPerSqm": 1703,
+    "n": 141,
+    "radiusUsed": 0
+  },
   "marseille 15ème|13|maison": {
     "medianPerSqm": 1457,
     "n": 156,
@@ -3512,6 +3592,11 @@
   "mehun-sur-yèvre|18|maison": {
     "medianPerSqm": 1212,
     "n": 160,
+    "radiusUsed": 0
+  },
+  "melun|77|appartement": {
+    "medianPerSqm": 2789,
+    "n": 118,
     "radiusUsed": 0
   },
   "melz-sur-seine|77|maison": {
@@ -4054,6 +4139,16 @@
     "n": 81,
     "radiusUsed": 0
   },
+  "nice|06|appartement": {
+    "medianPerSqm": 4375,
+    "n": 159,
+    "radiusUsed": 0
+  },
+  "nice|06|studio": {
+    "medianPerSqm": 4375,
+    "n": 159,
+    "radiusUsed": 0
+  },
   "nitry|89|maison": {
     "medianPerSqm": 597,
     "n": 26,
@@ -4284,6 +4379,11 @@
     "n": 149,
     "radiusUsed": 0
   },
+  "paris 19ème|75|appartement": {
+    "medianPerSqm": 8405,
+    "n": 173,
+    "radiusUsed": 0
+  },
   "paris 7ème|75|local": {
     "medianPerSqm": 14214,
     "n": 165,
@@ -4305,6 +4405,11 @@
     "radiusUsed": 0
   },
   "pau|64|appartement": {
+    "medianPerSqm": 2256,
+    "n": 174,
+    "radiusUsed": 0
+  },
+  "pau|64|studio": {
     "medianPerSqm": 2256,
     "n": 174,
     "radiusUsed": 0
@@ -4454,6 +4559,11 @@
     "n": 158,
     "radiusUsed": 0
   },
+  "plouguerneau|29|maison": {
+    "medianPerSqm": 2382,
+    "n": 114,
+    "radiusUsed": 0
+  },
   "poilly-sur-serein (yonne)|89|maison": {
     "medianPerSqm": 751,
     "n": 21,
@@ -4467,6 +4577,11 @@
   "poissy|78|studio": {
     "medianPerSqm": 3891,
     "n": 150,
+    "radiusUsed": 0
+  },
+  "poitiers|86|autre": {
+    "medianPerSqm": 2242,
+    "n": 168,
     "radiusUsed": 0
   },
   "poligny|77|maison": {
@@ -4662,6 +4777,11 @@
   "quincy-voisins|77|autre": {
     "medianPerSqm": 3433,
     "n": 149,
+    "radiusUsed": 0
+  },
+  "quintin|22|autre": {
+    "medianPerSqm": 1703,
+    "n": 119,
     "radiusUsed": 0
   },
   "rayol-canadel-sur-mer|83|autre": {
@@ -5414,6 +5534,11 @@
     "n": 156,
     "radiusUsed": 0
   },
+  "saint-priest|69|parking": {
+    "medianPerSqm": 3013,
+    "n": 151,
+    "radiusUsed": 0
+  },
   "saint-prix|95|maison": {
     "medianPerSqm": 4063,
     "n": 163,
@@ -5582,6 +5707,11 @@
   "sarcelles (val d'oise)|95|appartement": {
     "medianPerSqm": 2156,
     "n": 153,
+    "radiusUsed": 0
+  },
+  "sarcelles|95|appartement": {
+    "medianPerSqm": 2278,
+    "n": 148,
     "radiusUsed": 0
   },
   "sartilly-baie-bocage|50|maison": {
@@ -6334,6 +6464,11 @@
     "n": 11,
     "radiusUsed": 0
   },
+  "villeurbanne|69|appartement": {
+    "medianPerSqm": 3794,
+    "n": 160,
+    "radiusUsed": 0
+  },
   "villiers sur marne|94|appartement": {
     "medianPerSqm": 4016,
     "n": 126,
@@ -6437,6 +6572,11 @@
   "vétheuil|95|maison": {
     "medianPerSqm": 2381,
     "n": 22,
+    "radiusUsed": 0
+  },
+  "vétraz-monthoux|74|appartement": {
+    "medianPerSqm": 4131,
+    "n": 122,
     "radiusUsed": 0
   },
   "wallers (nord)|59|terrain": {

@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Nav } from "@/components/nav";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,26 +13,21 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://oction.fr"),
   title: {
-    default: "OCTION — Analyseur d'enchères immobilières",
+    default: "OCTION — Sourcing algorithmique d'enchères immobilières judiciaires",
     template: "%s · OCTION",
   },
   description:
-    "Analysez les ventes aux enchères judiciaires : prix du marché DVF, décote, score d'attractivité, simulateur de financement — et le radar des meilleures opportunités à venir.",
+    "Opérateur spécialisé dans le sourcing algorithmique des ventes aux enchères immobilières judiciaires en France. Méthode propriétaire de détection et de sélection des lots.",
   applicationName: "OCTION",
   openGraph: {
-    title: "OCTION — Analyseur d'enchères immobilières",
+    title: "OCTION — Sourcing d'enchères immobilières judiciaires",
     description:
-      "Achetez l'immobilier à −30/40 % du marché : analyse DVF instantanée et radar des ventes judiciaires à venir.",
+      "Méthode propriétaire de sourcing algorithmique des ventes judiciaires immobilières en France.",
     locale: "fr_FR",
     type: "website",
     siteName: "OCTION",
-  },
-  twitter: {
-    card: "summary",
-    title: "OCTION — Analyseur d'enchères immobilières",
-    description:
-      "Analyse DVF instantanée et radar des ventes judiciaires à venir.",
   },
 };
 
@@ -41,6 +35,8 @@ export const viewport: Viewport = {
   themeColor: "#0a0f1a",
 };
 
+// Root layout is intentionally minimal: the marketing site (app/(marketing))
+// and the admin tool (app/admin) each supply their own chrome.
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -51,10 +47,7 @@ export default function RootLayout({
       lang="fr"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-[#0a0f1a]">
-        <Nav />
-        {children}
-      </body>
+      <body className="min-h-full bg-[#0a0f1a]">{children}</body>
     </html>
   );
 }

@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { requireApiAuth } from "@/lib/auth/dal";
 import { getUpcomingHighlights } from "@/lib/analytics/upcoming-browse";
 
 /**
@@ -7,6 +8,8 @@ import { getUpcomingHighlights } from "@/lib/analytics/upcoming-browse";
  * hot path costs no extra Supabase round-trip.
  */
 export async function GET() {
+  const guard = await requireApiAuth();
+  if (guard) return guard;
   try {
     const highlights = await getUpcomingHighlights();
     return NextResponse.json(highlights);

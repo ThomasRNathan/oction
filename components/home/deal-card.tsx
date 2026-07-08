@@ -20,7 +20,7 @@ interface Props {
 export function DealCard({ row, onAnalyze }: Props) {
   const decote = decoteVsDvf(row.mapDvfRatio);
 
-  const analyzeHref = row.url ? `/?url=${encodeURIComponent(row.url)}` : null;
+  const analyzeHref = row.url ? `/admin?url=${encodeURIComponent(row.url)}` : null;
 
   return (
     <article className="animate-fade-up group rounded-xl border border-slate-700 bg-slate-900/40 p-4 flex flex-col gap-3 hover:border-orange-500/50 hover:bg-slate-900/70 transition-all">

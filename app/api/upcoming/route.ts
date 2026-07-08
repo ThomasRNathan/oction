@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireApiAuth } from "@/lib/auth/dal";
 import {
   getUpcomingMeta,
   queryUpcoming,
@@ -42,6 +43,9 @@ function parseNum(raw: string | null): number | null {
  * MAP/DVF observed [min, max] so the client can render slider hints.
  */
 export async function GET(request: NextRequest) {
+  const guard = await requireApiAuth();
+  if (guard) return guard;
+
   const sp = request.nextUrl.searchParams;
 
   const filters: UpcomingFilters = {};

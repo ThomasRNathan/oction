@@ -118,6 +118,114 @@ body {
   }
 }
 
+/* ── Premium surface system ──────────────────────────────────────────────
+   Layered background: a soft multi-point color mesh + a faint dot grid, for
+   depth on the near-black canvas without looking busy. Apply .bg-mesh to a
+   full-bleed fixed layer, .bg-dotgrid on top. */
+
+.bg-mesh {
+  background-color: #0a0f1a;
+  background-image:
+    radial-gradient(50rem 40rem at 12% -8%, rgba(249, 115, 22, 0.14), transparent 60%),
+    radial-gradient(45rem 40rem at 92% 6%, rgba(139, 92, 246, 0.10), transparent 60%),
+    radial-gradient(60rem 50rem at 50% 118%, rgba(56, 189, 248, 0.06), transparent 55%);
+}
+
+.bg-dotgrid {
+  background-image: radial-gradient(rgba(148, 163, 184, 0.10) 1px, transparent 1px);
+  background-size: 26px 26px;
+  -webkit-mask-image: radial-gradient(75% 60% at 50% 0%, #000 30%, transparent 100%);
+  mask-image: radial-gradient(75% 60% at 50% 0%, #000 30%, transparent 100%);
+}
+
+/* Gradient utilities ------------------------------------------------------ */
+.text-gradient {
+  background: linear-gradient(120deg, #fcd34d 0%, #f97316 45%, #ef4444 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.gradient-animate {
+  background-size: 200% auto;
+  animation: gradient-pan 6s ease infinite;
+}
+
+@keyframes gradient-pan {
+  0% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+  100% { background-position: 0% center; }
+}
+
+/* Hairline gradient border on cards (mask trick keeps the fill dark) ------- */
+.ring-gradient {
+  position: relative;
+}
+.ring-gradient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(140deg, rgba(249, 115, 22, 0.5), rgba(148, 163, 184, 0.08) 40%, transparent 70%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.ring-gradient:hover::before {
+  opacity: 1;
+}
+
+/* Always-on gradient edge for feature panels (hero visual, auth card). */
+.ring-gradient-on {
+  position: relative;
+}
+.ring-gradient-on::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(140deg, rgba(249, 115, 22, 0.55), rgba(148, 163, 184, 0.1) 45%, transparent 72%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Hero data-visual: gentle twinkle for the "signal" nodes ------------------ */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
+.twinkle {
+  animation: twinkle 3.2s ease-in-out infinite;
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.float-slow {
+  animation: float-slow 7s ease-in-out infinite;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gradient-animate,
+  .twinkle,
+  .float-slow {
+    animation: none;
+  }
+}
+
 /* Custom range slider (financing simulator — purple is its accent) */
 input[type="range"] {
   -webkit-appearance: none;

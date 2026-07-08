@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireApiAuth } from "@/lib/auth/dal";
 import { scrapeListicor } from "@/lib/scraper";
 import { geocodeAddress } from "@/lib/geocoder";
 import { getDVFAnalysis } from "@/lib/dvf";
@@ -28,6 +29,8 @@ function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T | null> {
 }
 
 export async function POST(request: NextRequest) {
+  const guard = await requireApiAuth();
+  if (guard) return guard;
   try {
     const { url, rate, duration } = await request.json();
 

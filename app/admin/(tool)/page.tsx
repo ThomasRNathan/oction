@@ -69,7 +69,7 @@ function HomeContent() {
   const analyzeAndShare = useCallback(
     (url: string) => {
       consumedRef.current = url;
-      router.replace(`/?url=${encodeURIComponent(url)}`, { scroll: false });
+      router.replace(`/admin?url=${encodeURIComponent(url)}`, { scroll: false });
       handleAnalyze(url);
     },
     [router, handleAnalyze]
@@ -80,7 +80,7 @@ function HomeContent() {
     setResult(null);
     setErrorMsg("");
     consumedRef.current = null;
-    router.replace("/", { scroll: false });
+    router.replace("/admin", { scroll: false });
   };
 
   const lawyerSearchUrl = (r: AnalysisResult) => {
@@ -99,7 +99,7 @@ function HomeContent() {
     }
     if (r.property.surface) sp.set("surface", String(r.property.surface));
     const qs = sp.toString();
-    return qs ? `/calculateur?${qs}` : "/calculateur";
+    return qs ? `/admin/calculateur?${qs}` : "/admin/calculateur";
   };
 
   const isCollapsed = state === "result" || state === "loading";
