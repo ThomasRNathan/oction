@@ -3,23 +3,29 @@
 import { useEffect, useState } from "react";
 
 const STEPS = [
-  { pct: 5,  label: "Connexion à licitor.com…",          icon: "🔗" },
-  { pct: 15, label: "Lecture de l'annonce…",              icon: "📄" },
-  { pct: 28, label: "Extraction de la surface…",          icon: "📐" },
-  { pct: 40, label: "Géocodage de l'adresse…",            icon: "📍" },
-  { pct: 52, label: "Interrogation des données DVF…",     icon: "🏦" },
-  { pct: 65, label: "Calcul du prix au m²…",              icon: "📊" },
-  { pct: 75, label: "Estimation de la liquidité…",        icon: "💧" },
-  { pct: 84, label: "Analyse de l'attractivité…",         icon: "⭐" },
-  { pct: 92, label: "Simulation de financement…",         icon: "💶" },
-  { pct: 98, label: "Finalisation du rapport…",           icon: "✅" },
+  "Connexion à licitor.com",
+  "Lecture de l'annonce",
+  "Extraction de la surface",
+  "Géocodage de l'adresse",
+  "Interrogation des données DVF",
+  "Calcul du prix au m²",
+  "Estimation de la liquidité",
+  "Analyse de l'attractivité",
+  "Simulation de financement",
+  "Finalisation du rapport",
 ];
+
+// Percentage each step settles at (last stays < 100 until the result lands).
+const PCT = [5, 15, 28, 40, 52, 65, 75, 84, 92, 98];
+
+const R = 82;
+const CIRC = 2 * Math.PI * R;
 
 export function LoadingSkeleton() {
   const [stepIndex, setStepIndex] = useState(0);
   const [displayPct, setDisplayPct] = useState(0);
 
-  // Advance steps every ~2.8s
+  // Advance the step every ~2.8s.
   useEffect(() => {
     const interval = setInterval(() => {
       setStepIndex((prev) => Math.min(prev + 1, STEPS.length - 1));
@@ -27,67 +33,95 @@ export function LoadingSkeleton() {
     return () => clearInterval(interval);
   }, []);
 
-  // Smoothly animate the percentage counter
-  const targetPct = STEPS[stepIndex].pct;
+  // Ease the percentage counter toward the current step's target.
+  const targetPct = PCT[stepIndex];
   useEffect(() => {
     const tick = setInterval(() => {
       setDisplayPct((cur) => {
-        if (cur >= targetPct) { clearInterval(tick); return cur; }
+        if (cur >= targetPct) {
+          clearInterval(tick);
+          return cur;
+        }
         return Math.min(cur + 1, targetPct);
       });
-    }, 30);
+    }, 22);
     return () => clearInterval(tick);
   }, [targetPct]);
 
-  const step = STEPS[stepIndex];
+  const offset = CIRC * (1 - displayPct / 100);
 
   return (
-    <div className="max-w-xl mx-auto text-center py-12 space-y-8">
-      {/* Big percentage */}
-      <div className="relative">
-        <p
-          className="text-8xl font-black tabular-nums"
-          style={{
-            background: "linear-gradient(135deg, #fb923c, #ef4444, #a855f7)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-          }}
-        >
-          {displayPct}%
-        </p>
-        <p className="text-slate-500 text-xs mt-1 tracking-widest uppercase">
-          Analyse en cours
-        </p>
-      </div>
-
-      {/* Progress bar */}
-      <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
-        <div
-          className="h-full rounded-full transition-all duration-500"
-          style={{
-            width: `${displayPct}%`,
-            background: "linear-gradient(90deg, #fb923c, #ef4444, #a855f7)",
-          }}
-        />
+    <div className="max-w-md mx-auto py-14 flex flex-col items-center text-center">
+      {/* Circular progress ring */}
+      <div className="relative h-52 w-52">
+        <div className="absolute inset-6 rounded-full bg-orange-500/10 blur-2xl" />
+        <svg viewBox="0 0 200 200" className="relative h-full w-full -rotate-90">
+          <defs>
+            <linearGradient id="ld-grad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#fcd34d" />
+              <stop offset="50%" stopColor="#f97316" />
+              <stop offset="100%" stopColor="#ef4444" />
+            </linearGradient>
+          </defs>
+          <circle cx="100" cy="100" r={R} fill="none" stroke="#1e293b" strokeWidth="7" />
+          <circle
+            cx="100"
+            cy="100"
+            r={R}
+            fill="none"
+            stroke="url(#ld-grad)"
+            strokeWidth="7"
+            strokeLinecap="round"
+            strokeDasharray={CIRC}
+            strokeDashoffset={offset}
+            style={{ transition: "stroke-dashoffset 0.5s cubic-bezier(0.16,1,0.3,1)" }}
+          />
+        </svg>
+        <div className="absolute inset-0 flex flex-col items-center justify-center">
+          <span className="text-5xl font-black tabular-nums text-gradient leading-none">
+            {displayPct}
+            <span className="text-2xl align-top">%</span>
+          </span>
+          <span className="text-[10px] uppercase tracking-[0.25em] text-slate-500 mt-2">
+            Analyse
+          </span>
+        </div>
       </div>
 
       {/* Current step */}
-      <div className="flex items-center justify-center gap-3 h-10">
-        <span className="text-2xl">{step.icon}</span>
-        <span className="text-slate-300 font-medium text-lg animate-pulse">
-          {step.label}
+      <div className="mt-8 flex items-center justify-center gap-2.5 h-6">
+        <span className="relative flex h-2 w-2">
+          <span className="absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-60 animate-ping" />
+          <span className="relative inline-flex h-2 w-2 rounded-full bg-orange-500" />
         </span>
+        <span className="text-slate-300 font-medium">{STEPS[stepIndex]}…</span>
       </div>
 
-      {/* Completed steps log */}
-      <div className="text-left space-y-1 max-h-36 overflow-hidden">
-        {STEPS.slice(0, stepIndex).map((s, i) => (
-          <div key={i} className="flex items-center gap-2 text-xs text-slate-600">
-            <span className="text-green-500/70">✓</span>
-            <span>{s.label.replace("…", "")}</span>
-          </div>
-        ))}
-      </div>
+      {/* Step log */}
+      <ul className="mt-6 w-full max-w-xs space-y-1.5 text-left">
+        {STEPS.slice(0, stepIndex + 1).map((label, i) => {
+          const done = i < stepIndex;
+          return (
+            <li
+              key={i}
+              className={`flex items-center gap-2.5 text-xs transition-colors ${
+                done ? "text-slate-500" : "text-slate-300"
+              }`}
+            >
+              <span
+                className={`inline-flex h-4 w-4 items-center justify-center rounded-full border text-[9px] ${
+                  done
+                    ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
+                    : "border-orange-500/40 bg-orange-500/10 text-orange-400"
+                }`}
+              >
+                {done ? "✓" : "•"}
+              </span>
+              <span>{label}</span>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }
